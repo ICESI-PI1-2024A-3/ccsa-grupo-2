@@ -18,7 +18,9 @@ class Request(models.Model):
     type = models.ForeignKey(RequestType, on_delete=models.CASCADE)
     status = models.ForeignKey(RequestStatus, on_delete=models.CASCADE)
     requester = models.ForeignKey(
-        "users_mgmt.CustomUser", on_delete=models.CASCADE, related_name="requested_requests"
+        "users_mgmt.CustomUser",
+        on_delete=models.CASCADE,
+        related_name="requested_requests",
     )
     manager = models.ForeignKey(
         "users_mgmt.CustomUser",
