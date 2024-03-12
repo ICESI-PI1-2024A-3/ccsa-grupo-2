@@ -1,0 +1,8 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <form method="post" class="form">
+        {{ form.as_p }}
+        <input class="form_button" type="submit" value="Iniciar Sesión">
+        {% csrf_token %}
+    </form>
+{% endblock %}
