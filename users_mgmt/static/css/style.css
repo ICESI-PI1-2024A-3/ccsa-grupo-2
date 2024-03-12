@@ -19,10 +19,18 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background: #ffffffce;
-    padding: 40px;
+    padding: 30px;
     width: 300px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    text-align: center;
+}
+
+.form a {
+    text-decoration: none;
+    color: #007bff;
+    padding-top: 10px;
+    display: block;
 }
 
 .form_control {

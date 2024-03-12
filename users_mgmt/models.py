@@ -19,6 +19,7 @@ class CustomUser(AbstractUser):
         (APPROVER, "Approver"),
     ]
     id = models.CharField(max_length=20, primary_key=True, unique=True, editable=False)
+    id_type = models.CharField(max_length=20, null=True, blank=True)
     role = models.CharField(max_length=20, choices=ROLES_CHOICES, default=REQUESTER)
     process_leader = models.ForeignKey(
         "self", on_delete=models.CASCADE, null=True, blank=True

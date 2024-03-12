@@ -1,8 +1,9 @@
 {% extends "layouts/base.html" %}
 {% block content %}
     <form method="post" class="form">
+        {% csrf_token %}
         {{ form.as_p }}
         <input class="form_button" type="submit" value="Iniciar Sesión">
-        {% csrf_token %}
+        <a href="{% url 'register' %}">Crear una cuenta</a>
     </form>
 {% endblock %}

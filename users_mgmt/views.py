@@ -18,26 +18,23 @@ class UserViews:
             return render(request, "login.html", {"form": LoginForm()})
 
     def register(request):
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        phone = request.POST.get("phone")
-        id_type = request.POST.get("id_type")
-        username = request.POST.get("id_number")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        User.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            phone=phone,
-            id_type=id_type,
-            username=username,
-            email=email,
-            password=password,
-        )
-        return render(
-            request,
-            "register.html",
-            {
-                "form": RegisterForm(),
-            },
-        )
+        if request.method == "POST":
+            first_name = request.POST.get("first_name")
+            last_name = request.POST.get("last_name")
+            phone = request.POST.get("phone")
+            id_type = request.POST.get("id_type")
+            username = request.POST.get("id_number")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            print(
+                first_name,
+                last_name,
+                phone,
+                id_type,
+                username,
+                email,
+                password,
+            )
+            return redirect("home")
+        else:
+            return render(request, "register.html", {"form": RegisterForm()})
