@@ -1,5 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+    {% if error %}<div class="alert_danger" role="alert">{{ error }}</div>{% endif %}
     <form method="post" class="form">
         {% csrf_token %}
         {{ form.as_p }}
