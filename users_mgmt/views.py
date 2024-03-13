@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.db import IntegrityError
-from django.shortcuts import redirect, render
+from django.shortcuts import HttpResponse, redirect, render
 
 from .backends import CustomAuthBackend
 from .forms import LoginForm, RegisterForm
@@ -68,6 +68,26 @@ class UserViews:
                         {"form": RegisterForm(), "error": "El usuario ya existe"},
                     )
 
+    ### Update default mehtods to use
     def logout(request):
         logout(request)
         return redirect("login")
+
+    def retrieve_all_users(request):
+        users = User.objects.all()
+        return HttpResponse(users)
+
+    def retrieve_user(request, user_id):
+        user = User.objects.get(pk=user_id)
+        return HttpResponse(user)
+
+    def update_user(request, user_id):
+        user = User.objects.get(pk=user_id)
+        user.first_name = "John"
+        user.save()
+        return HttpResponse(user)
+
+    def delete_user(request, user_id):
+        user = User.objects.get(pk=user_id)
+        user.delete()
+        return HttpResponse(user)
