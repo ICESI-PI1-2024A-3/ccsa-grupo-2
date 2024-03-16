@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static '/css/base.css' %}" />
+    </head>
+    <body>
+        <nav class="navbar">
+            <ul>
+                <li class="logo">
+                    <a href="{% url 'home' %}">Logo</a>
+                </li>
+                <li>
+                    <div>
+                        <span class="user">{{ user }}</span>
+                        <a href="{% url 'logout' %}">Salir</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

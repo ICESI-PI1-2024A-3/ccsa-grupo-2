@@ -9,7 +9,7 @@ from .models import CustomUser as User
 
 class UserViews:
     def home(request):
-        return render(request, "index.html")
+        return render(request, "layouts/base.html", {"user": request.user})
 
     def login(request):
         if request.method == "GET":
