@@ -61,7 +61,7 @@ class UserViews:
                         password=password,
                     )
                     user.save()
-                    login(request, user)
+                    auth_login(request, user)
                     return redirect("home")
                 except IntegrityError:
                     return render(
