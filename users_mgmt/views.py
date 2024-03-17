@@ -103,9 +103,12 @@ class UserViews:
         return render(request, "roles.html", {"users_and_forms": users_and_forms})
 
     def assign_role(request):
-        user_id = request.POST.get("user_id")
-        role = request.POST.get("role")
-        user = User.objects.get(pk=user_id)
-        user.role = role
-        user.save()
-        return redirect("users")
+        try:
+            user_id = request.POST.get("user_id")
+            role = request.POST.get("role")
+            user = User.objects.get(pk=user_id)
+            user.role = role
+            user.save()
+            return redirect("users")
+        except ValueError:
+            return redirect("users", {"error": "Error al asignar el rol"})
