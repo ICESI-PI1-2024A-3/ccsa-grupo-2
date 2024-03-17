@@ -20,7 +20,13 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
                         <td>{{ user.created_at|date:"d/m/Y" }}</td>
-                        <td>{{ user.is_active }}</td>
+                        <td>
+                            {% if user.is_active %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %}
+                        </td>
                         <td>
                             <form class="form-role" method="post" action="{% url 'role' %}">
                                 {% csrf_token %}
