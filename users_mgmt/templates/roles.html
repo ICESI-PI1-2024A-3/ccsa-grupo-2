@@ -28,7 +28,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <form class="form-role" method="post" action="{% url 'role' %}">
+                            <form class="form-role" method="post" action="{% url 'roles' %}">
                                 {% csrf_token %}
                                 {{ form }}
                                 <button type="submit"

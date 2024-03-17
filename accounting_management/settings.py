@@ -127,3 +127,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTHENTICATION_BACKENDS = [
     "users_mgmt.backends.CustomAuthBackend",
 ]
+
+# Login URL
+LOGIN_URL = "login"

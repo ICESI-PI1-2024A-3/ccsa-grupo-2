@@ -1,4 +1,5 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login as auth_login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import HttpResponse, redirect, render
 
@@ -8,10 +9,11 @@ from .models import CustomUser as User
 
 
 class UserViews:
+    @login_required
     def home(request):
-        return render(request, "layouts/base.html", {"user": request.user})
+        return render(request, "index.html")
 
-    def login(request):
+    def custom_login(request):
         if request.method == "GET":
             return render(request, "login.html", {"form": LoginForm()})
         else:
@@ -27,8 +29,8 @@ class UserViews:
                     {"form": LoginForm(), "error": "Usuario o contraseña incorrectos"},
                 )
             else:
-                login(request, user)
-                return redirect("users")
+                auth_login(request, user)
+                return redirect("home")
 
     def register(request):
         if request.method == "GET":
@@ -60,7 +62,7 @@ class UserViews:
                     )
                     user.save()
                     login(request, user)
-                    return redirect("users")
+                    return redirect("home")
                 except IntegrityError:
                     return render(
                         request,
@@ -92,7 +94,18 @@ class UserViews:
         user.delete()
         return HttpResponse(user)
 
-    def users_roles(request):
+    #    def users_roles(request):
+    #        users = User.objects.all()
+    #        forms = []
+    #        for user in users:
+    #            forms.append(
+    #                UpdateRoleForm(initial={"role": user.role, "user_id": user.id})
+    #            )
+    #        users_and_forms = zip(users, forms)
+    #        return render(request, "roles.html", {"user": request.user, "users_and_forms": users_and_forms})
+
+    @login_required
+    def assign_role(request):
         users = User.objects.all()
         forms = []
         for user in users:
@@ -100,15 +113,35 @@ class UserViews:
                 UpdateRoleForm(initial={"role": user.role, "user_id": user.id})
             )
         users_and_forms = zip(users, forms)
-        return render(request, "roles.html", {"users_and_forms": users_and_forms})
-
-    def assign_role(request):
-        try:
-            user_id = request.POST.get("user_id")
-            role = request.POST.get("role")
-            user = User.objects.get(pk=user_id)
-            user.role = role
-            user.save()
-            return redirect("users")
-        except ValueError:
-            return redirect("users", {"error": "Error al asignar el rol"})
+        if request.method == "GET":
+            return render(
+                request,
+                "roles.html",
+                {"user": request.user, "users_and_forms": users_and_forms},
+            )
+        elif request.method == "POST":
+            try:
+                user_id = request.POST.get("user_id")
+                role = request.POST.get("role")
+                user = User.objects.get(pk=user_id)
+                user.role = role
+                user.save()
+                return render(
+                    request,
+                    "roles.html",
+                    {
+                        "user": request.user,
+                        "users_and_forms": users_and_forms,
+                        "success": "Rol asignado correctamente",
+                    },
+                )
+            except ValueError:
+                return render(
+                    request,
+                    "roles.html",
+                    {
+                        "user": request.user,
+                        "users_and_forms": users_and_forms,
+                        "error": "Error al asignar el rol",
+                    },
+                )
