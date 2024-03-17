@@ -26,4 +26,5 @@ urlpatterns = [
     path("register/", UserViews.register, name="register"),
     path("logout/", UserViews.logout, name="logout"),
     path("users/", include("users_mgmt.urls")),
+    path("request/", include("requests_mgmt.urls"))
 ]
