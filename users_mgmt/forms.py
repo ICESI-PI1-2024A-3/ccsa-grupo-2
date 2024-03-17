@@ -79,3 +79,17 @@ class RegisterForm(forms.Form):
             attrs={"class": "form_control", "placeholder": "Confirmar Contraseña"}
         ),
     )
+
+
+class UpdateRoleForm(forms.Form):
+    role = forms.ChoiceField(
+        label="",
+        choices=[
+            ("PROCESS_LEADER", "Lider de Proceso"),
+            ("ACCOUNTING_MANAGER", "Gestor de Contabilidad"),
+            ("REQUESTER", "Solicitante"),
+            ("REVIEWER", "Revisor"),
+            ("APPROVER", "Aprobador"),
+        ],
+        widget=forms.Select(attrs={"class": "role-select"}),
+    )

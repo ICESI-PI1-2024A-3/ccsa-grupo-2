@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans';
+    font-family: sans-serif;
 	background-color: #fbfbfb;
 	margin: 0;
     padding: 0;
@@ -43,4 +43,37 @@ body {
 
 .user {
     padding: 0 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-users {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px 0;
+}
+
+.table-users th {
+    background: #1E4072;
+    color: #fff;
+    font-weight: bold;
+}
+
+.table-users th, .table-users td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e7e7e7;
+}
+
+.role-select {
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.role-select:focus {
+    outline: none;
 }

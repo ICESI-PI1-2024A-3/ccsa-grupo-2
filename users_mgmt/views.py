@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.shortcuts import HttpResponse, redirect, render
 
 from .backends import CustomAuthBackend
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UpdateRoleForm
 from .models import CustomUser as User
 
 
@@ -91,3 +91,15 @@ class UserViews:
         user = User.objects.get(pk=user_id)
         user.delete()
         return HttpResponse(user)
+
+    def users_roles(request):
+        users = User.objects.all()
+        return render(
+            request, "roles.html", {"role_form": UpdateRoleForm(), "users": users}
+        )
+
+    def assign_role(request, user_id):
+        user = User.objects.get(pk=user_id)
+        user.role = request.POST.get("role")
+        user.save()
+        return redirect("roles")
