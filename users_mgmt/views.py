@@ -70,7 +70,7 @@ class UserViews:
                         {"form": RegisterForm(), "error": "El usuario ya existe"},
                     )
 
-    ### Update default mehtods to use
+    @login_required
     def logout(request):
         logout(request)
         return redirect("login")
@@ -78,10 +78,6 @@ class UserViews:
     def retrieve_all_users(request):
         users = User.objects.all()
         return HttpResponse(users)
-
-    def retrieve_user(request, user_id):
-        user = User.objects.get(pk=user_id)
-        return HttpResponse(user)
 
     def update_user(request, user_id):
         user = User.objects.get(pk=user_id)
@@ -93,16 +89,6 @@ class UserViews:
         user = User.objects.get(pk=user_id)
         user.delete()
         return HttpResponse(user)
-
-    #    def users_roles(request):
-    #        users = User.objects.all()
-    #        forms = []
-    #        for user in users:
-    #            forms.append(
-    #                UpdateRoleForm(initial={"role": user.role, "user_id": user.id})
-    #            )
-    #        users_and_forms = zip(users, forms)
-    #        return render(request, "roles.html", {"user": request.user, "users_and_forms": users_and_forms})
 
     @login_required
     def assign_role(request):
@@ -145,3 +131,23 @@ class UserViews:
                         "error": "Error al asignar el rol",
                     },
                 )
+
+    def search_users(request):
+        search_query = request.GET.get("search_query")
+        users = User.objects.filter(
+            first_name__icontains=search_query
+        ) | User.objects.filter(last_name__icontains=search_query)
+        forms = [
+            UpdateRoleForm(initial={"role": user.role, "user_id": user.id})
+            for user in users
+        ]
+        users_and_forms = zip(users, forms)
+        return render(
+            request,
+            "roles.html",
+            {
+                "user": request.user,
+                "users_and_forms": users_and_forms,
+                "search_query": search_query,
+            },
+        )

@@ -47,7 +47,6 @@ body {
 .table-users {
     width: 100%;
     border-collapse: collapse;
-    margin: 40px 0;
 }
 
 .table-users th {
@@ -98,4 +97,23 @@ body {
 
 .button:focus {
     outline: none;
+}
+
+.search {
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.search:focus {
+    outline: none;
+    border: 1px solid #4C8ECB;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
