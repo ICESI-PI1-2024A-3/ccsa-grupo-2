@@ -4,22 +4,18 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
+        <title>Users</title>
         <link rel="stylesheet" href="{% static '/css/base.css' %}" />
     </head>
     <body>
         <nav class="navbar">
-            <ul>
-                <li class="logo">
-                    <a href="{% url 'users' %}">Logo</a>
-                </li>
-                <li>
-                    <div>
-                        <span class="user">{{ user }}</span>
-                        <a href="{% url 'logout' %}">Salir</a>
-                    </div>
-                </li>
-            </ul>
+            <a href="{% url 'users' %}" class="logo">
+                <img src="{% static '/images/logo.png' %}" alt="Logo" />
+            </a>
+            <div class="user-info">
+                <span>{{ user }}</span>
+                <a href="{% url 'logout' %}">Salir</a>
+            </div>
         </nav>
         {% block content %}{% endblock %}
     </body>

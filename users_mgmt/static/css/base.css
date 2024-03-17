@@ -6,44 +6,38 @@ body {
 	overflow: hidden;
 }
 
-.navbar {
-    background: #1E4072;
-    color: #fff;
-    border-bottom: 1px solid #e7e7e7;
-    border-radius: 0;
-    margin-bottom: 0;
-    min-height: 50px;
-    padding: 5px 0;
-}
+/* Navbar */
 
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.navbar {
+    background-color: #1E4072;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.navbar ul li {
-    display: inline;
-    margin: 0 10px;
+.logo img {
+    height: 40px;
+    margin-left: 10px;
 }
 
-.navbar ul li a {
-    padding: 10px 20px;
-    color: #fff;
+.user-info {
+    color: white;
+}
+
+.user-info a {
+    color: white;
     text-decoration: none;
-    line-height: 50px;
+    padding: 10px;
+    margin-left: 10px;
     border-radius: 5px;
 }
 
-.navbar ul li a:hover {
-    background: #29589e;
+.user-info a:hover {
+    background: #d03123;
 }
 
-.user {
-    padding: 0 20px;
-}
+/* Users Page */
 
 .container {
     width: 80%;
@@ -71,7 +65,6 @@ body {
 .form-role {
     display: flex;
     justify-content: space-evenly;
-    /* margin: 20px 0; */
 }
 
 .role-select {
