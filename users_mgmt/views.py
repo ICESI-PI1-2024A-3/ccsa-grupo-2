@@ -28,7 +28,7 @@ class UserViews:
                 )
             else:
                 login(request, user)
-                return redirect("home")
+                return redirect("users")
 
     def register(request):
         if request.method == "GET":
@@ -60,7 +60,7 @@ class UserViews:
                     )
                     user.save()
                     login(request, user)
-                    return redirect("home")
+                    return redirect("users")
                 except IntegrityError:
                     return render(
                         request,
@@ -94,12 +94,18 @@ class UserViews:
 
     def users_roles(request):
         users = User.objects.all()
-        return render(
-            request, "roles.html", {"role_form": UpdateRoleForm(), "users": users}
-        )
+        forms = []
+        for user in users:
+            forms.append(
+                UpdateRoleForm(initial={"role": user.role, "user_id": user.id})
+            )
+        users_and_forms = zip(users, forms)
+        return render(request, "roles.html", {"users_and_forms": users_and_forms})
 
-    def assign_role(request, user_id):
+    def assign_role(request):
+        user_id = request.POST.get("user_id")
+        role = request.POST.get("role")
         user = User.objects.get(pk=user_id)
-        user.role = request.POST.get("role")
+        user.role = role
         user.save()
-        return redirect("roles")
+        return redirect("users")

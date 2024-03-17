@@ -85,11 +85,12 @@ class UpdateRoleForm(forms.Form):
     role = forms.ChoiceField(
         label="",
         choices=[
-            ("PROCESS_LEADER", "Lider de Proceso"),
-            ("ACCOUNTING_MANAGER", "Gestor de Contabilidad"),
-            ("REQUESTER", "Solicitante"),
-            ("REVIEWER", "Revisor"),
-            ("APPROVER", "Aprobador"),
+            ("Process Leader", "Lider de Proceso"),
+            ("Accounting Manager", "Gestor de Contabilidad"),
+            ("Requester", "Solicitante"),
+            ("Reviewer", "Revisor"),
+            ("Approver", "Aprobador"),
         ],
         widget=forms.Select(attrs={"class": "role-select"}),
     )
+    user_id = forms.IntegerField(widget=forms.HiddenInput())

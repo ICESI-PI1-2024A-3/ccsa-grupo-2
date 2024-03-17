@@ -6,22 +6,30 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
                     <th>Fecha de registro</th>
                     <th>Estado</th>
                     <th>Rol</th>
                 </tr>
             </thead>
             <tbody>
-                {% for user in users %}
+                {% for user, form in users_and_forms %}
                     <tr>
                         <td>{{ user }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
-                        <td>{{ user.created_at }}</td>
+                        <td>{{ user.created_at|date:"d/m/Y" }}</td>
                         <td>{{ user.is_active }}</td>
-                        <td>{{ role_form }}</td>
+                        <td>
+                            <form class="form-role" method="post" action="{% url 'role' %}">
+                                {% csrf_token %}
+                                {{ form }}
+                                <button type="submit"
+                                        class="button"
+                                        {% if user.role == form.role.data %}disabled{% endif %}>Cambiar</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
