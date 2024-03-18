@@ -151,3 +151,9 @@ class UserViews:
                 "search_query": search_query,
             },
         )
+        
+    def show_approver(request):
+        return render(
+            request, 
+            "approver.html"
+        )

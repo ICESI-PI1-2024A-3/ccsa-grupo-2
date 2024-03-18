@@ -117,3 +117,37 @@ body {
     margin-top: 40px;
     margin-bottom: 20px;
 }
+
+.button-success {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #21991f;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button-success:hover {
+    background: #2ed52b;
+}
+
+.button-success:focus {
+    outline: none;
+}
+
+.button-failure {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #b72323;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button-failure:hover {
+    background: #711111;
+}
+
+.button-failure{
+    outline: : none;;
+}
