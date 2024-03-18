@@ -33,8 +33,7 @@ class TaxTreatmentForm(forms.Form):
     checkbox_choices = forms.ChoiceField(
         label="Se tomarán costos y deducciones asociados a las rentas de trabajo por los servicios prestados:",
         choices=CHOICES,
-        widget=forms.RadioSelect,  # Utilizamos RadioSelect para permitir solo una selección
-    )
+        widget=forms.RadioSelect)
 
 class CheckboxRentaResidente(forms.Form):
     declarante = forms.BooleanField(label="Soy declarante de impuesto de renta", required=False)
@@ -42,9 +41,23 @@ class CheckboxRentaResidente(forms.Form):
     residente = forms.BooleanField(label="Soy residente fiscal en Colombia", required=False)
 
 class City_Date(forms.Form):
-    city = forms.CharField(label = "Ciuadad: ", max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    city = forms.CharField(label = "Ciudad: ", max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    date = forms.DateField(label="Fecha:", widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    date = forms.DateField(label="Fecha: ", widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+
+class BankInformation(forms.Form):
+    CHOICES = [
+        ('corriente', 'Corriente'),
+        ('ahorro', 'Ahorro')
+    ]
+
+    bank_name = forms.CharField(label = "Banco: ", max_length = 200, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    checkbox_choices = forms.ChoiceField(
+        label="Tipo de cuenta: ",
+        choices=CHOICES,
+        widget=forms.RadioSelect
+    )
 
 
     

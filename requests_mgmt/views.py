@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import user_information, CreateNewChargeAccount, TaxTreatmentForm, CheckboxRentaResidente,  City_Date
+from .forms import user_information, CreateNewChargeAccount, TaxTreatmentForm, CheckboxRentaResidente,  City_Date, BankInformation
 
 # Create your views here.
 
@@ -14,5 +14,6 @@ def charge_account(request):
         "charge_account": CreateNewChargeAccount(),
         "taxTreatment": TaxTreatmentForm,
         "checkBox": CheckboxRentaResidente,
-        "city_date": City_Date
+        "city_date": City_Date,
+        "bankInformation": BankInformation
     })
