@@ -3,13 +3,14 @@ from .forms import *
 from .models import *
 from django.http import HttpResponse
 
+
 # Create your views here.
 class RequestViews:
     def createRequest(request):
         if request.method=='GET':
             return render(request,'createRequest.html',{
                 'userInfoForm':user_information(),
-                'inputForm':CreateNewChargeAccount()
+                'inputForm':CreateNewChargeAccount(),
             })
         else:
             try:
@@ -47,5 +48,28 @@ class RequestViews:
                 return redirect('home')
             except:
                 return HttpResponse('An Error Has Ocurred')
+    def update_reviewer(request,request_id, user_id):
+        user = CustomUser.objects.get(pk=user_id)
+        intance_request=Request.objects.get(pk=request_id)
+        intance_request.requester = user
+        intance_request.save()
+        return HttpResponse(intance_request)
+    def details_request(request,request_id):
+            chargeRequest=ChargeAccountRequest.objects.get(id=request_id)
+            return render(request,'template/details_request.html',{
+                'chargeRequest':chargeRequest
+            })
+
+
+
+
+        
+       
+
+       
+    
+            
+
+
             
 

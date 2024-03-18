@@ -1,5 +1,6 @@
 from django import forms
 
+
 class user_information(forms.Form):
 
     DOCUMENT_CHOICES = [
@@ -32,5 +33,13 @@ class CreateNewChargeAccount(forms.Form):
     account_type = forms.CharField(label='Tipo de Cuenta : ')
     account_number = forms.CharField(label='Numero de Cuenta : ')
     CEX_no = forms.CharField(label='CEX No : ')
+
+class Assign_reviewer(forms.Form):
+        assign_reviewer = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+
 
 

@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from users_mgmt.views import UserViews
+from requests_mgmt.views import RequestViews
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,4 +28,5 @@ urlpatterns = [
     path("logout/", UserViews.logout, name="logout"),
     path("", UserViews.home, name="home"),
     path("users/", include("users_mgmt.urls")),
+    path("request_details",RequestViews.details_request,name='details')
 ]
