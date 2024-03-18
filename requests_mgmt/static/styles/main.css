@@ -75,10 +75,22 @@ a{
     background-color: #1E4072;
 }
 
-.form-control {
-    width: 60%;
+.form-container {
+    width: 800px; 
+    margin: 20px auto; 
+    margin-left: 10px;
+    border: 2px solid #ccc; 
+    padding: 20px; 
+    border-radius: 5px;
+}
+
+
+
+.form-container .form-control {
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
