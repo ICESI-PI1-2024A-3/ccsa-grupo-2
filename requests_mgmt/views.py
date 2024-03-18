@@ -5,11 +5,18 @@ from django.http import HttpResponse
 
 # Create your views here.
 class RequestViews:
-    def createRequest(request):
+    def request_index(request):
+        return render(request, 'requests_index.html')
+    
+    def charge_account(request):
         if request.method=='GET':
-            return render(request,'createChargeAccountRequest.html',{
-                'userInfoForm':user_information(),
-                'inputForm':CreateNewChargeAccount()
+            return render(request,'request_type/charge_account.html',{
+                "user_form": user_information(),
+                "charge_account": CreateNewChargeAccount(),
+                "taxTreatment": TaxTreatmentForm,
+                "checkBox": CheckboxRentaResidente,
+                "city_date": City_Date,
+                "bankInformation": BankInformation
             })
         else:
             try:
