@@ -7,7 +7,7 @@ from django.http import HttpResponse
 class RequestViews:
     def createRequest(request):
         if request.method=='GET':
-            return render(request,'createRequest.html',{
+            return render(request,'createChargeAccountRequest.html',{
                 'userInfoForm':user_information(),
                 'inputForm':CreateNewChargeAccount()
             })
@@ -44,8 +44,27 @@ class RequestViews:
                     chargeRequest.isFiscal_Resident(True)
                 else:
                     chargeRequest.isFiscal_Resident(True)
+                
+                chargeRequest.save()
                 return redirect('home')
             except:
                 return HttpResponse('An Error Has Ocurred')
+            
+    
+    def showRequests(request):
+        requests = ChargeAccountRequest.objects.all()
+        return render(request,'requestTable.html',{
+            'requests':requests
+        })
+    
+    def detail_request(request,request_id):
+        if request.method=='GET':
+            chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
+            return render(request,'detail_request.html',{
+                'chargeRequest':chargeRequest
+            })
+        else:
+            print("\n\n ASIGNAR REVIWER\n\n")
+
             
 
