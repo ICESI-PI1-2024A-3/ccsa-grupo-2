@@ -1,3 +1,5 @@
+{% extends "layouts/base.html" %}
+{% block content %}
 <div class="container">
     <div class="header">
         <h2>Información de la solicitud</h2>
@@ -5,17 +7,15 @@
     <table class="table-request">
         <thead>
             <tr>
-                <th>Tipo de solicitud</th>
+     
                 <th>Nombre del solicitante</th>
                 <th>Fecha de registro</th>
                 <th>detalles de la solictud</th>
-                <th>Estado</th>
-                <th>Revisor</th>
                 <th>valor</th>
                 <th>Ciudad</th>
                 <th>Nombre del banco</th>
                 <th>tipo de cuenta</th>
-                <th>NUmero de cuenta</th>
+                <th>Numero de cuenta</th>
                 <th>Numero de CEX</th>
                 <th>Residente fiscal</th>
                 <th>Declarador de renta</th>
@@ -23,25 +23,21 @@
             </tr>
         </thead>
         <tbody>
-                {% request %}
                     <tr>
-                        <td>{{ request.user_name }}</td>
-                        <td>{{ request.user_name }}</td>
-                        <td>{{ request.date }}</td>
-                        <td>{{ request_concept }}</td>
-                        <td>{{ request.user_name }}</td>
-                        <td>{{ request.amount }}</td>
-                        <td>{{ request.city }}</td>
-                        <td>{{ request.banck_name }}</td>
-                        <td>{{ request.account_type }}</td>
-                        <td>{{ request.account_number }}</td>
-                        <td>{{ request.CEX_no }}</td>
-                        <td>{{ request.bank_name }}</td>
-                        <td>{{request.fiscal_resident}}</td>
-                        <td>{{request.rent_tax_declarant}}</td>
-                        <td>{{request.costs_and_deductions}}</td>
+                        <td>{{ chargeRequest.user_name }}</td>
+                        <td>{{ chargeRequest.date }}</td>
+                        <td>{{ chargeRequest.concept }}</td>
+                        <td>{{ chargeRequest.amount }}</td>
+                        <td>{{ chargeRequest.banck_name }}</td>
+                        <td>{{ charRequest.account_type }}</td>
+                        <td>{{ chargeRequest.account_number }}</td>
+                        <td>{{ chargeRequest.CEX_no }}</td>
+                        <td>{{ chargeRequest.fiscal_resident}}</td>
+                        <td>{{ chargeRequest.rent_tax_declarant}}</td>
+                        <td>{{ chargeRequest.costs_and_deductions}}</td>
 
         </tbody>
     </table>
 </div>
+{%endblock%}
 
