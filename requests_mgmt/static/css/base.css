@@ -1,0 +1,123 @@
+body {
+    font-family: sans-serif;
+	background-color: #fbfbfb;
+	margin: 0;
+    padding: 0;
+	overflow: hidden;
+}
+
+/* Navbar */
+
+.navbar {
+    background-color: #1E4072;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.user-info {
+    color: white;
+}
+
+.user-info a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.user-info a:hover {
+    background: #d03123;
+}
+
+/* Users Page */
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-users {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-users th {
+    background: #1E4072;
+    color: #fff;
+    font-weight: bold;
+}
+
+.table-users th, .table-users td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e7e7e7;
+}
+
+.form-role {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.role-select {
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.role-select:focus {
+    outline: none;
+}
+
+.button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #4C8ECB;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #56a0e6;
+}
+
+.button:disabled {
+    background: #e7e7e7;
+    color: #000;
+    cursor: not-allowed;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.search {
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.search:focus {
+    outline: none;
+    border: 1px solid #4C8ECB;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.navigation {
+    color: #fff;
+}

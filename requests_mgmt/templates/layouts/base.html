@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Users</title>
+        <link rel="stylesheet" href="{% static '/css/base.css' %}" />
+    </head>
+    <body>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static '/images/logo.png' %}" alt="Logo" />
+            </a>
+            <a href="{% url 'roles' %}" class="navigation">
+                ROLES
+            </a>
+            <a href="{% url 'show_requests' %}" class="navigation">
+               SOLICITUDES
+            </a>
+            <a href="{% url 'charge_account' %}" class="navigation">
+                CREAR SOLICITUD
+             </a>
+            <div class="user-info">
+                <span>{{ user }}</span>
+                <a href="{% url 'logout' %}">Salir</a>
+            </div>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<h1>Create a New Charge Account Request</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{userInfoForm.as_p}}
+    {{inputForm.as_p}}
+    <button>
+        SAVE
+    </button>
+</form>
+{% endblock %}
