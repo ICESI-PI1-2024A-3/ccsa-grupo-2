@@ -12,6 +12,15 @@
             <a href="{% url 'home' %}" class="logo">
                 <img src="{% static '/images/logo.png' %}" alt="Logo" />
             </a>
+            <a href="{% url 'roles' %}" class="navigation">
+                ROLES
+            </a>
+            <a href="{% url 'show_requests' %}" class="navigation">
+               SOLICITUDES
+            </a>
+            <a href="{% url 'charge_account_request' %}" class="navigation">
+                CREAR SOLICITUD
+             </a>
             <div class="user-info">
                 <span>{{ user }}</span>
                 <a href="{% url 'logout' %}">Salir</a>

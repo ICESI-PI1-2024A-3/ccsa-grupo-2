@@ -66,6 +66,7 @@ class RequestViews:
     def edit_request(request,request_id):
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
         if request.method=='GET':
+            print("\n\n GET !!!!!!!!!\n\n")
             return render(request,'edit_request.html',{
                 'chargeRequest':chargeRequest,
                 'form':CreateNewChargeAccount
@@ -81,6 +82,16 @@ class RequestViews:
             chargeRequest.CEX_no=request.POST['CEX_no']
             chargeRequest.save()
             return redirect('show_requests')
+        
+                
+    def delete_request(request,request_id):
+        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
+        chargeRequest.delete()
+        return redirect('show_requests')
+
+
+    
+  
 
 
             

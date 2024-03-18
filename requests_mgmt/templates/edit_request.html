@@ -10,4 +10,11 @@
     </button>
 </form>
 
+<form action="{% url 'delete_request' chargeRequest.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+        DELETE
+    </button>
+</form>
+
 {% endblock %}
