@@ -3,5 +3,6 @@ from django.urls import path
 from .views import UserViews
 
 urlpatterns = [
-    path("", UserViews.home, name="home"),
+    path("roles/", UserViews.assign_role, name="roles"),
+    path("roles/search_users", UserViews.search_users, name="search_users"),
 ]

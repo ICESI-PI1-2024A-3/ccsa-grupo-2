@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h2>Usuarios</h2>
+            <form method="get" action="{% url 'search_users' %}">
+                <input type="text"
+                       class="search"
+                       name="search_query"
+                       placeholder="Buscar por nombre...">
+                <button type="submit" class="button">Buscar</button>
+            </form>
+        </div>
+        <table class="table-users">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de registro</th>
+                    <th>Estado</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if search_query %}
+                    {% for user, form in users_and_forms %}
+                        <tr>
+                            <td>{{ user }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.created_at|date:"d/m/Y" }}</td>
+                            <td>
+                                {% if user.is_active %}
+                                    Activo
+                                {% else %}
+                                    Inactivo
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form class="form-role" method="post" action="{% url 'roles' %}">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <button type="submit"
+                                            class="button"
+                                            {% if user.role == form.role.data %}disabled{% endif %}>Cambiar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for user, form in users_and_forms %}
+                        <tr>
+                            <td>{{ user }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.created_at|date:"d/m/Y" }}</td>
+                            <td>
+                                {% if user.is_active %}
+                                    Activo
+                                {% else %}
+                                    Inactivo
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form class="form-role" method="post" action="{% url 'roles' %}">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <button type="submit"
+                                            class="button"
+                                            {% if user.role == form.role.data %}disabled{% endif %}>Cambiar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

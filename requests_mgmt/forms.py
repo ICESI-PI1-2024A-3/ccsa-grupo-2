@@ -36,9 +36,9 @@ class TaxTreatmentForm(forms.Form):
         widget=forms.RadioSelect)
 
 class CheckboxRentaResidente(forms.Form):
-    declarante = forms.BooleanField(label="Soy declarante de impuesto de renta", required=False)
+    rent_tax_declarant = forms.BooleanField(label="Soy declarante de impuesto de renta", required=False)
     
-    residente = forms.BooleanField(label="Soy residente fiscal en Colombia", required=False)
+    fiscal_resident = forms.BooleanField(label="Soy residente fiscal en Colombia", required=False)
 
 class City_Date(forms.Form):
     city = forms.CharField(label = "Ciudad: ", max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -53,11 +53,15 @@ class BankInformation(forms.Form):
 
     bank_name = forms.CharField(label = "Banco: ", max_length = 200, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    checkbox_choices = forms.ChoiceField(
+    account_number = forms.CharField(label='Numero de Cuenta : ')
+
+    account_type = forms.ChoiceField(
         label="Tipo de cuenta: ",
         choices=CHOICES,
         widget=forms.RadioSelect
     )
+
+    CEX_no = forms.CharField(label='CEX No : ')
 
 
     

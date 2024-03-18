@@ -22,9 +22,10 @@ from users_mgmt.views import UserViews
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", UserViews.login, name="login"),
+    path("login/", UserViews.custom_login, name="login"),
     path("register/", UserViews.register, name="register"),
     path("logout/", UserViews.logout, name="logout"),
+    path("", UserViews.home, name="home"),
     path("users/", include("users_mgmt.urls")),
     path("request/", include("requests_mgmt.urls"))
 ]
