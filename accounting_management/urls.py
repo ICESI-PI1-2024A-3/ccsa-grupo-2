@@ -28,5 +28,5 @@ urlpatterns = [
     path("logout/", UserViews.logout, name="logout"),
     path("", UserViews.home, name="home"),
     path("users/", include("users_mgmt.urls")),
-    path("request_details",RequestViews.details_request,name='details')
+    path("request/", include("requests_mgmt.urls"))
 ]
