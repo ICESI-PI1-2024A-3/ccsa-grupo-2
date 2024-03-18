@@ -125,6 +125,10 @@ body {
     background: #21991f;
     color: #fff;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-success:hover {
@@ -142,12 +146,37 @@ body {
     background: #b72323;
     color: #fff;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-failure:hover {
     background: #711111;
 }
 
-.button-failure{
-    outline: : none;;
+.button-failure {
+    outline: none;
+}
+
+.text-area-comentario {
+    resize: none;
+}
+
+.text-area-comentario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.approver-objects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    display: block;
+    
 }

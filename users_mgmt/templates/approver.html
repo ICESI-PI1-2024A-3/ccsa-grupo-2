@@ -1,9 +1,41 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 
-<div class="prueba">
-    <button type="submit" class="button-success">Aprobar</button>
-    <button type="submit" class="button-failure">Rechazar</button>
-</div>
+<head>
+    <style>
+
+        body, html {
+            height: 100%; /* Ajustar la altura al 100% de la ventana */
+            margin: 0; /* Eliminar los márgenes predeterminados */
+            display: flex; /* Utilizar flexbox */
+            flex-direction: column; /* Organizar los elementos en columna */
+        }
+
+        .container {
+            flex: 1; /* El contenedor ocupa todo el espacio restante */
+            display: flex; /* Utilizar flexbox */
+            flex-direction: column; /* Organizar los elementos en columna */
+            align-items: center; /* Centrar los elementos horizontalmente */
+            justify-content: center; /* Centrar los elementos verticalmente */
+        }
+
+        #texto {
+            width: 50%; 
+            resize: none; 
+        }
+
+        button {
+            margin: 5px; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <textarea class="text-area-comentario" rows="4" cols="50" placeholder="Introduce tu comentario"></textarea><br><br>
+        <button type="submit" class="button-success">Aprobar</button>
+        <button type="submit" class="button-failure">Rechazar</button>
+    </div>
+</body>
 
 {% endblock %}
