@@ -57,42 +57,20 @@ class RequestViews:
                 return redirect('show_requests')
             except:
                 return HttpResponse('An Error Has Ocurred')
+            
     def update_reviewer(request,request_id, user_id):
-        user = CustomUser.objects.get(pk=user_id)
+        #user = CustomUser.objects.get(pk=user_id)
         intance_request=Request.objects.get(pk=request_id)
         intance_request.requester = user
         intance_request.save()
         return HttpResponse(intance_request)
+    
     def details_request(request,request_id):
             chargeRequest=ChargeAccountRequest.objects.get(id=request_id)
             return render(request,'template/details_request.html',{
                 'chargeRequest':chargeRequest
             })
 
-
-
-
-        
-       
-
-       
-    
-            
-
-
-            
-    
-    def showRequests(request):
-        requests = ChargeAccountRequest.objects.all()
-        return render(request,'requestTable.html',{
-            'requests':requests
-        })
-    
-    def detail_request(request,request_id):
-        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-        return render(request,'detail_request.html',{
-            'chargeRequest':chargeRequest
-        })
     
     def edit_request(request,request_id):
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
@@ -119,12 +97,6 @@ class RequestViews:
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
         chargeRequest.delete()
         return redirect('show_requests')
-
-
-    
-  
-
-
             
     
     def showRequests(request):
@@ -135,36 +107,10 @@ class RequestViews:
     
     def detail_request(request,request_id):
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-        return render(request,'detail_request.html',{
+        return render(request,'request_details.html',{
             'chargeRequest':chargeRequest
         })
     
-    def edit_request(request,request_id):
-        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-        if request.method=='GET':
-            print("\n\n GET !!!!!!!!!\n\n")
-            return render(request,'edit_request.html',{
-                'chargeRequest':chargeRequest,
-                'form':CreateNewChargeAccount
-            })
-        else:
-            chargeRequest.amount=request.POST['amount']
-            chargeRequest.concept=request.POST['concept']
-            chargeRequest.city=request.POST['city']
-            chargeRequest.date=request.POST['date']
-            chargeRequest.bank_name=request.POST['bank_name']
-            chargeRequest.account_type=request.POST['account_type']
-            chargeRequest.account_number=request.POST['account_number']
-            chargeRequest.CEX_no=request.POST['CEX_no']
-            chargeRequest.save()
-            return redirect('show_requests')
-        
-                
-    def delete_request(request,request_id):
-        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-        chargeRequest.delete()
-        return redirect('show_requests')
-
 
     
   
