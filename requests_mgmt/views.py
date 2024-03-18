@@ -46,7 +46,7 @@ class RequestViews:
                     chargeRequest.isFiscal_Resident(True)
                 
                 chargeRequest.save()
-                return redirect('home')
+                return redirect('show_requests')
             except:
                 return HttpResponse('An Error Has Ocurred')
             
@@ -58,13 +58,30 @@ class RequestViews:
         })
     
     def detail_request(request,request_id):
+        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
+        return render(request,'detail_request.html',{
+            'chargeRequest':chargeRequest
+        })
+    
+    def edit_request(request,request_id):
+        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
         if request.method=='GET':
-            chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-            return render(request,'detail_request.html',{
-                'chargeRequest':chargeRequest
+            return render(request,'edit_request.html',{
+                'chargeRequest':chargeRequest,
+                'form':CreateNewChargeAccount
             })
         else:
-            print("\n\n ASIGNAR REVIWER\n\n")
+            chargeRequest.amount=request.POST['amount']
+            chargeRequest.concept=request.POST['concept']
+            chargeRequest.city=request.POST['city']
+            chargeRequest.date=request.POST['date']
+            chargeRequest.bank_name=request.POST['bank_name']
+            chargeRequest.account_type=request.POST['account_type']
+            chargeRequest.account_number=request.POST['account_number']
+            chargeRequest.CEX_no=request.POST['CEX_no']
+            chargeRequest.save()
+            return redirect('show_requests')
+
 
             
 
