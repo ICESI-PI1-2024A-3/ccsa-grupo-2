@@ -27,4 +27,5 @@ urlpatterns = [
     path("logout/", UserViews.logout, name="logout"),
     path("", UserViews.home, name="home"),
     path("users/", include("users_mgmt.urls")),
+    path("request/", include("requests_mgmt.urls"))
 ]
