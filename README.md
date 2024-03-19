@@ -29,30 +29,28 @@ git add .
 git commit -m "feat: descripción del cambio realizado" # Ejemplo "feat: add new dashboard template"
 ```
 
-### 4. Fusionar los Cambios en dev
+### 4. Mantener tu Rama Actualizada:
 
-Antes de abrir una Pull Request, asegúrate de tener los últimos cambios de la branch dev:
-
-```bash
-git checkout dev
-git pull origin dev
-```
-
-Fusiona tus cambios en la branch dev:
+Durante el desarrollo, asegúrate de mantener tu rama actualizada con los últimos cambios de la rama dev:
 
 ```bash
-git merge feat_nombre_funcionalidad
+git checkout feat_nombre_funcionalidad
+git merge dev
 ```
 
-### 5. Enviar Cambios al Repositorio Remoto
+### 5. Resolver Conflictos en Visual Studio Code:
 
-Envía tu branch y cambios al repositorio remoto:
+Si se presentan conflictos durante la fusión, resuélvelos utilizando Visual Studio Code. Abre la vista de "Source Control" para visualizar y resolver los conflictos de manera interactiva.
+
+### 6. Enviar Cambios al Repositorio Remoto:
+
+Una vez resueltos los conflictos y completada la funcionalidad, envía tu rama y cambios al repositorio remoto:
 
 ```bash
 git push origin feat_nombre_funcionalidad
 ```
 
-### 6. Abrir una Pull Request en GitHub
+### 7. Abrir una Pull Request en GitHub
 
 - Ve a la página de tu repositorio en GitHub.
 - Cambia a la pestaña "Pull Requests".
@@ -62,6 +60,6 @@ git push origin feat_nombre_funcionalidad
 - Proporciona una descripción clara de los cambios realizados.
 - Haz clic en "Create pull request" para abrir la Pull Request.
 
-### 7. Revisión y Fusión de la Pull Request
+### 8. Revisión y Fusión de la Pull Request
 
 Otros colaboradores revisarán tu Pull Request y podrán hacer comentarios o solicitar modificaciones. Una vez revisada y aprobada, un colaborador con permisos de fusión puede fusionar la Pull Request utilizando la interfaz de GitHub.
