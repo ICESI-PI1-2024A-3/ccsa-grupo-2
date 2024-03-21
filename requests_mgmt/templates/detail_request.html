@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+
+<h3>SOLICITANTE :{{chargeRequest.user_name}}</h3>
+<p>DOCUMENTO : {{chargeRequest.user_id}}</p>
+<p>FECHA : {{chargeRequest.date}}</p>
+<p>AMOUNT : {{chargeRequest.amount}}</p>
+<p>ID : {{chargeRequest.id}}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button>
+        EDITAR
+    </button>
+</form>
+{% endblock %}

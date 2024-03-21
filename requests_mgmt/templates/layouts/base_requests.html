@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva solicitud</title>
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+</head>
+<body>
+    <header class = "header">
+        <img src="{% static '/images/icesi.png' %}" alt="Icon" width="150">
+
+        <h1 class = "header h1"> Contabilidad </h1>
+
+        <button class="user-button">
+            <img src="{% static '/images/user.png' %}" alt="Usuario" width="30">
+        </button>
+    </header>
+    
+    <main>
+        {% block content%}
+        {% endblock %}
+    </main>
+</body>
+</html>
