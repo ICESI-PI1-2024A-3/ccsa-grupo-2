@@ -1,5 +1,5 @@
 from django import forms
-
+from users_mgmt.models import CustomUser
 
 class user_information(forms.Form):
 
@@ -62,10 +62,20 @@ class BankInformation(forms.Form):
 
     CEX_no = forms.CharField(label='CEX No : ')
 
-class Assign_reviewer(forms.Form):
-        assign_reviewer = forms.CharField(
-        max_length=200,
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
+class AddReviewerForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(AddReviewerForm, self).__init__(*args, **kwargs)
+        reviewers = CustomUser.objects.filter(role="Reviewer")
+        reviewer_choices = [(reviewer.id,reviewer) for reviewer in reviewers]
+        self.fields[''] = forms.ChoiceField(choices=reviewer_choices)
+        self.fields[''].required = False
+
+class AddApproverForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(AddApproverForm, self).__init__(*args, **kwargs)
+        approvers = CustomUser.objects.filter(role="Approver")
+        approver_choices = [(approver.id, approver) for approver in approvers]
+        self.fields[''] = forms.ChoiceField(choices=approver_choices, required=False)
 
 
 

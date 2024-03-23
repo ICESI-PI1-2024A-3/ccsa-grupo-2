@@ -107,9 +107,19 @@ class RequestViews:
     
     def detail_request(request,request_id):
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
+        if request.method == 'POST':
+            form = AddReviewerForm(request.POST)
+            form1 = AddApproverForm(request.POST)
+        else:
+            form=AddReviewerForm()
+            form1 = AddReviewerForm()
+
         return render(request,'request_details.html',{
-            'chargeRequest':chargeRequest
+            'chargeRequest':chargeRequest,
+            'select_reviewer': form,
+            'select_approver':form1
         })
+        
     
 
     

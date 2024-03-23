@@ -1,42 +1,98 @@
 {% extends "layouts/base_requests.html" %}
 {% block content %}
-<div class="container">
-    <div class="header">
-        <h2>Información de la solicitud</h2>
-    </div>
-    <table class="table-request">
-        <thead>
-            <tr>
-                <th>Nombre del solicitante</th>
-                <th>Fecha de registro</th>
-                <th>detalles de la solictud</th>
-                <th>valor</th>
-                <th>Ciudad</th>
-                <th>Nombre del banco</th>
-                <th>tipo de cuenta</th>
-                <th>Numero de cuenta</th>
-                <th>Numero de CEX</th>
-                <th>Residente fiscal</th>
-                <th>Declarador de renta</th>
-                <th>Costo y deducion</th>
-            </tr>
-        </thead>
-        <tbody>
-                    <tr>
-                        <td>{{ chargeRequest.user_name }}</td>
-                        <td>{{ chargeRequest.date }}</td>
-                        <td>{{ chargeRequest.concept }}</td>
-                        <td>{{ chargeRequest.amount }}</td>
-                        <td>{{ chargeRequest.banck_name }}</td>
-                        <td>{{ charRequest.account_type }}</td>
-                        <td>{{ chargeRequest.account_number }}</td>
-                        <td>{{ chargeRequest.CEX_no }}</td>
-                        <td>{{ chargeRequest.fiscal_resident}}</td>
-                        <td>{{ chargeRequest.rent_tax_declarant}}</td>
-                        <td>{{ chargeRequest.costs_and_deductions}}</td>
-
-        </tbody>
-    </table>
-</div>
-{%endblock%}
-
+<h2>Información de la solicitud</h2>
+<TABLE BORDER>
+    <TR>
+        <TH ROWSPAN=1>Nombre del solicitante</TH>
+        <TD>{{chargeRequest.user_name}}</TD>
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Fecha de registro</TH>
+        <TD>{{chargeRequest.date}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Tipo de documentos</TH>
+        <TD>{{chargeRequest.document_type}}</TD>
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Identificación del usuario</TH>
+        <TD>{{chargeRequest.user_id}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Monto</TH>
+        <TD>{{chargeRequest.amount}}</TD>
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Descripcion</TH>
+        <TD>{{chargeRequest.concept}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Declarador de renta</TH>
+        <TD>
+            {% if chargeRequest.rent_tax_declaran %}
+                Sí
+            {% else %}
+                No
+            {% endif %}
+        </TD>
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Declarador de renta</TH>
+        <TD>
+            {% if chargeRequest.rent_tax_declarant %}
+                Sí
+            {% else %}
+                No 
+            {% endif %}
+        </TD>
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Ciudad</TH>
+        <TD>{{chargeRequest.city}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Fecha</TH>
+        <TD>{{chargeRequest.date}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Nombre del banco</TH>
+        <TD>{{chargeRequest.bank_name}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Tipo De Cuenta</TH>
+        <TD>{{chargeRequest.account_type}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>Numero de Cuenta</TH>
+        <TD>{{chargeRequest.account_number}}</TD> 
+    </TR>
+    <TR>
+        <TH ROWSPAN=1>No CEX</TH>
+        <TD>{{chargeRequest.CEX_no}}</TD> 
+    </TR>
+    <tr>
+        <TH ROWSPAN=1>Revisor</TH>
+        <td colspan="2">
+            <form class="form-reviewer" method="POST" action="{% url 'details' chargeRequest.id %}">
+                {% csrf_token %}
+                <div class="form-control-user">
+                    {{ select_reviewer }}
+                    </div class="button">
+                    <button type="submit" class="button">Asignar</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <TH ROWSPAN=1>Aprovador</TH>
+        <td colspan="2">
+            <form class="form-reviewer" method="POST" action="{% url 'details' chargeRequest.id %}">
+                {% csrf_token %}
+                <div class="form-control-user">
+                    {{ select_approver }}
+                    </div class="button">
+                    <button type="submit" class="button">Asignar</button>
+            </form>
+        </td>
+    </tr>
+</TABLE>
+{% endblock %}
