@@ -16,17 +16,18 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 
-from users_mgmt.views import UserViews
-from requests_mgmt.views import RequestViews
+from requests_mgmt.views import HomeView
+from users_mgmt.views import LoginView, LogoutView, RegisterView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", UserViews.custom_login, name="login"),
-    path("register/", UserViews.register, name="register"),
-    path("logout/", UserViews.logout, name="logout"),
-    path("", UserViews.home, name="home"),
-    path("users/", include("users_mgmt.urls")),
-    path("request/", include("requests_mgmt.urls"))
+    path("iniciar sesion/", LoginView.as_view(), name="login"),
+    path("registrarse/", RegisterView.as_view(), name="register"),
+    path("cerrar sesion/", login_required(LogoutView.as_view()), name="logout"),
+    path("", login_required(HomeView.as_view()), name="home"),
+    path("usuarios/", include("users_mgmt.urls")),
+    path("solicitudes/", include("requests_mgmt.urls")),
 ]
