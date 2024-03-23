@@ -57,6 +57,14 @@ class RequestViews:
             except:
                 return HttpResponse('An Error Has Ocurred')
             
+    def invoice_legalization (request):
+        return render(request, "request_type/invoice_legalization.html")
+    
+    def advance_request (request):
+        return render(request, "request_type/advance_request.html")
+    
+    def perdiem_request (request):
+        return render(request, "request_type/perdiem_request.html")
     
     def showRequests(request):
         requests = ChargeAccountRequest.objects.all()

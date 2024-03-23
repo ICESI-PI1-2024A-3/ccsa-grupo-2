@@ -76,32 +76,43 @@ a{
 }
 
 .form-container {
-    width: 800px; 
-    margin: 20px auto; 
+    width: 95%;
+    margin: 20px auto;
     margin-left: 10px;
-    border: 2px solid #ccc; 
-    padding: 20px; 
+    border: 2px solid #ccc;
+    padding: 20px;
     border-radius: 5px;
 }
-
-
 
 .form-container .form-control {
     width: 95%;
     padding: 10px;
     margin-bottom: 10px;
-    margin-right: 10px;
+    margin-right: 10px; /* Ajusta el espacio entre las celdas */
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.form-control-user{
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+/* Estilos para form-container-flex */
+.form-container-flex {
+    width: 95%;
+    margin: 20px auto;
+    margin-left: 10px;
+    border: 2px solid #ccc;
+    padding: 20px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    justify-content: center;
+}
+
+.form-container-flex .form-control {
+    width: 300px; /* Ajusta el ancho de las celdas */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    margin-right: 30px;
+    border-radius: 5px;
 }
 
 .submit-button {

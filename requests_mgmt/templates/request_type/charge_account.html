@@ -15,7 +15,7 @@
 
     <form method="POST" class="with-margin">
         {% csrf_token %}
-        <div class="form-control-user with-margin">
+        <div class="form-container-flex with-margin">
             {{ user_form.as_p }}
         </div>
 
@@ -41,7 +41,7 @@
                 {{ checkBox }}
             </div>
 
-            <div class="with-margin form-container"> 
+            <div class="with-margin form-container-flex"> 
                 {{ city_date }}
             </div>
             
@@ -49,7 +49,7 @@
         
         <div>
             <h2> Información bancaria </h2>
-            <div class="with-margin form-container">
+            <div class="with-margin form-container-flex">
                 {{ bankInformation }}
             </div>
         </div>

@@ -51,7 +51,7 @@ class BankInformation(forms.Form):
 
     bank_name = forms.CharField(label = "Banco: ", max_length = 200, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    account_number = forms.CharField(label='Numero de Cuenta : ')
+    account_number = forms.CharField(label='Numero de Cuenta : ', max_length = 200, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     account_type = forms.ChoiceField(
         label="Tipo de cuenta: ",
@@ -59,7 +59,7 @@ class BankInformation(forms.Form):
         widget=forms.RadioSelect
     )
 
-    CEX_no = forms.CharField(label='CEX No : ')
+    CEX_no = forms.CharField(label='CEX No : ', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
     
