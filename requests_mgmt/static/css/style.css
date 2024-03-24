@@ -108,6 +108,12 @@ body {
     padding: 10px;
     border: 1px solid #e7e7e7;
     border-radius: 5px;
+    margin-bottom: 10px;
+    width: auto;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .search:focus {
