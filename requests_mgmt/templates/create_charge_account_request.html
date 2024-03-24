@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <h1>Nueva solicitud de cuenta de cobro</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_info_form.as_p }}
+        {{ city_date_form.as_p }}
+        {{ bank_info_form.as_p }}
+        {{ charge_account_form.as_p }}
+        {{ tax_treatment_form.as_p }}
+        {{ checkbox_form.as_p }}
+        <button>Enviar</button>
+    </form>
+{% endblock %}

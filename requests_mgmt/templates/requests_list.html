@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h2>Solicitudes: Cuenta de Cobro</h2>
+            <form method="get" action="{% url 'home' %}">
+                <input type="text"
+                       class="search"
+                       name="search_query"
+                       placeholder="Buscar por nombre...">
+                <button type="submit" class="button">Buscar</button>
+            </form>
+        </div>
+        <table class="table-users">
+            <thead>
+                <tr>
+                    <th>Solicitante</th>
+                    <th>Tipo de Documento</th>
+                    <th>Identificación</th>
+                    <th>Cantidad</th>
+                    <th>Concepto</th>
+                    <th>Fecha</th>
+                    <th>Banco</th>
+                    <th>No Cuenta</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chargeRequest in requests %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.user_name }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.document_type }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.user_id }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.amount }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.concept }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.date }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.bank_name }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.account_number }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.city }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

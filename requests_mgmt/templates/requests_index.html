@@ -1,50 +1,23 @@
-{% extends "layouts/base_requests.html"%}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva solicitud</title>
-</head>
-
-<body>
-    
-
-    {% block content%}
+{% extends "layouts/base.html" %}
+{% block content %}
     <div>
-        <h1 class = "with-margin"> Nueva solicitud</h1>
+        <h1 class="with-margin">Nueva solicitud</h1>
     </div>
-    <main class = "container">
-    
-
-        <a href="{% url 'charge_account' %}"> <div class = "card"> Cuenta de cobro </div> </a>
-
-        <a href="">
-            <div class = "card"> Legalización de facturas </div>
+    <div class="container">
+        <a href="{% url 'charge_account' %}">
+            <div class="card">Cuenta de cobro</div>
         </a>
         <a href="">
-            <div class = "card"> Anticipos </div>
+            <div class="card">Legalización de facturas</div>
         </a>
         <a href="">
-            <div class = "card"> Viáticos </div>
+            <div class="card">Anticipos</div>
         </a>
         <a href="">
-            <div class = "card"> Facturas </div>
+            <div class="card">Viáticos</div>
         </a>
-        
-        
-        
-        
-        
-
-
-    </main>
-    
-    
-
-    {% endblock %}
-</body>
-
-</html>
+        <a href="">
+            <div class="card">Facturas</div>
+        </a>
+    </div>
+{% endblock %}
