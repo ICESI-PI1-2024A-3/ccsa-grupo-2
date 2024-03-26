@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import CustomUser
+from users_mgmt.models import CustomUser
 
 
 class AddReviewerForm(forms.Form):

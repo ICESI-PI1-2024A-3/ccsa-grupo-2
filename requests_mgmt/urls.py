@@ -9,7 +9,7 @@ from .views import (
     HomeView,
     RequestsListView,
     RequestsView,
-    UpdateRequestView,
+    UpdateReviewerView,
 )
 
 urlpatterns = [
@@ -19,7 +19,7 @@ urlpatterns = [
         login_required(DetailsRequestView.as_view()),
         name="detail_request",
     ),
-    path("update/<int:request_id>", login_required(UpdateRequestView.as_view()),name="update_request"),
+    path("update/<int:request_id>", login_required(UpdateReviewerView.as_view()),name="update_reviewer"),
     path(
         "<int:request_id>/editar",
         login_required(EditRequestView.as_view()),
