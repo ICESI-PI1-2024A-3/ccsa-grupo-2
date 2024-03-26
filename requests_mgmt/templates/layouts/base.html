@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Users</title>
         <link rel="stylesheet" href="{% static '/css/base.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+
     </head>
     <body>
         <nav class="navbar">
@@ -18,7 +20,7 @@
             <a href="{% url 'show_requests' %}" class="navigation">
                SOLICITUDES
             </a>
-            <a href="{% url 'charge_account' %}" class="navigation">
+            <a href="{% url 'request_index' %}" class="navigation">
                 CREAR SOLICITUD
              </a>
             <div class="user-info">
