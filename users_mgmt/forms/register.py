@@ -1,23 +1,6 @@
 from django import forms
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(
-        label="",
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "Usuario"}
-        ),
-    )
-    password = forms.CharField(
-        label="",
-        max_length=100,
-        widget=forms.PasswordInput(
-            attrs={"class": "form_control", "placeholder": "Contraseña"}
-        ),
-    )
-
-
 class RegisterForm(forms.Form):
     first_name = forms.CharField(
         label="",
@@ -79,18 +62,3 @@ class RegisterForm(forms.Form):
             attrs={"class": "form_control", "placeholder": "Confirmar Contraseña"}
         ),
     )
-
-
-class UpdateRoleForm(forms.Form):
-    role = forms.ChoiceField(
-        label="",
-        choices=[
-            ("Process Leader", "Lider de Proceso"),
-            ("Accounting Manager", "Gestor de Contabilidad"),
-            ("Requester", "Solicitante"),
-            ("Reviewer", "Revisor"),
-            ("Approver", "Aprobador"),
-        ],
-        widget=forms.Select(attrs={"class": "role-select"}),
-    )
-    user_id = forms.IntegerField(widget=forms.HiddenInput())
