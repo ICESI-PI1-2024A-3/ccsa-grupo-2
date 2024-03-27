@@ -37,6 +37,10 @@ body {
     background: #d03123;
 }
 
+.navigation {
+    color: #fff;
+}
+
 /* Users Page */
 
 .container {
@@ -116,8 +120,4 @@ body {
     align-items: center;
     margin-top: 40px;
     margin-bottom: 20px;
-}
-
-.navigation {
-    color: #fff;
 }
