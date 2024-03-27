@@ -37,6 +37,10 @@ body {
     background: #d03123;
 }
 
+.navigation {
+    color: #fff;
+}
+
 /* Users Page */
 
 .container {
