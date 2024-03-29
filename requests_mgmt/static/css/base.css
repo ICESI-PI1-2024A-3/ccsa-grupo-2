@@ -1,9 +1,10 @@
 body {
     font-family: sans-serif;
-	background-color: #fbfbfb;
+	background: #e5e5e5;
+    color: #000000;
+    font-family: Arial, sans-serif;
 	margin: 0;
     padding: 0;
-	overflow: hidden;
 }
 
 /* Navbar */
@@ -118,6 +119,31 @@ body {
     margin-bottom: 20px;
 }
 
+.nav-links {
+    display: flex;
+}
+
+.nav-link {
+    margin-right: 10px;
+}
+
 .navigation {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
     color: #fff;
+    background-color: #1E4072;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navigation:hover {
+    background-color: #bbb;
+    color: #fff;
+}
+
+.active {
+    background-color: #ccc;
+    color: #000;
 }

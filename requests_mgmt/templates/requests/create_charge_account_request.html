@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cuenta de cobro </title>
+    <title>{% block title %} Cuenta de cobro {% endblock %}</title>
 </head>
 
 <body>
@@ -15,11 +15,11 @@
     <form method="POST" class="with-margin">
         {% csrf_token %}
         <div class="form-container-flex with-margin">
-            {{ user_form.as_p }}
+            {{ user_info_form.as_p }}
         </div>
 
         <div class="with-margin form-container">
-            {{ charge_account.as_p }}
+            {{ charge_account_form.as_p }}
         </div>
 
         <div>
@@ -33,15 +33,15 @@
             </p>
 
             <div class="with-margin form-container">
-                {{ taxTreatment }}
+                {{ tax_treatment_form }}
             </div>
 
             <div class="with-margin form-container">
-                {{ checkBox }}
+                {{ checkbox_form }}
             </div>
 
             <div class="with-margin form-container-flex"> 
-                {{ city_date }}
+                {{ city_date_form }}
             </div>
             
         </div>
@@ -49,7 +49,7 @@
         <div>
             <h2> Información bancaria </h2>
             <div class="with-margin form-container-flex">
-                {{ bankInformation }}
+                {{ bank_info_form }}
             </div>
         </div>
 

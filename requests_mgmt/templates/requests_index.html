@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva solicitud</title>
+    <title>{% block title %} Nueva solicitud {% endblock %} </title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <div>
         <h1 class="with-margin">Nueva solicitud</h1>
     </div>
-    <main class = "container">
+    <main class = "container-main">
     
 
         <a href="{% url 'charge_account' %}"> <div class = "card"> Cuenta de cobro </div> </a>

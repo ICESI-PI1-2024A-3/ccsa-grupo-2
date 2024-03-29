@@ -1,11 +1,6 @@
-body {
-    background: #e5e5e5;
-    color: #000000;
-    font-family: Arial, sans-serif;
-    margin: 0;
-}
 
-.header {
+
+.header-main {
     background: #1E4072;
     margin: 10;
     padding: 10px;
@@ -48,7 +43,7 @@ a{
     /* Espacio entre la imagen y el texto */
 }
 
-.container {
+.container-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,6 +78,7 @@ a{
     border: 2px solid #ccc;
     padding: 20px;
     border-radius: 5px;
+    justify-content: center;
 }
 
 .form-container .form-control {
@@ -96,7 +92,7 @@ a{
 
 /* Estilos para form-container-flex */
 .form-container-flex {
-    width: 95%;
+    width: 70%;
     margin: 20px auto;
     margin-left: 10px;
     border: 2px solid #ccc;
@@ -105,15 +101,25 @@ a{
     display: flex;
     justify-content: space-between;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .form-container-flex .form-control {
-    width: 300px; /* Ajusta el ancho de las celdas */
+    width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     margin-right: 30px;
     border-radius: 5px;
+}
+
+.form-container-column {
+    width: 300px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .submit-button {

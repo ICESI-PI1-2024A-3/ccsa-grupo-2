@@ -1,0 +1,71 @@
+{% extends "layouts/base.html"%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Legalzación de facturas {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1 class="with-margin"> Nueva solicitud - Legalización de facturas </h1>
+
+    <form method="POST" class="with-margin">
+        {% csrf_token %}
+        <div class="form-container-flex with-margin">
+            <div class="form-container-column">
+                <label for="id_legalization_date">Fecha de legalización:</label>
+                {{ invoice_legalization_form.legalization_date }}
+
+                <label for="id_dependency">Dependencia:</label>
+                {{ invoice_legalization_form.dependency }}
+
+                <label for="id_destination_city">Ciudad de destino:</label>
+                {{ invoice_legalization_form.destination_city }}
+            </div>
+            <div class="form-container-column">
+                <label for="id_departure_date">Fecha de salida:</label>
+                {{ invoice_legalization_form.departure_date }}
+
+                <label for="id_reason_trip">Motivo de viaje:</label>
+                {{ invoice_legalization_form.reason_trip }}
+            </div>
+        </div>
+        <h2> Relación de gastos </h2>
+        <div id="expense-container" class="">
+            <div class="form-container-flex" id="rubros-table">
+                {{ expense_ratio_form }}
+            </div>
+
+        </div>
+        
+
+        <button type="button" onclick="addExpense()">Agregar Gasto</button>
+
+
+        </div>
+
+
+    </form>
+
+    <script>
+        function addExpense() {
+            var expenseContainer = document.querySelector('#expense-container');
+            var newExpenseContainer = document.createElement('div');
+            var newExpenseRow = document.createElement('div');
+            newExpenseRow.className = 'form-container-flex';
+            newExpenseRow.innerHTML = `
+                {{ expense_ratio_form }}
+            `;
+            newExpenseContainer.appendChild(newExpenseRow);
+            expenseContainer.appendChild(newExpenseContainer);
+        }
+    </script>
+    
+    {% endblock %}
+</body>
+
+</html>
