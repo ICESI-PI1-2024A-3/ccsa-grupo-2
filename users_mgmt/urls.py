@@ -8,5 +8,4 @@ urlpatterns = [
     path(
         "roles/usuarios", login_required(SearchUsersView.as_view()), name="search_users"
     ),
-    path("solicitudes/", UserViews.show_approver, name="approvers"),
 ]
