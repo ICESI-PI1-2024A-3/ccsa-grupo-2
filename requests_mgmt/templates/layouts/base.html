@@ -15,6 +15,8 @@
             <a href="{% url 'assign_roles' %}" class="navigation">ROLES</a>
             <a href="{% url 'requests_list' %}" class="navigation">SOLICITUDES</a>
             <a href="{% url 'charge_account' %}" class="navigation">CREAR SOLICITUD</a>
+            <a href="{% url "approver_users" %}" class="navigation">APROBADORES</a>
+
             <div class="user-info">
                 <span>{{ user }}</span>
                 <a href="{% url 'logout' %}">Salir</a>

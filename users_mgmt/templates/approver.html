@@ -1,66 +1,55 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <style>
-
-        body, html {
-            height: 100%; /* Ajustar la altura al 100% de la ventana */
-            margin: 0; /* Eliminar los márgenes predeterminados */
-            display: flex; /* Utilizar flexbox */
-            flex-direction: column; /* Organizar los elementos en columna */
-        }
-
-        .container {
-            flex: 1; /* El contenedor ocupa todo el espacio restante */
-            display: flex; /* Utilizar flexbox */
-            flex-direction: column; /* Organizar los elementos en columna */
-            align-items: center; /* Centrar los elementos horizontalmente */
-            justify-content: center; /* Centrar los elementos verticalmente */
-        }
-
-        #texto {
-            width: 50%; 
-            resize: none; 
-        }
-
-        button {
-            margin: 5px; 
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Users</title>
+    <link rel="stylesheet" href="{% static 'css/approve_styles.css' %}"> <!-- Agrega la ruta correcta a tu archivo CSS -->
 </head>
-
 <body>
     <div class="container">
-        <div class="box">
-            <p>Informe sobre el evento</p>
-        </div>
-        <div class="spacer">
-        </div>
-        <textarea class="text-area-comentario" rows="10" cols="60" placeholder="Introduce tu comentario"></textarea><br><br>
-        <div class="buttons">
-
-            <a href="#popup" class="open-popup">Abrir Pop-up</a>
-
-            <a href="#popup" class="open-popup">Abrir Pop-up</a>
-
-            <div id="popup" class="popup-container">
-                <div class="popup-content">
-                    <a href="#" class="close" id="close-popup">&times;</a>
-          <h2>Contenido del Pop-up</h2>
-    <p>Este es un pop-up simple.</p>
-    <button class="open-popup" id="open-button">Abrir Pop-up</button>
-  </div>
-</div>
-
-            <button type="submit" class="button-success">Aprobar</button>
-            <button type="submit" class="button-failure">Rechazar</button>
+        <h1>Usuarios que necesitan aprobación</h1>
+        <div class="user-list">
+            <ul>
+                {% for user in users_needing_approval %}
+                    <li>
+                        <p>{{ user.username }}</p>
+                        <!-- Agrega más información sobre el usuario si es necesario -->
+                        <textarea id="comment-{{ user.id }}" placeholder="Escribe un comentario"></textarea>
+                        <div class="button-container">
+                            <button class="approve-btn" onclick="approveUser('{{ user.id }}')">Aceptar</button>
+                            <button class="reject-btn" onclick="rejectUser('{{ user.id }}')">Rechazar</button>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
+    <script>
+        function approveUser(userId) {
+            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
+            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
+            if (confirm("¿Estás seguro de aprobar este usuario?")) {
+                document.getElementById('user_id').value = userId;
+                document.getElementById('action').value = 'approve';
+                document.getElementById('approveForm').submit();
+            }
+        }
 
-
-
+        function rejectUser(userId) {
+            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
+            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
+            if (confirm("¿Estás seguro de rechazar este usuario?")) {
+                document.getElementById('user_id').value = userId;
+                document.getElementById('action').value = 'reject';
+                document.getElementById('approveForm').submit();
+            }
+        }
+    </script>
 </body>
+</html>
 
 {% endblock %}

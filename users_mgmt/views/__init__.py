@@ -3,3 +3,4 @@ from .login import *
 from .logout import *
 from .register import *
 from .search_users import *
+from .approve_as_approver import *
