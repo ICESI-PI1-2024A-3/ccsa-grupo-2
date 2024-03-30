@@ -60,12 +60,12 @@ class ChargeAccountView(View):
             if rent_tax_declarant:
                 chargeRequest.isRent_Tax_Declarant(True)
             else:
-                chargeRequest.isRent_Tax_Declarant(True)
+                chargeRequest.isRent_Tax_Declarant(False)
 
             if fiscal_resident:
                 chargeRequest.isFiscal_Resident(True)
             else:
-                chargeRequest.isFiscal_Resident(True)
+                chargeRequest.isFiscal_Resident(False)
 
             chargeRequest.save()
             return redirect("requests_list")
