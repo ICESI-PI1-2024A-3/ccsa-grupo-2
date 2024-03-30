@@ -23,7 +23,6 @@ body {
     width: 300px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    text-align: center;
 }
 
 .form a {
@@ -31,6 +30,8 @@ body {
     color: #007bff;
     padding-top: 10px;
     display: block;
+    text-align: center;
+    font-size: small;
 }
 
 .form_control {

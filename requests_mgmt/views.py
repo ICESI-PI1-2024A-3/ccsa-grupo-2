@@ -3,6 +3,7 @@ from .forms import *
 from .models import *
 from django.http import HttpResponse
 
+
 # Create your views here.
 class RequestViews:
     def request_index(request):
@@ -11,12 +12,12 @@ class RequestViews:
     def charge_account(request):
         if request.method=='GET':
             return render(request,'request_type/charge_account.html',{
-                "user_form": user_information(),
-                "charge_account": CreateNewChargeAccount(),
-                "taxTreatment": TaxTreatmentForm,
-                "checkBox": CheckboxRentaResidente,
-                "city_date": City_Date,
-                "bankInformation": BankInformation
+                #"user_form": user_information(),
+                #"charge_account": CreateNewChargeAccount(),
+                #"taxTreatment": TaxTreatmentForm,
+                #"checkBox": CheckboxRentaResidente,
+                #"city_date": City_Date,
+                #"bankInformation": BankInformation
             })
         else:
             try:
@@ -57,18 +58,18 @@ class RequestViews:
             except:
                 return HttpResponse('An Error Has Ocurred')
             
+    def update_reviewer(request,request_id, user_id):
+        #user = CustomUser.objects.get(pk=user_id)
+        intance_request=Request.objects.get(pk=request_id)
+        intance_request.requester = user
+        intance_request.save()
+        return HttpResponse(intance_request)
     
-    def show_requests(request):
-        requests = ChargeAccountRequest.objects.all()
-        return render(request,'requestTable.html',{
-            'requests':requests
-        })
-    
-    def detail_request(request,request_id):
-        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
-        return render(request,'detail_request.html',{
-            'chargeRequest':chargeRequest
-        })
+    def details_request(request,request_id):
+            chargeRequest=ChargeAccountRequest.objects.get(id=request_id)
+            return render(request,'template/details_request.html',{
+                'chargeRequest':chargeRequest
+            })
     
     def edit_request(request,request_id):
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
@@ -95,7 +96,30 @@ class RequestViews:
         chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
         chargeRequest.delete()
         return redirect('show_requests')
+            
+    
+    def showRequests(request):
+        requests = ChargeAccountRequest.objects.all()
+        return render(request,'requestTable.html',{
+            'requests':requests
+        })
+    
+    def detail_request(request,request_id):
+        chargeRequest = ChargeAccountRequest.objects.get(id=request_id)
+        if request.method == 'POST':
+            form = AddReviewerForm(request.POST)
+            form1 = AddApproverForm(request.POST)
+        else:
+            form=AddReviewerForm()
+            form1 = AddReviewerForm()
 
+        return render(request,'request_details.html',{
+            'chargeRequest':chargeRequest,
+            'select_reviewer': form,
+            'select_approver':form1
+        })
+        
+    
 
     
   

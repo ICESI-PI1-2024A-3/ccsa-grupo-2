@@ -13,64 +13,100 @@ body {
 	overflow: hidden;
 }
 
-.form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffffce;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    text-align: center;
+.navbar {
+    background-color: #1E4072;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.form a {
+.logo img {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.user-info {
+    color: white;
+}
+
+.user-info a {
+    color: white;
     text-decoration: none;
-    color: #007bff;
-    padding-top: 10px;
-    display: block;
-}
-
-.form_control {
-    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
 }
 
-.form_control:focus {
-    border-color: #007bff;
+.user-info a:hover {
+    background: #d03123;
+}
+
+/* Users Page */
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-users {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-users th {
+    background: #1E4072;
+    color: #fff;
+    font-weight: bold;
+}
+
+.table-users th, .table-users td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e7e7e7;
+}
+
+.form-role {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.role-select {
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.role-select:focus {
     outline: none;
 }
 
-.form_button {
-    width: 100%;
-    background: #007bff;
-    border: 0;
-    color: #fff;
+.button {
     padding: 10px;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
+    background: #4C8ECB;
+    color: #fff;
     cursor: pointer;
 }
 
-.form_button:hover {
-    background: #0044cc;
+.button:hover {
+    background: #56a0e6;
 }
 
-.form_button:focus {
-    border-color: #007bff;
+.button:disabled {
+    background: #e7e7e7;
+    color: #000;
+    cursor: not-allowed;
+}
+
+.button:focus {
     outline: none;
 }
 
-.alert_danger {
-    background: #e67272;
-    color: #ffffff;
+.search {
     padding: 10px;
-    text-align: center;
+    border: 1px solid #e7e7e7;
     border-radius: 5px;
     margin-bottom: 10px;
     width: auto;
@@ -79,3 +115,18 @@ body {
     left: 50%;
     transform: translate(-50%, 0);
 }
+
+.search:focus {
+    outline: none;
+    border: 1px solid #4C8ECB;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+
