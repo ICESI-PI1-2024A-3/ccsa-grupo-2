@@ -14,11 +14,10 @@
             <a href="{% url 'home' %}" class="logo">
                 <img src="{% static '/images/logo.png' %}" alt="Logo" />
             </a>
-
+            
             <a href="{% url 'assign_roles' %}" class="navigation {% if request.resolver_match.url_name == 'assign_roles' %} active {% endif %}">ROLES</a>
             <a href="{% url 'requests_list' %}" class="navigation {% if request.resolver_match.url_name == 'requests_list' %} active {% endif %}">SOLICITUDES</a>
             <a href="{% url 'requests_index' %}" class="navigation {% if request.resolver_match.url_name == 'requests_index' %} active {% endif %}">CREAR SOLICITUD</a>
-
             <div class="user-info">
                 <span>{{ user }}</span>
                 <a href="{% url 'logout' %}">Salir</a>
