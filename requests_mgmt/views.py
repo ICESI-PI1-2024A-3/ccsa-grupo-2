@@ -58,7 +58,7 @@ class RequestViews:
                 return HttpResponse('An Error Has Ocurred')
             
     
-    def showRequests(request):
+    def show_requests(request):
         requests = ChargeAccountRequest.objects.all()
         return render(request,'requestTable.html',{
             'requests':requests
