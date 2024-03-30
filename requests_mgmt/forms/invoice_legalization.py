@@ -24,7 +24,7 @@ class ExpenseRatioForm(forms.Form):
     proveedor = forms.CharField(label='Proveedor',max_length=200, widget=forms.TextInput(attrs={"class": "form-control"}))
     nit = forms.CharField(label='Nit', max_length=200, widget=forms.TextInput(attrs={"class": "form-control"}))
     concepto = forms.CharField(label='Concepto', max_length=200, widget=forms.TextInput(attrs={"class": "form-control"}))
-    anticipo_tipo = forms.ChoiceField(label='Moneda', choices=[('Pesos colombianos', 'Pesos colombianos'), ('Dólares', 'Dólares'), ('Euros', 'Euros')], widget=forms.Select(attrs={'class': 'form-control'}))
+    advance_currency = forms.ChoiceField(label='Moneda', choices=[('Pesos colombianos', 'Pesos colombianos'), ('Dólares', 'Dólares'), ('Euros', 'Euros')], widget=forms.Select(attrs={'class': 'form-control'}))
 
 
 class BalanceDiscountAutorizationForm(forms.Form):

@@ -6,12 +6,14 @@ from ..forms import (
     ExpenseRatioForm,
     BalanceDiscountAutorizationForm,
     BankInformation,
-    InvoiceLegalizationObservations
+    InvoiceLegalizationObservations,
+    UserInfoForm
 )
 # from ..models import 
 
 class InvoiceLegalizationView(View):
     template_name = "requests/create_invoice_legalization_request.html"
+    user_info = UserInfoForm
     invoice_legalization_form = InvoiceLegalizationForm
     expense_ratio_form = ExpenseRatioForm
     balance_discount_autorization_form = BalanceDiscountAutorizationForm
@@ -21,6 +23,7 @@ class InvoiceLegalizationView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {
+            "user_info": self.user_info(),
             "invoice_legalization_form": self.invoice_legalization_form(),
             "expense_ratio_form": self.expense_ratio_form(),
             "balance_discount_autorization_form": self.balance_discount_autorization_form,

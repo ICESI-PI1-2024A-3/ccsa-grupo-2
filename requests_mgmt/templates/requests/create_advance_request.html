@@ -2,11 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Legalzación de facturas {% endblock %} </title>
 </head>
+
 <body>
     {% block content %}
     <h1 class="with-margin"> Nueva solicitud - Anticipos </h1>
@@ -15,17 +17,31 @@
         <h3>Por favor, tener en cuenta: </h3>
 
         <ol>
-            <li>Los anticipos en moneda nacional deben solicitarse con tres días hábiles antes de la fecha de viaje (como mínimo)</li>
-            <li>Los anticipos en moneda extranjera (dólar y euro)  deben solicitarse cinco días hábiles antes de la fecha de viaje (como mínimo)
+            <li>Los anticipos en moneda nacional deben solicitarse con tres días hábiles antes de la fecha de viaje
+                (como mínimo)</li>
+            <li>Los anticipos en moneda extranjera (dólar y euro) deben solicitarse cinco días hábiles antes de la fecha
+                de viaje (como mínimo)
             </li>
-            <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5.  Documento sin este requisito, será rechazado en la legalización.</li>
-          </ol>
+            <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5.
+                Documento sin este requisito, será rechazado en la legalización.</li>
+        </ol>
     </div>
 
     <form method="POST" class="with-margin">
-        
+        {% csrf_token %}
+        <div class="div-with-space">
+            <h3>Información del viajero </h3>
+            <div class="form-container-flex">
+                {{user_info}}
+            </div>
+        </div>
+
+        <div class="form-container">
+            {{ advance_request_info }}
+        </div>
 
     </form>
     {% endblock %}
 </body>
+
 </html>

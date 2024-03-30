@@ -3,8 +3,8 @@ from django import forms
 
 class UserInfoForm(forms.Form):
     DOCUMENT_CHOICES = [
+        ("NA", "<Seleccione tipo de documento>"),
         ("CC", "Cédula de ciudadanía"),
-        ("TI", "Tarjeta de identidad"),
         ("CE", "Cédula de extranjería"),
     ]
     user_name = forms.CharField(
