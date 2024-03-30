@@ -1,11 +1,10 @@
 from django.db import models
 
-from . import RequestType, RequestStatus
-
 
 class Request(models.Model):
-    type = models.ForeignKey(RequestType, on_delete=models.CASCADE)
-    status = models.ForeignKey(RequestStatus, on_delete=models.CASCADE)
+    type = models.CharField(max_length=100)
+    status = models.ForeignKey("RequestStatus", on_delete=models.CASCADE, default=1)
+    comments = models.TextField(null=True, blank=True)
     requester = models.ForeignKey(
         "users_mgmt.CustomUser",
         on_delete=models.CASCADE,

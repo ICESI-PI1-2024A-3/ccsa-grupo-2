@@ -1,9 +1,10 @@
 from django.db import models
 
-from . import Request
+from .request import Request
 
 
 class ChargeAccountRequest(Request):
+    type = "Charge Account Request"
     amount = models.FloatField(default=0)
     concept = models.CharField(max_length=200)
     costs_and_deductions = models.BooleanField(default=True)
@@ -14,7 +15,7 @@ class ChargeAccountRequest(Request):
     bank_name = models.CharField(default="Not Set", max_length=20)
     account_type = models.CharField(default="Not Set", max_length=20)
     account_number = models.CharField(default="Not Set", max_length=20)
-    CEX_no = models.CharField(default="Not Set", max_length=20)
+    cex_no = models.CharField(default="Not Set", max_length=20)
 
     def isCost_and_Deductions(self, element: bool):
         if element:

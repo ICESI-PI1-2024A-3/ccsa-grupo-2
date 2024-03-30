@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import Request
+from .request import Request
 
 
 class InvoiceLegalizationRequest(Request):
