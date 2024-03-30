@@ -28,6 +28,11 @@ a{
     margin-right: 20px;
 }
 
+.div-with-space {
+    margin-bottom: 25px; 
+    margin-top: 10px;
+}
+
 .user-button {
     float: right;
     margin-top: 10px;
@@ -85,24 +90,20 @@ a{
     width: 95%;
     padding: 10px;
     margin-bottom: 10px;
-    margin-right: 10px; /* Ajusta el espacio entre las celdas */
+    margin-right: 10px; 
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* Estilos para form-container-flex */
 .form-container-flex {
     width: 70%;
-    margin: 20px auto;
+    margin: 0 auto;
     margin-left: 10px;
     border: 2px solid #ccc;
     padding: 20px;
     border-radius: 5px;
     display: flex;
-    justify-content: space-between;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
 }
 
 .form-container-flex .form-control {
@@ -123,6 +124,7 @@ a{
 }
 
 .submit-button {
+    margin-top: 15px;
     display: block;
     margin: 0 auto;
     padding: 15px 30px;
@@ -132,4 +134,26 @@ a{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #1E4072;
+}
+
+.add-expense-button {
+    display: inline-block; /* Cambiado a inline-block para alinear a la izquierda */
+    margin: 0; /* Eliminado el margen */
+    padding: 8px 16px; /* Reducir el padding para hacer el botón más pequeño */
+    font-size: 14px; /* Reducir el tamaño de la fuente */
+    background-color: #1E4072;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.add-expense-button:hover {
+    background-color: #163152; /* Cambia el color de fondo cuando se pasa el mouse */
 }

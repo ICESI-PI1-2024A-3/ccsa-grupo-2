@@ -15,7 +15,7 @@
 
     <form method="POST" class="with-margin">
         {% csrf_token %}
-        <div class="form-container-flex with-margin">
+        <div class="form-container-flex div-with-space">
             <div class="form-container-column">
                 <label for="id_legalization_date">Fecha de legalización:</label>
                 {{ invoice_legalization_form.legalization_date }}
@@ -34,21 +34,26 @@
                 {{ invoice_legalization_form.reason_trip }}
             </div>
         </div>
+
         <h2> Relación de gastos </h2>
-        <div id="expense-container" class="">
-            <div class="form-container-flex" id="rubros-table">
-                {{ expense_ratio_form }}
+
+        <div class="div-with-space">
+            <div id="expense-container" class="">
+                <div class="form-container-flex" id="rubros-table">
+                    {{ expense_ratio_form }}
+                </div>
             </div>
+    
+            <button type="button" onclick="addExpense()" class="add-expense-button">Agregar Gasto</button>
 
         </div>
         
 
-        <button type="button" onclick="addExpense()">Agregar Gasto</button>
+        <div class="div-with-space"> {{ balance_discount_autorization_form }} </div>
 
+        <div class="div-with-space form-container-flex"> {{ bank_information }} </div>
 
-        </div>
-
-
+        <button type="submit" class="submit-button">Enviar </button>
     </form>
 
     <script>
@@ -64,7 +69,7 @@
             expenseContainer.appendChild(newExpenseContainer);
         }
     </script>
-    
+
     {% endblock %}
 </body>
 
