@@ -35,3 +35,5 @@ class BalanceDiscountAutorizationForm(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'form-control'})
     )
 
+class InvoiceLegalizationObservations(forms.Form):
+    observations = forms.CharField(label='Observaciones', widget=forms.Textarea(attrs={"class": "form-control", "rows": 10}))
