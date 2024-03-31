@@ -9,7 +9,7 @@ from ..forms import (
     TaxTreatmentForm,
     UserInfoForm,
 )
-from ..models import ChargeAccountRequest
+from ..models import ChargeAccountRequest,RequestStatus
 
 
 class ChargeAccountView(View):
@@ -44,10 +44,13 @@ class ChargeAccountView(View):
             bank_name = request.POST.get("bank_name")
             account_type = request.POST.get("account_type")
             account_number = request.POST.get("account_number")
-            CEX_no = request.POST.get("cex_no")
+            cex_no = request.POST.get("cex_no")
             rent_tax_declarant = request.POST.get("rent_tax_declarant")
             fiscal_resident = request.POST.get("fiscal_resident")
+            requester = request.user
             chargeRequest = ChargeAccountRequest.objects.create(
+                requester=requester,
+                status = RequestStatus.objects.get(id=1),
                 amount=amount,
                 concept=concept,
                 city=city,
@@ -55,7 +58,7 @@ class ChargeAccountView(View):
                 bank_name=bank_name,
                 account_type=account_type,
                 account_number=account_number,
-                CEX_no=CEX_no,
+                cex_no=cex_no,
             )
             if rent_tax_declarant:
                 chargeRequest.isRent_Tax_Declarant(True)

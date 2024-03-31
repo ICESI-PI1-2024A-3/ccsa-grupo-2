@@ -12,4 +12,4 @@ class AddReviewerForm(forms.Form):
         super(AddReviewerForm, self).__init__(*args, **kwargs)
         reviewers = CustomUser.objects.filter(role="Reviewer")
         reviewer_choices = [(reviewer.id,reviewer) for reviewer in reviewers]
-        self.fields['reviewer'].choices =reviewer_choices
+        self.fields['reviewers'].choices =reviewer_choices
