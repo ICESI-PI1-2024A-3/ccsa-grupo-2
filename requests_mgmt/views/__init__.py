@@ -1,4 +1,5 @@
 from .charge_account import *
+from .invoice_legalization import *
 from .delete_request import *
 from .details_request import *
 from .edit_request import *

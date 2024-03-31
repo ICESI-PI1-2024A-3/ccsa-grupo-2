@@ -13,7 +13,7 @@ from ..models import ChargeAccountRequest
 
 
 class ChargeAccountView(View):
-    template_name = "create_charge_account_request.html"
+    template_name = "requests/create_charge_account_request.html"
     bank_info_form = BankInformation
     checkbox_form = CheckboxRentResidentForm
     city_date_form = CityDateForm

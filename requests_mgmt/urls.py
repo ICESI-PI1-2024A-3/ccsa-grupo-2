@@ -10,6 +10,7 @@ from .views import (
     RequestsListView,
     RequestsView,
     UpdateReviewerView,
+    InvoiceLegalizationView,
 )
 
 urlpatterns = [
@@ -32,8 +33,12 @@ urlpatterns = [
     ),
     path("nueva", login_required(RequestsView.as_view()), name="requests_index"),
     path(
-        "cuenta de cobro",
+        "nueva/cuenta de cobro",
         login_required(ChargeAccountView.as_view()),
         name="charge_account",
     ),
+    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
+    path("nueva/adelanto", login_required(InvoiceLegalizationView.as_view()), name="advance_request"),
+    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="perdiem_request"),
+    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization")
 ]
