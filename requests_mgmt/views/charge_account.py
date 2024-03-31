@@ -9,7 +9,7 @@ from ..forms import (
     TaxTreatmentForm,
     UserInfoForm,
 )
-from ..models import ChargeAccountRequest
+from ..models import ChargeAccountRequest,RequestStatus
 
 
 class ChargeAccountView(View):
@@ -50,6 +50,7 @@ class ChargeAccountView(View):
             requester = request.user
             chargeRequest = ChargeAccountRequest.objects.create(
                 requester=requester,
+                status = RequestStatus.objects.get(id=1),
                 amount=amount,
                 concept=concept,
                 city=city,
