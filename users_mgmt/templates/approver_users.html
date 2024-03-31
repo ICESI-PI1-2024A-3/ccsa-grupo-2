@@ -1,16 +1,9 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Approve Users</title>
-    <link rel="stylesheet" href="{% static 'css/approve_styles.css' %}"> <!-- Agrega la ruta correcta a tu archivo CSS -->
-</head>
+
 <body>
     <div class="container">
-        <h1>Usuarios que necesitan aprobación</h1>
+        <h1>Solicitantes</h1>
         <div class="user-list">
             <ul>
                 {% for user in users_needing_approval %}
@@ -19,7 +12,7 @@
                         <!-- Agrega más información sobre el usuario si es necesario -->
                         <textarea id="comment-{{ user.id }}" placeholder="Escribe un comentario"></textarea>
                         <div class="button-container">
-                            <button class="approve-btn" onclick="approveUser('{{ user.id }}')">Aceptar</button>
+                            <button class="approve-btn" type="submit" onclick="approveUser('{{ user.id }}')"> Aceptar</button>
                             <button class="reject-btn" onclick="rejectUser('{{ user.id }}')">Rechazar</button>
                         </div>
                     </li>
@@ -50,6 +43,5 @@
         }
     </script>
 </body>
-</html>
 
 {% endblock %}

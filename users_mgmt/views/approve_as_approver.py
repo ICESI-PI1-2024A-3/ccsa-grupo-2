@@ -4,7 +4,7 @@ from django.views import View
 from ..models import CustomUser as User
 
 class ApproveAsApproverView(View):
-    template_name = "assign_roles.html"
+    template_name = "approver_users.html"
     
     def get(self, request):
         # Obtener todos los usuarios que necesitan aprobación
