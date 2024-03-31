@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,HttpResponse
 from django.views import View
 
 from ..forms import (
@@ -9,7 +9,7 @@ from ..forms import (
     TaxTreatmentForm,
     UserInfoForm,
 )
-from ..models import ChargeAccountRequest
+from ..models import ChargeAccountRequest,Request,RequestStatus,RequestType,Format
 
 
 class ChargeAccountView(View):
@@ -47,6 +47,7 @@ class ChargeAccountView(View):
             CEX_no = request.POST.get("cex_no")
             rent_tax_declarant = request.POST.get("rent_tax_declarant")
             fiscal_resident = request.POST.get("fiscal_resident")
+            costs_and_deductions = request.POST.get("checkbox_choices")
             chargeRequest = ChargeAccountRequest.objects.create(
                 amount=amount,
                 concept=concept,
@@ -55,6 +56,7 @@ class ChargeAccountView(View):
                 bank_name=bank_name,
                 account_type=account_type,
                 account_number=account_number,
+                costs_and_deductions = costs_and_deductions,
                 CEX_no=CEX_no,
             )
             if rent_tax_declarant:
@@ -66,8 +68,16 @@ class ChargeAccountView(View):
                 chargeRequest.isFiscal_Resident(True)
             else:
                 chargeRequest.isFiscal_Resident(False)
-
+            
             chargeRequest.save()
+            
+            generalRequest = Request.objects.create(
+                type = RequestType.objects.get(id=1),
+                status = RequestStatus.objects.get(id=1),
+                format = Format.objects.get(id=1)
+            )
+            generalRequest.save()
+
             return redirect("requests_list")
         except ValueError:
-            return print("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION
+            return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION

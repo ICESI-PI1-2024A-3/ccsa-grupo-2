@@ -4,14 +4,20 @@ from django.db import models
 class Format(models.Model):
     type = models.CharField(max_length=100)
     file = models.FileField(upload_to="formats/")
+    def __str__(self):
+        return self.type
 
 
 class RequestStatus(models.Model):
     status = models.CharField(max_length=100)
+    def __str__(self):
+        return self.status
 
 
 class RequestType(models.Model):
     type = models.CharField(max_length=100)
+    def __str__(self):
+        return self.type
 
 
 class ChargeAccountRequest(models.Model):
@@ -20,7 +26,7 @@ class ChargeAccountRequest(models.Model):
     user_id = models.CharField(max_length=30)
     amount = models.FloatField(default=0)
     concept = models.CharField(max_length=200)
-    costs_and_deductions = models.BooleanField(default=True)
+    costs_and_deductions = models.CharField(default='Not Set',max_length=200)
     rent_tax_declarant = models.BooleanField(default=True)
     fiscal_resident = models.BooleanField(default=False)
     city = models.CharField(default='Not Set',max_length=20)
@@ -29,12 +35,6 @@ class ChargeAccountRequest(models.Model):
     account_type = models.CharField(default='Not Set',max_length=20)
     account_number = models.CharField(default='Not Set',max_length=20)
     CEX_no = models.CharField(default='Not Set',max_length=20)
-
-    def isCost_and_Deductions(self,element:bool):
-        if element:
-            self.costs_and_deductions = True
-        else:
-            self.costs_and_deductions = False
 
     def isRent_Tax_Declarant(self,element:bool):
         if element:
@@ -57,6 +57,8 @@ class Request(models.Model):
         "users_mgmt.CustomUser",
         on_delete=models.CASCADE,
         related_name="requested_requests",
+        null=True,
+        blank=True,
     )
     manager = models.ForeignKey(
         "users_mgmt.CustomUser",
