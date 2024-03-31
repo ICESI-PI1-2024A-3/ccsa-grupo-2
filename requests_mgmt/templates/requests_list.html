@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container">
         <div class="header">
-            <h2>Solicitudes: Cuenta de Cobro</h2>
+            <h2>Solicitudes</h2>
             <form method="get" action="{% url 'home' %}">
                 <input type="text"
                        class="search"
@@ -29,13 +29,13 @@
                 {% for chargeRequest in requests %}
                     <tr>
                         <td>
-                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.user_name }}</a>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.requester }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.document_type }}</a>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.requester.id_type }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.user_id }}</a>
+                            <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.requester.id_number }}</a>
                         </td>
                         <td>
                             <a href="{% url 'edit_request' chargeRequest.id %}">{{ chargeRequest.amount }}</a>
