@@ -25,6 +25,29 @@ class AssignRolesView(View):
 
     def post(self, request):
         try:
+            user_id = request.POST.get("user_id")
+            role = request.POST.get("role")
+
+            if not user_id or not role:
+                raise ValueError("Missing user id or role")
+
+            user = User.objects.get(pk=user_id)
+
+            if not user:
+                raise ValueError("User not found")
+
+            if role not in [
+                "Process Leader",
+                "Accounting Manager",
+                "Requester",
+                "Reviewer",
+                "Approver",
+            ]:
+                raise ValueError("Invalid role")
+
+            user.role = role
+            user.save()
+
             users = User.objects.all()
             forms = []
             for user in users:
@@ -32,11 +55,7 @@ class AssignRolesView(View):
                     self.form_class(initial={"role": user.role, "user_id": user.id})
                 )
             users_and_forms = zip(users, forms)
-            user_id = request.POST.get("user_id")
-            role = request.POST.get("role")
-            user = User.objects.get(pk=user_id)
-            user.role = role
-            user.save()
+
             return render(
                 request,
                 self.template_name,
@@ -47,6 +66,13 @@ class AssignRolesView(View):
                 },
             )
         except ValueError:
+            users = User.objects.all()
+            forms = []
+            for user in users:
+                forms.append(
+                    self.form_class(initial={"role": user.role, "user_id": user.id})
+                )
+            users_and_forms = zip(users, forms)
             return render(
                 request,
                 self.template_name,
