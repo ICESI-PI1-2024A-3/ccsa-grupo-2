@@ -7,6 +7,7 @@ from ..models import (
     InvoiceLegalizationRequest,
     TravelExpenseRequest,
     RequestStatus,
+    Request,
 )
 
 
@@ -20,7 +21,7 @@ class RequestsListView(View):
         RequestStatus.objects.create(status='Rechazado').save()
 
     def get(self, request):
-        requests = ChargeAccountRequest.objects.all()
+        requests = Request.objects.all()
         return render(request, self.template_name,{
             'requests':requests
         })
