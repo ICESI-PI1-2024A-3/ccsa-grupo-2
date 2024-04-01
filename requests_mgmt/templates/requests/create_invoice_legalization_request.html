@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="addExpense()" class="add-expense-button">Agregar Gasto</button>
+            <button type="button" onclick="addExpense()" class="simple-button">Agregar Gasto</button>
 
         </div>
 
@@ -61,6 +61,13 @@
 
         <div class="div-with-space form-container">
             {{ observations }}
+        </div>
+
+        <div class="form-group with-margin">
+            <h3>Documentos</h3>
+            
+            {{ upload_documents }}
+            
         </div>
 
         <button type="submit" class="submit-button">Enviar </button>

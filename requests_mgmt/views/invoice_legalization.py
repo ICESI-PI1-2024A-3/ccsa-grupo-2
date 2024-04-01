@@ -7,7 +7,8 @@ from ..forms import (
     BalanceDiscountAutorizationForm,
     BankInformation,
     InvoiceLegalizationObservations,
-    UserInfoForm
+    UserInfoForm,
+    UploadDocuments
 )
 # from ..models import 
 
@@ -19,6 +20,7 @@ class InvoiceLegalizationView(View):
     balance_discount_autorization_form = BalanceDiscountAutorizationForm
     bank_information = BankInformation
     observations = InvoiceLegalizationObservations
+    upload_documents = UploadDocuments
 
 
     def get(self, request, *args, **kwargs):
@@ -28,5 +30,6 @@ class InvoiceLegalizationView(View):
             "expense_ratio_form": self.expense_ratio_form(),
             "balance_discount_autorization_form": self.balance_discount_autorization_form,
             "bank_information": self.bank_information,
-            "observations": self.observations
+            "observations": self.observations(),
+            "upload_documents": self.upload_documents()
         })
