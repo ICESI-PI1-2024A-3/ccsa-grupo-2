@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <h2>Información de la solicitud</h2>
-{% if request.type == 'Charge request'%}
+{% if request.type == 'Cuenta de Cobro'%}
 <table BORDER>
     <tr>
         <th ROWSPAN=1>Nombre del solicitante</th>
@@ -74,7 +74,7 @@
     <tr>
         <th ROWSPAN=1>Revisor</th>
         <td colspan="2">
-            <form class="form-reviewer" method="post" action="{% url 'update_request' request.id %}">
+            <form class="form-reviewer" method="post" action="{% url 'update_reviewer' request.id %}">
                 {% csrf_token %}
                 <div class="form-control-user">
                     {{ select_reviewer }}
@@ -86,7 +86,7 @@
     <tr>
         <th ROWSPAN=1>Aprovador</th>
         <td colspan="2">
-            <form class="form-reviewer" method="post" action="{% url 'update_request' request.id %}">
+            <form class="form-reviewer" method="post" action="{% url 'update_approver' request.id %}">
                 {% csrf_token %}
                 <div class="form-control-user">
                     {{ select_approver }}
