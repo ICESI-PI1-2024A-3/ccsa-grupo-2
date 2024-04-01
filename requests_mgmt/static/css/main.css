@@ -121,6 +121,7 @@ a{
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    justify-self: center;
 }
 
 .submit-button {
@@ -141,7 +142,7 @@ a{
     background-color: #1E4072;
 }
 
-.add-expense-button {
+.simple-button {
     display: inline-block; /* Cambiado a inline-block para alinear a la izquierda */
     margin: 0; /* Eliminado el margen */
     padding: 8px 16px; /* Reducir el padding para hacer el botón más pequeño */
@@ -154,6 +155,18 @@ a{
     transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
 }
 
-.add-expense-button:hover {
+.simple-button:hover {
     background-color: #163152; /* Cambia el color de fondo cuando se pasa el mouse */
+}
+
+.forms-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.forms {
+    max-width: 800px;
+    width: 100%;
 }

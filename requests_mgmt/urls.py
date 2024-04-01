@@ -11,6 +11,8 @@ from .views import (
     RequestsView,
     UpdateReviewerView,
     InvoiceLegalizationView,
+    AdvanceRequest,
+    TravelExpensesRequest
 )
 
 urlpatterns = [
@@ -40,5 +42,7 @@ urlpatterns = [
     path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
     path("nueva/adelanto", login_required(InvoiceLegalizationView.as_view()), name="advance_request"),
     path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="perdiem_request"),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization")
+    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
+    path("nueva/anticipos", login_required(AdvanceRequest.as_view()), name = "advance_request"),
+    path("nueva/viaticos", login_required(TravelExpensesRequest.as_view()), name = "travel_expenses"),
 ]
