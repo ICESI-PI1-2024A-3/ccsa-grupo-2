@@ -48,7 +48,7 @@ class InvoiceLegalizationView(View):
             requester = request.user
             invoice_legalization_request = InvoiceLegalizationRequest.objects.create(
                 requester = requester,
-                type = 'Legalización de Factura',
+                type = 'Legalizacion de Factura',
                 status = RequestStatus.objects.get(id=1),
                 legalization_date = legalization_date,
                 dependency = dependency,
