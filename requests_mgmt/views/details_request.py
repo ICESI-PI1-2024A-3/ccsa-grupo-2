@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 
 from ..forms import AddReviewerForm, AddApproverForm
-from ..models import Request,ChargeAccountRequest
+from ..models import ChargeAccountRequest,InvoiceLegalizationRequest,Request
 
 
 class DetailsRequestView(View):
@@ -12,8 +12,14 @@ class DetailsRequestView(View):
 
     def get(self, request,request_id, *args, **kwargs):
         intance_request=Request.objects.get(pk=request_id)
+
+        if intance_request.type == 'Cuenta de Cobro':
+            gotten_request=ChargeAccountRequest.objects.get(pk=request_id)
+        if intance_request.type == 'Legalización de Factura':
+            gotten_request=InvoiceLegalizationRequest.objects.get(pk=request_id)
+
         return render(request, self.template_name,{
-            'request':intance_request,
+            'request':gotten_request,
             'select_reviewer': self.select_reviewer_form(),
             'select_approver': self.select_approver_form()
         })       

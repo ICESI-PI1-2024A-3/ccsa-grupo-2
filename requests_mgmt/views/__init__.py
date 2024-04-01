@@ -7,5 +7,7 @@ from .home import *
 from .requests import *
 from .requests_list import *
 from .update_reviewer import *
+from .update_approver import *
 from .advance_request import *
 from .travel_expenses import *
+
