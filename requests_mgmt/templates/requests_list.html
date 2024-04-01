@@ -15,14 +15,12 @@
             <thead>
                 <tr>
                     <th>Solicitante</th>
-                    <th>Tipo de Documento</th>
-                    <th>Identificación</th>
-                    <th>Cantidad</th>
-                    <th>Concepto</th>
-                    <th>Fecha</th>
-                    <th>Banco</th>
-                    <th>No Cuenta</th>
-                    <th>Ciudad</th>
+                    <th>Tipo de Solicitud</th>
+                    <th>Gestor</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de cierre</th>
+                    <th>Estado</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -32,28 +30,20 @@
                             <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.requester }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.requester.id_type }}</a>
+                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.type }}</a>
+                        </td>
+                        
+                        <td>
+                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.manager }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.requester.id_number }}</a>
+                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.initial_date }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.amount }}</a>
+                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.closing_date }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.concept }}</a>
-                        </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.date }}</a>
-                        </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.bank_name }}</a>
-                        </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.account_number }}</a>
-                        </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.city }}</a>
+                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.status.status }}</a>
                         </td>
                     </tr>
                 {% endfor %}

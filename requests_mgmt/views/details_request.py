@@ -11,7 +11,7 @@ class DetailsRequestView(View):
     select_approver_form = AddApproverForm
 
     def get(self, request,request_id, *args, **kwargs):
-        intance_request=ChargeAccountRequest.objects.get(pk=request_id)
+        intance_request=Request.objects.get(pk=request_id)
         return render(request, self.template_name,{
             'request':intance_request,
             'select_reviewer': self.select_reviewer_form(),
