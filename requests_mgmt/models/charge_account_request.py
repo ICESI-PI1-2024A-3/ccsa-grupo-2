@@ -6,7 +6,7 @@ from .request import Request
 class ChargeAccountRequest(Request):
     amount = models.FloatField(default=0)
     concept = models.CharField(max_length=200)
-    costs_and_deductions = models.BooleanField(default=True)
+    costs_and_deductions = models.CharField(default='Not Set',max_length=200)
     rent_tax_declarant = models.BooleanField(default=True)
     fiscal_resident = models.BooleanField(default=False)
     city = models.CharField(default="Not Set", max_length=20)
@@ -15,12 +15,6 @@ class ChargeAccountRequest(Request):
     account_type = models.CharField(default="Not Set", max_length=20)
     account_number = models.CharField(default="Not Set", max_length=20)
     cex_no = models.CharField(default="Not Set", max_length=20)
-
-    def isCost_and_Deductions(self, element: bool):
-        if element:
-            self.costs_and_deductions = True
-        else:
-            self.costs_and_deductions = False
 
     def isRent_Tax_Declarant(self, element: bool):
         if element:
