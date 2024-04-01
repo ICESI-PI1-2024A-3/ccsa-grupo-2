@@ -4,7 +4,6 @@ from .request import Request
 
 
 class ChargeAccountRequest(Request):
-    type = "Charge Account Request"
     amount = models.FloatField(default=0)
     concept = models.CharField(max_length=200)
     costs_and_deductions = models.BooleanField(default=True)

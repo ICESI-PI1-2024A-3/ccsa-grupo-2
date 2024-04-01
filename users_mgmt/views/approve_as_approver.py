@@ -2,18 +2,21 @@ from django.shortcuts import render
 from django.views import View
 
 from ..models import CustomUser as User
+from requests_mgmt.models import Request
 
 class ApproveAsApproverView(View):
-    template_name = "approver_users.html"
+    template_name = "approve_as_approver.html"
     
     def get(self, request):
         # Obtener todos los usuarios que necesitan aprobación
-        users_needing_approval = User.objects.filter(needs_approval=True)
+        # users_needing_approval = User.objects.filter(needs_approval=True)
+        requests_to_approval = Request.objects.filter(approver=request.user.id)
         
         return render(
             request, 
             self.template_name,
-            {"users_needing_approval": users_needing_approval}
+            # {"users_needing_approval": users_needing_approval}
+            {"requests_to_approval": requests_to_approval}
         )
 
     def post(self, request):

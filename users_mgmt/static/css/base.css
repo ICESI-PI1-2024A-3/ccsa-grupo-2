@@ -171,20 +171,9 @@ h1 {
     text-align: right;
 }
 
-.approve-btn, .reject-btn {
-    padding: 5px 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.approve-btn {
-    background-color: #4caf50;
-    color: #4caf50;
-}
-
-.reject-btn {
-    background-color: #f44336;
-    color: #f44336;
+.card {
+    width: 200px;
+    height: 200px;
+    background-color: #81c7f5;
+    border-radius: 20px;
 }
