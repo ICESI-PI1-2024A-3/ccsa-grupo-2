@@ -8,3 +8,4 @@ from .invoice_legalization import *
 from .add_approver import *
 from .add_reviewer import *
 from .advance_request import *
+from .travel_expenses import *

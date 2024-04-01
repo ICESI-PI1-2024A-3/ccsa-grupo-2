@@ -1,6 +1,6 @@
 from django import forms   
 
-class AdvanceRequest(forms.Form):
+class TravelExpensesRequest(forms.Form):
 
     request_date = forms.DateField(label = 'Fecha de solicitud', widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}),)
 

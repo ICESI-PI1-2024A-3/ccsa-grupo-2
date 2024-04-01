@@ -1,14 +1,15 @@
 {% extends "layouts/base.html"%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Legalzación de facturas {% endblock %} </title>
+    <title>{% block title %} Legalzación de facturas {% endblock %}</title>
 </head>
 <body>
     {% block content %}
-    <h1 class="with-margin"> Nueva solicitud - Anticipos </h1>
+    <h1 class="with-margin"> Nueva solicitud - Viáticos </h1>
     <div class="with-margin">
         <h3>Por favor, tener en cuenta: </h3>
         <ol>
@@ -31,26 +32,26 @@
                 <div class="">
                     <div class="form-container-column">
                         <label for="id_request_date">Fecha de solicitud:</label>
-                        {{ advance_request_info.request_date }}
+                        {{ travel_expense_info.request_date }}
                         <label for="id_dependency">Dependencia:</label>
-                        {{ advance_request_info.dependency }}
+                        {{ travel_expense_info.dependency }}
                         <label for="id_destination_city">Ciudad de destino:</label>
-                        {{ advance_request_info.destination_city }}
+                        {{ travel_expense_info.destination_city }}
                         <label for="id_departure_date">Fecha de salida:</label>
-                        {{ advance_request_info.departure_date }}
+                        {{ travel_expense_info.departure_date }}
                     </div>
                 </div>
 
                 <div class="">
                     <div class="form-container-column">
                         <label for="id_return_date">Fecha de regreso:</label>
-                        {{ advance_request_info.return_date }}
+                        {{ travel_expense_info.return_date }}
                         <label for="id_reason_trip">Motivo de viaje:</label>
-                        {{ advance_request_info.reason_trip }}
+                        {{ travel_expense_info.reason_trip }}
                         <label for="id_advance_currency">Moneda:</label>
-                        {{ advance_request_info.advance_currency }}
+                        {{ travel_expense_info.advance_currency }}
                         <label for="id_icesi_last_day_date">Último día en Icesi antes del viaje:</label>
-                        {{ advance_request_info.icesi_last_day_date }}
+                        {{ travel_expense_info.icesi_last_day_date }}
                     </div>
                 </div>
             </div>

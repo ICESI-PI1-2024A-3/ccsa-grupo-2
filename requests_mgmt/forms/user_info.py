@@ -13,7 +13,7 @@ class UserInfoForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "form-control"}),
     )
     user_id = forms.CharField(
-        label="Identificación solicitante (C.C.):",
+        label="Identificación solicitante:",
         max_length=200,
         widget=forms.TextInput(attrs={"class": "form-control"}),
     )

@@ -3,21 +3,21 @@ from django.views import View
 
 from ..forms import (
     UserInfoForm,
-    AdvanceRequest,
+    TravelExpensesRequest,
     ExpenseBudget
 )
 
 # from ..models import 
 
-class AdvanceRequest(View):
-    template_name = "requests/create_advance_request.html"
+class TravelExpensesRequest(View):
+    template_name = "requests/create_travel_expenses_request.html"
     user_info = UserInfoForm
-    advance_request_info = AdvanceRequest
+    travel_expense_request = TravelExpensesRequest
     expense_budget = ExpenseBudget
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name,{
+        return render(request, self.template_name, {
             "user_info": self.user_info(),
-            "advance_request_info": self.advance_request_info(),
+            "travel_expense_info": self.travel_expense_request(),
             "expense_budget": self.expense_budget(),
         })

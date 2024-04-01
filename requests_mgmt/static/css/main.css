@@ -121,6 +121,7 @@ a{
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    justify-self: center;
 }
 
 .submit-button {
@@ -156,4 +157,16 @@ a{
 
 .add-expense-button:hover {
     background-color: #163152; /* Cambia el color de fondo cuando se pasa el mouse */
+}
+
+.forms-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.forms {
+    max-width: 800px;
+    width: 100%;
 }
