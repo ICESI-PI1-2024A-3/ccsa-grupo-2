@@ -62,7 +62,6 @@ class ChargeAccountView(View):
                 account_type=account_type,
                 account_number=account_number,
                 cex_no=cex_no,
-                type="Solicitud Cuenta de Cobro"
             )
             if rent_tax_declarant:
                 chargeRequest.isRent_Tax_Declarant(True)

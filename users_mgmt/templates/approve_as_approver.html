@@ -8,10 +8,12 @@
     <div class="request_cards">
         {% for request in requests_to_approval %}
         <a href="{% url 'detail_request' request.id %}">
-            <div class="card">
-                <p class="type_request">{{request.type}}</p>
-                <p>{{request.requester}}</p>
-                <p>{{ request.initial_date|date:"d/m/Y" }}</p>
+            <div class="approve_cards">
+                <div class="card_content">
+                    <p class="type_request">{{request.type}}</p>
+                    <p>{{request.requester}}</p>
+                    <p>{{ request.initial_date|date:"d/m/Y" }}</p>
+                </div>
             </div>
         </a>
         {% endfor %}
@@ -41,4 +43,20 @@
     </script>
 
 -->
+
+<style>
+    .approve_cards {
+        background-color: #f2f2f2; /* Color de fondo gris */
+        border-radius: 10px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado interno para el contenido */
+        margin-bottom: 10px; /* Espaciado inferior entre las tarjetas */
+    }
+
+    .card-content {
+        /* Ajustar el espaciado interno si es necesario */
+        padding: 10px;
+    }
+</style>  
 {% endblock %}
+
+  
