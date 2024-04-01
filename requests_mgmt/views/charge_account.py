@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 
 from ..forms import (
@@ -47,13 +47,16 @@ class ChargeAccountView(View):
             cex_no = request.POST.get("cex_no")
             rent_tax_declarant = request.POST.get("rent_tax_declarant")
             fiscal_resident = request.POST.get("fiscal_resident")
+            costs_and_deductions = request.POST.get("checkbox_choices")
             requester = request.user
             chargeRequest = ChargeAccountRequest.objects.create(
                 requester=requester,
+                type = 'Cuenta de Cobro',
                 status = RequestStatus.objects.get(id=1),
                 amount=amount,
                 concept=concept,
                 city=city,
+                costs_and_deductions=costs_and_deductions,
                 date=date,
                 bank_name=bank_name,
                 account_type=account_type,
@@ -63,14 +66,15 @@ class ChargeAccountView(View):
             if rent_tax_declarant:
                 chargeRequest.isRent_Tax_Declarant(True)
             else:
-                chargeRequest.isRent_Tax_Declarant(True)
+                chargeRequest.isRent_Tax_Declarant(False)
 
             if fiscal_resident:
                 chargeRequest.isFiscal_Resident(True)
             else:
-                chargeRequest.isFiscal_Resident(True)
+                chargeRequest.isFiscal_Resident(False)
 
             chargeRequest.save()
+
             return redirect("requests_list")
         except ValueError:
-            return print("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION
+            return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION

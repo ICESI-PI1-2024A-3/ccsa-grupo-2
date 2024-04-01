@@ -10,13 +10,11 @@ class DetailsRequestView(View):
     select_reviewer_form = AddReviewerForm
     select_approver_form = AddApproverForm
 
-    def get(self, request, request_id, *args, **kwargs):
-        intance_request = Request.objects.get(pk=request_id)
-        print('\nREQUEST TYPE : ',intance_request.type)
-        print('REQUEST ID : ',intance_request.id)
-        print('REQUEST Requester : ',intance_request.requester)
-        return render(request, self.template_name, {
-            'request': intance_request,
+    def get(self, request,request_id, *args, **kwargs):
+        intance_request=Request.objects.get(pk=request_id)
+        return render(request, self.template_name,{
+            'request':intance_request,
+
             'select_reviewer': self.select_reviewer_form(),
             'select_approver': self.select_approver_form()
         })       
