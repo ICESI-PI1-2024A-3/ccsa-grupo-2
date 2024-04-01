@@ -28,15 +28,35 @@ class RegisterView(View):
             id_number = request.POST.get("id_number")
             email = request.POST.get("email")
             password = request.POST.get("password")
-            user = User.objects.create(
-                first_name=first_name,
-                last_name=last_name,
-                phone=phone,
-                id_type=id_type,
-                id_number=id_number,
-                username=id_number,
-                email=email,
-                password=password,
-            )
-            login(request, user)
-            return redirect("home")
+
+            user_found = User.objects.filter(email=email)
+            if user_found:
+                return render(
+                    request,
+                    self.template_name,
+                    {"form": self.form_class(), "error": "El email ya está registrado"},
+                )
+            else:
+                user_found = User.objects.filter(id_number=id_number)
+                if user_found:
+                    return render(
+                        request,
+                        self.template_name,
+                        {
+                            "form": self.form_class(),
+                            "error": "El número de identificación ya está registrado",
+                        },
+                    )
+                else:
+                    user = User.objects.create(
+                        first_name=first_name,
+                        last_name=last_name,
+                        phone=phone,
+                        id_type=id_type,
+                        id_number=id_number,
+                        username=id_number,
+                        email=email,
+                        password=password,
+                    )
+                    login(request, user)
+                    return redirect("home")
