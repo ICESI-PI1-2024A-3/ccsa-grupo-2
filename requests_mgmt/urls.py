@@ -12,6 +12,9 @@ from .views import (
     RequestsView,
     UpdateReviewerView,
     InvoiceLegalizationView,
+    AdvanceRequest,
+    TravelExpensesRequest,
+    UpdateApproverView,
 )
 
 urlpatterns = [
