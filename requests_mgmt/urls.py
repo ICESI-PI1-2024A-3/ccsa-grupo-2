@@ -3,18 +3,18 @@ from django.urls import path
 
 from .views import (
     SearchRequestView,
+    AdvanceRequest,
     ChargeAccountView,
     DeleteRequestView,
     DetailsRequestView,
     EditRequestView,
     HomeView,
+    InvoiceLegalizationView,
     RequestsListView,
     RequestsView,
-    UpdateReviewerView,
-    InvoiceLegalizationView,
-    AdvanceRequest,
     TravelExpensesRequest,
     UpdateApproverView,
+    UpdateReviewerView,
 )
 
 urlpatterns = [
@@ -26,15 +26,15 @@ urlpatterns = [
     ),
     path("search/<str:requester>", login_required(SearchRequestView.as_view()),name="search_request"),
     path(
-        "<int:request_id>/editar",
-        login_required(EditRequestView.as_view()),
-        name="edit_request",
+        "update_reviewer/<int:request_id>",
+        login_required(UpdateReviewerView.as_view()),
+        name="update_reviewer",
     ),
-    path("update_reviewer/<int:request_id>",
-        login_required(UpdateReviewerView.as_view()), name="update_reviewer"),
-
-    path('update_approver/<int:request_id>',
-        UpdateApproverView.as_view(), name='update_approver'),
+    path(
+        "update_approver/<int:request_id>",
+        UpdateApproverView.as_view(),
+        name="update_approver",
+    ),
     path(
         "<int:request_id>/eliminar",
         login_required(DeleteRequestView.as_view()),
@@ -46,10 +46,20 @@ urlpatterns = [
         login_required(ChargeAccountView.as_view()),
         name="charge_account",
     ),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
-    path("nueva/adelanto", login_required(InvoiceLegalizationView.as_view()), name="advance_request"),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="perdiem_request"),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
-    path("nueva/anticipos", login_required(AdvanceRequest.as_view()), name = "advance_request"),
-    path("nueva/viaticos", login_required(TravelExpensesRequest.as_view()), name = "travel_expenses"),
+    path(
+        "nueva/legalizacion de facturas",
+        login_required(InvoiceLegalizationView.as_view()),
+        name="invoice_legalization",
+    ),
+    
+    path(
+        "nueva/anticipos",
+        login_required(AdvanceRequest.as_view()),
+        name="advance_request",
+    ),
+    path(
+        "nueva/viaticos",
+        login_required(TravelExpensesRequest.as_view()),
+        name="travel_expenses",
+    ),
 ]
