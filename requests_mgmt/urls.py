@@ -11,7 +11,6 @@ from .views import (
     RequestsView,
     UpdateReviewerView,
     InvoiceLegalizationView,
-    UpdateApproverView,
 )
 
 urlpatterns = [
@@ -27,7 +26,7 @@ urlpatterns = [
         login_required(EditRequestView.as_view()),
         name="edit_request",
     ),
-    path("update/<int:request_id>", login_required(UpdateApproverView.as_view()),name="update_approver"),
+     path("update/<int:request_id>", login_required(UpdateReviewerView.as_view()),name="update_approver"),
     path(
         "<int:request_id>/editar",
         login_required(EditRequestView.as_view()),

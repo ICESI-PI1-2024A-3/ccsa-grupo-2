@@ -157,3 +157,45 @@ a{
 .add-expense-button:hover {
     background-color: #163152; /* Cambia el color de fondo cuando se pasa el mouse */
 }
+/* Estilos para la información de la solicitud */
+.request-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.info-group {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.info-group h3 {
+    margin-top: 0;
+}
+
+.info-group p {
+    margin: 0 0 10px;
+}
+
+.form-reviewer {
+    margin-top: 20px;
+}
+
+.form-control-user {
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
