@@ -1,107 +1,78 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <h2>Información de la solicitud</h2>
-{% if request.type == 'Charge request'%}
-<table BORDER>
-    <tr>
-        <th ROWSPAN=1>Nombre del solicitante</th>
-        <td>{{request.user_name}}</td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Fecha de registro</th>
-        <td>{{request.date}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Tipo de documentos</th>
-        <td>{{request.document_type}}</td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Identificación del usuario</th>
-        <td>{{request.user_id}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Monto</th>
-        <td>{{request.amount}}</td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Descripcion</th>
-        <td>{{request.concept}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Declarador de renta</th>
-        <td>
-            {% if request.rent_tax_declaran %}
-                Sí
-            {% else %}
-                No
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Declarador de renta</th>
-        <td>
-            {% if request.rent_tax_declarant %}
-                Sí
-            {% else %}
-                No 
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Ciudad</th>
-        <td>{{request.city}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Fecha</th>
-        <td>{{request.date}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Nombre del banco</th>
-        <td>{{request.bank_name}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Tipo De Cuenta</th>
-        <td>{{request.account_type}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Numero de Cuenta</th>
-        <td>{{request.account_number}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>No CEX</th>
-        <td>{{request.CEX_no}}</td> 
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Revisor</th>
-        <td colspan="2">
-            <form class="form-reviewer" method="post" action="{% url 'update_request' request.id %}">
-                {% csrf_token %}
-                <div class="form-control-user">
-                    {{ select_reviewer }}
-                    </div class="button">
-                    <button type="submit" class="button">Asignar</button>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <th ROWSPAN=1>Aprovador</th>
-        <td colspan="2">
-            <form class="form-reviewer" method="post" action="{% url 'update_request' request.id %}">
-                {% csrf_token %}
-                <div class="form-control-user">
-                    {{ select_approver }}
-                    </div class="button">
-                    <button type="submit" class="button">Asignar</button>
-            </form>
-        </td>
-    </tr>
-</table>
-
+{% if request.type == 'Cuenta de Cobro' %}
+<div class="request-info">
+    <div class="info-group">
+        <h3>Datos Generales</h3>
+        <p><strong>Nombre del solicitante:</strong> {{request.requester}}</p>
+        <p><strong>Monto:</strong> {{request.amount}}</p>
+        <p><strong>Descripción:</strong> {{request.concept}}</p>
+        <p><strong>Ciudad:</strong> {{request.city}}</p>
+        <p><strong>Fecha:</strong> {{request.date}}</p>
+    </div>
+    <div class="info-group">
+        <h3>Información Bancaria</h3>
+        <p><strong>Nombre del banco:</strong> {{request.bank_name}}</p>
+        <p><strong>Tipo de Cuenta:</strong> {{request.account_type}}</p>
+        <p><strong>Número de Cuenta:</strong> {{request.account_number}}</p>
+    </div>
+    <div class="info-group">
+        <h3>Información Adicional</h3>
+        <p><strong>No CEX:</strong> {{request.cex_no}}</p>
+        <p><strong>Costos y deducciones:</strong> {{request.costs_and_deductions}}</p>
+    </div>
+    <div class="info-group">
+        <h3>Revisor y Aprobador</h3>
+        <form class="form-reviewer" method="post" action="{% url 'update_reviewer' request.id %}">
+            {% csrf_token %}
+            <div class="form-control-user">
+                {{ select_reviewer }}
+            </div>
+            <button type="submit" class="button">Asignar Revisor</button>
+        </form>
+        <form class="form-reviewer" method="post" action="{% url 'update_approver' request.id %}">
+            {% csrf_token %}
+            <div class="form-control-user">
+                {{ select_approver }}
+            </div>
+            <button type="submit" class="button">Asignar Aprobador</button>
+        </form>
+    </div>
 {% endif %}
-<form method ='get' action="{% url 'delete_request' request.id %}">
-    {% csrf_token %}
-    <button>
-        DELETE
-    </button>
-</form>
+{% if request.type == 'Legalización de Factura' %}
+<div class="request-info">
+    <div class="info-group">
+        <h3>Datos de Legalización de Factura</h3>
+        <p><strong>Fecha de legalizacion:</strong> {{ request.legalization_date }}</p>
+        <p><strong>Dependencia:</strong> {{ request.dependency }}</p>
+        <p><strong>Ciudad de destino:</strong> {{ request.destination_city }}</p>
+        <p><strong>Fecha de salida:</strong> {{ request.departure_date }}</p>
+        <p><strong>Rubro:</strong> {{ request.reason_trip }}</p>
+        <p><strong>Proveedor:</strong> {{ request.discount_authorization }}</p>
+        <p><strong>Nombre del banco:</strong> {{ request.bank_name }}</p>
+        <p><strong>Tipo de Cuenta:</strong> {{ request.account_type }}</p>
+        <p><strong>Número de cuenta:</strong> {{ request.account_number }}</p>
+    </div>
+    <div class="action-group">
+        <h3>Asignar Revisor y Aprobador</h3>
+        <form class="form-reviewer" method="put" action="{% url 'update_request' request.id %}">
+            {% csrf_token %}
+            <div class="form-control-user">
+                {{ select_reviewer }}
+            </div>
+            <button type="submit" class="button">Asignar Revisor</button>
+        </form>
+        <form class="form-reviewer" method="put" action="{% url 'update_request' request.id %}">
+            {% csrf_token %}
+            <div class="form-control-user">
+                {{ select_approver }}
+            </div>
+            <button type="submit" class="button">Asignar Aprobador</button>
+        </form>
+     </div>
+
+</div>
+{% endif %}
 {% endblock %}
+
