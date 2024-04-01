@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from .views import (
+    SearchRequestView,
     ChargeAccountView,
     DeleteRequestView,
     DetailsRequestView,
@@ -23,6 +24,7 @@ urlpatterns = [
         name="detail_request",
     ),
     path("update/<int:request_id>", login_required(UpdateReviewerView.as_view()),name="update_reviewer"),
+    path("search/<str:requester>", login_required(SearchRequestView.as_view()),name="search_request"),
     path(
         "<int:request_id>/editar",
         login_required(EditRequestView.as_view()),
