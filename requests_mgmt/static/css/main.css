@@ -199,3 +199,14 @@ a{
 .button:hover {
     background-color: #0056b3;
 }
+.additional-info {
+    background-color: #f2f2f2; /* Fondo gris */
+    padding: 20px;
+    text-align: center; /* Texto centrado */
+    margin-top: 20px; /* Espacio arriba */
+}
+
+.info-container {
+    width: 50%; /* Ancho del contenedor */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
