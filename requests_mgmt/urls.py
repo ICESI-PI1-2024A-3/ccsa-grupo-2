@@ -2,15 +2,18 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from .views import (
+    AdvanceRequest,
     ChargeAccountView,
     DeleteRequestView,
     DetailsRequestView,
     EditRequestView,
     HomeView,
+    InvoiceLegalizationView,
     RequestsListView,
     RequestsView,
+    TravelExpensesRequest,
+    UpdateApproverView,
     UpdateReviewerView,
-    InvoiceLegalizationView,
 )
 
 urlpatterns = [
@@ -20,11 +23,15 @@ urlpatterns = [
         login_required(DetailsRequestView.as_view()),
         name="detail_request",
     ),
-    path("update/<int:request_id>", login_required(UpdateReviewerView.as_view()),name="update_reviewer"),
     path(
-        "<int:request_id>/editar",
-        login_required(EditRequestView.as_view()),
-        name="edit_request",
+        "update_reviewer/<int:request_id>",
+        login_required(UpdateReviewerView.as_view()),
+        name="update_reviewer",
+    ),
+    path(
+        "update_approver/<int:request_id>",
+        UpdateApproverView.as_view(),
+        name="update_approver",
     ),
     path(
         "<int:request_id>/eliminar",
@@ -37,8 +44,34 @@ urlpatterns = [
         login_required(ChargeAccountView.as_view()),
         name="charge_account",
     ),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization"),
-    path("nueva/adelanto", login_required(InvoiceLegalizationView.as_view()), name="advance_request"),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="perdiem_request"),
-    path("nueva/legalizacion de facturas", login_required(InvoiceLegalizationView.as_view()), name="invoice_legalization")
+    path(
+        "nueva/legalizacion de facturas",
+        login_required(InvoiceLegalizationView.as_view()),
+        name="invoice_legalization",
+    ),
+    path(
+        "nueva/adelanto",
+        login_required(InvoiceLegalizationView.as_view()),
+        name="advance_request",
+    ),
+    path(
+        "nueva/legalizacion de facturas",
+        login_required(InvoiceLegalizationView.as_view()),
+        name="perdiem_request",
+    ),
+    path(
+        "nueva/legalizacion de facturas",
+        login_required(InvoiceLegalizationView.as_view()),
+        name="invoice_legalization",
+    ),
+    path(
+        "nueva/anticipos",
+        login_required(AdvanceRequest.as_view()),
+        name="advance_request",
+    ),
+    path(
+        "nueva/viaticos",
+        login_required(TravelExpensesRequest.as_view()),
+        name="travel_expenses",
+    ),
 ]
