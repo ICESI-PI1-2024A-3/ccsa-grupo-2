@@ -1,0 +1,62 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="header">
+        <h2>Solicitudes por aprobar</h2>
+    </div>
+    <div class="request_cards">
+        {% for request in requests_to_approval %}
+        <a href="{% url 'detail_request' request.id %}">
+            <div class="approve_cards">
+                <div class="card_content">
+                    <p class="type_request">{{request.type}}</p>
+                    <p>{{request.requester}}</p>
+                    <p>{{ request.initial_date|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<!--
+    <script>
+        function approveUser(userId) {
+            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
+            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
+            if (confirm("¿Estás seguro de aprobar este usuario?")) {
+                document.getElementById('user_id').value = userId;
+                document.getElementById('action').value = 'approve';
+                document.getElementById('approveForm').submit();
+            }
+        }
+
+        function rejectUser(userId) {
+            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
+            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
+            if (confirm("¿Estás seguro de rechazar este usuario?")) {
+                document.getElementById('user_id').value = userId;
+                document.getElementById('action').value = 'reject';
+                document.getElementById('approveForm').submit();
+            }
+        }
+    </script>
+
+-->
+
+<style>
+    .approve_cards {
+        background-color: #f2f2f2; /* Color de fondo gris */
+        border-radius: 10px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado interno para el contenido */
+        margin-bottom: 10px; /* Espaciado inferior entre las tarjetas */
+    }
+
+    .card-content {
+        /* Ajustar el espaciado interno si es necesario */
+        padding: 10px;
+    }
+</style>  
+{% endblock %}
+
+  
