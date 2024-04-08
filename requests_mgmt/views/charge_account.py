@@ -8,6 +8,7 @@ from ..forms import (
     NewChargeAccountForm,
     TaxTreatmentForm,
     UserInfoForm,
+    UploadDocuments
 )
 from ..models import ChargeAccountRequest,RequestStatus
 
@@ -20,6 +21,7 @@ class ChargeAccountView(View):
     charge_account_form = NewChargeAccountForm
     tax_treatment_form = TaxTreatmentForm
     user_info_form = UserInfoForm
+    upload_documents = UploadDocuments
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -32,6 +34,7 @@ class ChargeAccountView(View):
                 "charge_account_form": self.charge_account_form(),
                 "tax_treatment_form": self.tax_treatment_form(),
                 "user_info_form": self.user_info_form(),
+                "upload_documents": self.upload_documents
             },
         )
 
