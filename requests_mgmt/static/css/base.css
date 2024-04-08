@@ -158,3 +158,27 @@ body {
     width: 50%; /* Ancho del contenedor */
     margin: 0 auto; /* Centrar horizontalmente */
 }
+
+/*
+Debe estar en base.css de user_mgmt
+*/
+.square_cards {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    
+    justify-content: center;
+    align-items: center;
+    background-color: #a9abaa; /* Cambia esto al color de fondo deseado */
+}
+
+.text {
+    text-align: center;
+    font-size: 18px;
+    color: #000000;
+
+}
+
