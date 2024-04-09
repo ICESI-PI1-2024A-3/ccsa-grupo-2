@@ -7,9 +7,15 @@ body {
     padding: 0;
 }
 
+.navigation:hover {
+    background-color: #0d6efd;
+    opacity: 0.8;
+    color: #fff;
+}
+
 /* Navbar */
 
-.navbar {
+/* .navbar {
     background-color: #1E4072;
     padding: 10px 20px;
     display: flex;
@@ -36,10 +42,10 @@ body {
 
 .user-info a:hover {
     background: #d03123;
-}
+} */
 
 /* Users Page */
-
+/*
 .container {
     width: 80%;
     margin: 0 auto;
@@ -148,13 +154,13 @@ body {
     color: #000;
 }
 .additional-info {
-    background-color: #f2f2f2; /* Fondo gris */
+    background-color: #f2f2f2;
     padding: 20px;
-    text-align: center; /* Texto centrado */
-    margin-top: 20px; /* Espacio arriba */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .info-container {
-    width: 50%; /* Ancho del contenedor */
-    margin: 0 auto; /* Centrar horizontalmente */
-}
+    width: 50%;
+    margin: 0 auto;
+} */

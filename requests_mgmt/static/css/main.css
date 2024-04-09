@@ -29,7 +29,7 @@ a{
 }
 
 .div-with-space {
-    margin-bottom: 25px; 
+    margin-bottom: 25px;
     margin-top: 10px;
 }
 
@@ -43,9 +43,7 @@ a{
 
 .user-button img {
     vertical-align: middle;
-    /* Alinear verticalmente la imagen */
     margin-right: 5px;
-    /* Espacio entre la imagen y el texto */
 }
 
 .container-main {
@@ -90,7 +88,7 @@ a{
     width: 95%;
     padding: 10px;
     margin-bottom: 10px;
-    margin-right: 10px; 
+    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -143,23 +141,22 @@ a{
 }
 
 .simple-button {
-    display: inline-block; /* Cambiado a inline-block para alinear a la izquierda */
-    margin: 0; /* Eliminado el margen */
-    padding: 8px 16px; /* Reducir el padding para hacer el botón más pequeño */
-    font-size: 14px; /* Reducir el tamaño de la fuente */
+    display: inline-block;
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 14px;
     background-color: #1E4072;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    transition: background-color 0.3s ease;
 }
 
 .simple-button:hover {
-    background-color: #163152; /* Cambia el color de fondo cuando se pasa el mouse */
+    background-color: #163152;
 }
 
-/* Estilos para la información de la solicitud */
 .request-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -202,15 +199,15 @@ a{
     background-color: #0056b3;
 }
 .additional-info {
-    background-color: #f2f2f2; /* Fondo gris */
+    background-color: #f2f2f2;
     padding: 20px;
-    text-align: center; /* Texto centrado */
-    margin-top: 20px; /* Espacio arriba */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .info-container {
-    width: 50%; /* Ancho del contenedor */
-    margin: 0 auto; /* Centrar horizontalmente */
+    width: 50%;
+    margin: 0 auto;
 }
 
 .forms-container {

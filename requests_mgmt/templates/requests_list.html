@@ -1,5 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+    {% include "sidemenu.html" %}
     <div class="container">
         <div class="header">
             <h2>Solicitudes</h2>
@@ -20,7 +21,6 @@
                     <th>Fecha de inicio</th>
                     <th>Fecha de cierre</th>
                     <th>Estado</th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,6 @@
                         <td>
                             <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.type }}</a>
                         </td>
-                        
                         <td>
                             <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.manager }}</a>
                         </td>
