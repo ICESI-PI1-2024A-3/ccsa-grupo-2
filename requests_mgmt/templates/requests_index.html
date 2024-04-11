@@ -1,40 +1,24 @@
-{% extends "layouts/base.html"%}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Nueva solicitud {% endblock %} </title>
-</head>
-
-<body>
-    
-
-    {% block content%}
+{% extends "layouts/base.html" %}
+{% block content %}
+    {% include "sidemenu.html" %}
     <div>
         <h1 class="with-margin">Nueva solicitud</h1>
     </div>
-    <main class = "container-main">
-    
-
-        <a href="{% url 'charge_account' %}"> <div class = "card"> Cuenta de cobro </div> </a>
-
+    <main class="container-main">
+        <a href="{% url 'charge_account' %}">
+            <div class="card">Cuenta de cobro</div>
+        </a>
         <a href="{% url 'invoice_legalization' %}">
-            <div class = "card"> Legalización de facturas </div>
+            <div class="card">Legalización de facturas</div>
         </a>
         <a href="{% url 'advance_request' %}">
-            <div class = "card"> Anticipos </div>
+            <div class="card">Anticipos</div>
         </a>
         <a href="{% url 'travel_expenses' %}">
-            <div class = "card"> Viáticos </div>
+            <div class="card">Viáticos</div>
         </a>
         <a href="{% url 'invoice_legalization' %}">
-            <div class = "card"> Facturas </div>
+            <div class="card">Facturas</div>
         </a>
-    </div>
+    </main>
 {% endblock %}
-</body>
-
-</html>
