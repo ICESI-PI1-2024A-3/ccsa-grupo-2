@@ -10,9 +10,9 @@
         {% for request in requests_to_approval %}
         <a href="{% url 'detail_request' request.id %}">
             <div class="square_cards">
-                <p class="type_request text">{{request.type}}</p>
-                <p class="text">{{request.requester}}</p>
-                <p class="text">{{ request.initial_date|date:"d/m/Y" }}</p>
+                    <p class="type_request">{{request.type}}</p>
+                    <p>{{request.requester}}</p>
+                    <p> {{ request.initial_date|date:"d/m/Y" }}</p>
             </div>
         </a>
         {% endfor %}

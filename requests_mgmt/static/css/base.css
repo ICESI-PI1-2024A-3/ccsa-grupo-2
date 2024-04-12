@@ -170,21 +170,16 @@ body {
 Debe estar en base.css de user_mgmt
 */
 .square_cards {
-    width: 200px;
-    height: 200px;
+    width: 225px;
+    height: 225px;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
-    display: inline-block;
-    
-    justify-content: center;
-    align-items: center;
     background-color: #a9abaa; /* Cambia esto al color de fondo deseado */
-}
-
-.text {
-    text-align: center;
     font-size: 18px;
     color: #000000;
-
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
 }
