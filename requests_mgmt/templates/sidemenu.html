@@ -22,24 +22,31 @@
                 </div>
             </a>
             <a href="{% url 'assign_roles' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2 {% if request.resolver_match.url_name == 'assign_roles' %}active{% endif %}">
+               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="material-symbols-outlined">people</span>
                     <span class="ms-2">Usuarios</span>
                 </div>
             </a>
             <a href="{% url 'requests_list' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2 {% if request.resolver_match.url_name == 'requests_list' %}active{% endif %}">
+               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="material-symbols-outlined">list</span>
                     <span class="ms-2">Solicitudes</span>
                 </div>
             </a>
             <a href="{% url 'requests_index' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2 {% if request.resolver_match.url_name == 'requests_index' %}active{% endif %}">
+               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="material-symbols-outlined">add</span>
                     <span class="ms-2">Nueva solicitud</span>
+                </div>
+            </a>
+            <a href="{% url 'requests_made' %}"
+               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2}">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="material-symbols-outlined">list</span>
+                    <span class="ms-2">Mis solicitudes</span>
                 </div>
             </a>
         </div>
