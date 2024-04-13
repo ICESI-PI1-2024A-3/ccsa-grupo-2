@@ -15,7 +15,7 @@ class DetailsRequestView(View):
 
         if intance_request.type == "Cuenta de Cobro":
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
-        if intance_request.type == "Legalizacion de Factura":
+        if intance_request.type == "Legalización de Factura":
             gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
 
         return render(
