@@ -10,6 +10,7 @@ from .views import (
     HomeView,
     InvoiceLegalizationView,
     RequestsListView,
+    RequestsMadeView,
     RequestsView,
     TravelExpensesRequest,
     UpdateApproverView,
@@ -73,5 +74,10 @@ urlpatterns = [
         "nueva/viaticos",
         login_required(TravelExpensesRequest.as_view()),
         name="travel_expenses",
+    ),
+    path(
+        "mis solicitudes",
+        login_required(RequestsMadeView.as_view()),
+        name="requests_made",
     ),
 ]
