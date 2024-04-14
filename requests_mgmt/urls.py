@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from .views import (
-    AdvanceRequest,
+    AdvanceRequestView,
     ChargeAccountView,
     DeleteRequestView,
     DetailsRequestView,
@@ -67,7 +67,7 @@ urlpatterns = [
     ),
     path(
         "nueva/anticipos",
-        login_required(AdvanceRequest.as_view()),
+        login_required(AdvanceRequestView.as_view()),
         name="advance_request",
     ),
     path(
