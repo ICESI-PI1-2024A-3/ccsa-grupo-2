@@ -4,164 +4,224 @@
         <div class="request-info">
             <style>
                 .custom-border {
-                    border: 1px solid rgba(0, 0, 0, 0.125); /* Líneas delgadas grises */
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+                    border: 1px solid rgba(0, 0, 0, 0.125);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 }
-                /* Margen superior para container-md */
                 .container-md {
-                    margin-top: 20px; /* Puedes ajustar el valor según sea necesario */
+                    margin-top: 20px;
                 }
             </style>
+            {% include "sidemenu.html" %}
             <div class="container-md">
-                <div class="text-left bg-light text-dark p-1 custom-border mb-4">
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
                     <h5 class="mb-4">Información general</h5>
-                    <p><strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{request.type}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>Fecha:</strong>&nbsp;&nbsp;{{request.date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
-                    <strong>Ciudad:</strong>&nbsp;&nbsp;{{request.city}}</p>
+                    <p>
+                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                    </p>
                 </div>
-
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="text-left bg-light text-dark p-1 custom-border mb-4">
-                            <h5 class="mb-4">Información del solicitante</h5>      
-                            <p><strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{request.requester}}</p>
-                            <p><strong>Identificación:</strong>&nbsp;&nbsp;{{request.requester.id_type}}&nbsp;&nbsp;{{request.requester.id_number}}</p>
-                            <p><strong>Correo electrónico:</strong>&nbsp;&nbsp;{{request.requester.email}}</p>  
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información del solicitante</h5>
+                            <p>
+                                <strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{ request.requester }}
+                            </p>
+                            <p>
+                                <strong>Identificación:</strong>&nbsp;&nbsp;{{ request.requester.id_type }}&nbsp;&nbsp;{{ request.requester.id_number }}
+                            </p>
+                            <p>
+                                <strong>Correo electrónico:</strong>&nbsp;&nbsp;{{ request.requester.email }}
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="text-left bg-light text-dark p-1 custom-border mb-4">
-                            <h5 class="mb-4">Información bancaria</h5>      
-                            <p><strong>Banco:</strong>&nbsp;&nbsp;{{request.bank_name}}</p>
-                            <p><strong>No. de cuenta:</strong>&nbsp;&nbsp;{{request.account_number}}</p>
-                            <p><strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{request.account_type}}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{request.cex_no}}</p>  
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información bancaria</h5>
+                            <p>
+                                <strong>Banco:</strong>&nbsp;&nbsp;{{ request.bank_name }}
+                            </p>
+                            <p>
+                                <strong>No. de cuenta:</strong>&nbsp;&nbsp;{{ request.account_number }}
+                            </p>
+                            <p>
+                                <strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{ request.account_type }}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{ request.cex_no }}
+                            </p>
                         </div>
                     </div>
                 </div>
-
-                <div class="text-left bg-light text-dark p-1 custom-border">
+                <div class="text-left bg-light text-dark p-3 custom-border">
                     <h5 class="mb-4">Información de la solicitud</h5>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{request.amount}}</p>
-                            <p><strong>Concepto:</strong>&nbsp;&nbsp;{{request.concept}}</p>
+                            <p>
+                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                            </p>
+                            <p>
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.concept }}
+                            </p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Costos y deducciones:</strong>&nbsp;&nbsp;{{request.costs_and_deductions}}</p>
-                            <p><strong>Declarante de impuesto de renta:</strong>&nbsp;&nbsp;{% if request.rent_tax_declarant %}Si{% else %}No{% endif %}</p>
-                            <p><strong>Residente fiscal:</strong>&nbsp;&nbsp;{% if request.fiscal_resident %}Si{% else %}No{% endif %}</p>
+                            <p>
+                                <strong>Costos y deducciones:</strong>&nbsp;&nbsp;{{ request.costs_and_deductions }}
+                            </p>
+                            <p>
+                                <strong>Declarante de impuesto de renta:</strong>&nbsp;&nbsp;
+                                {% if request.rent_tax_declarant %}
+                                    Si
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </p>
+                            <p>
+                                <strong>Residente fiscal:</strong>&nbsp;&nbsp;
+                                {% if request.fiscal_resident %}
+                                    Si
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="text-left bg-light text-dark p-1 custom-border mb-4 mt-4">
-                    <h5 class="mb-4">Asignaciones</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form class="form-reviewer mb-3" method="post" action="{% url 'update_reviewer' request.id %}">
-                                {% csrf_token %}
-                                <div class="form-control-user">
+                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Asignaciones</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form class="d-inline-flex"
+                                      method="post"
+                                      action="{% url 'update_reviewer' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Revisor:</label>
                                     {{ select_reviewer }}
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Asignar Revisor</button>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="form-reviewer mb-3" method="post" action="{% url 'update_approver' request.id %}">
-                                {% csrf_token %}
-                                <div class="form-control-user">
+                                    <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="d-inline-flex"
+                                      method="post"
+                                      action="{% url 'update_approver' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Aprobador:</label>
                                     {{ select_approver }}
-                                </div>
-                                <button type="submit" class="btn btn-success btn-block">Asignar Aprobador</button>
-                            </form>
+                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
+                {% endif %}
             </div>
-            
-            
         </div>
     {% endif %}
-{% if request.type == 'Legalización de Factura' %}
-<style>
-      .custom-border {
-                    border: 1px solid rgba(0, 0, 0, 0.125); /* Líneas delgadas grises */
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-                }
-                /* Margen superior para container-md */
-                .container-md {
-                    margin-top: 20px; /* Puedes ajustar el valor según sea necesario */
-                }
+    {% if request.type == 'Legalización de Factura' %}
+        <style>
+    .custom-border {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .container-md {
+        margin-top: 20px;
+    }
 
-</style>
-<div class="request-info">
-    <div class="container-md">
-        <div class="text-left bg-light text-dark p-1 custom-border mb-4">
-            <h5 class="mb-4">Información general</h5>
-            <p><strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{request.type}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <strong>Fecha:</strong>&nbsp;&nbsp;{{request.date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
-            <strong>Ciudad:</strong>&nbsp;&nbsp;{{request.city}}</p>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="text-left bg-light text-dark p-1 custom-border mb-4">
-                    <h5 class="mb-4">Información del solicitante</h5>      
-                    <p><strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{request.requester}}</p>
-                    <p><strong>Identificación:</strong>&nbsp;&nbsp;{{request.requester.id_type}}&nbsp;&nbsp;{{request.requester.id_number}}</p>
-                    <p><strong>Correo electrónico:</strong>&nbsp;&nbsp;{{request.requester.email}}</p>  
+        </style>
+        <div class="request-info">
+            {% include "sidemenu.html" %}
+            <div class="container-md">
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <h5 class="mb-4">Información general</h5>
+                    <p>
+                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                    </p>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="text-left bg-light text-dark p-1 custom-border mb-4">
-                    <h5 class="mb-4">Información bancaria</h5>      
-                    <p><strong>Banco:</strong>&nbsp;&nbsp;{{request.bank_name}}</p>
-                    <p><strong>No. de cuenta:</strong>&nbsp;&nbsp;{{request.account_number}}</p>
-                    <p><strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{request.account_type}}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{request.cex_no}}</p>  
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información del solicitante</h5>
+                            <p>
+                                <strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{ request.requester }}
+                            </p>
+                            <p>
+                                <strong>Identificación:</strong>&nbsp;&nbsp;{{ request.requester.id_type }}&nbsp;&nbsp;{{ request.requester.id_number }}
+                            </p>
+                            <p>
+                                <strong>Correo electrónico:</strong>&nbsp;&nbsp;{{ request.requester.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información bancaria</h5>
+                            <p>
+                                <strong>Banco:</strong>&nbsp;&nbsp;{{ request.bank_name }}
+                            </p>
+                            <p>
+                                <strong>No. de cuenta:</strong>&nbsp;&nbsp;{{ request.account_number }}
+                            </p>
+                            <p>
+                                <strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{ request.account_type }}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{ request.cex_no }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-    <div class="text-left bg-light text-dark p-1 custom-border">
-        <h5 class="mb-4">Información de la solicitud</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <p><strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{request.amount}}</p>
-                <p><strong>Concepto:</strong>&nbsp;&nbsp;{{request.reason_trip}}</p>
-            </div>
-            <div class="col-md-6">
-                <p><strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{request.legalization_date}}</p>
-                <p><strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{request.destination_city }}</p>
-                <p><strong>Fecha de partida:</strong>&nbsp;&nbsp;{{request.departure_date }}</p>
-                <p><strong>Autorización descuento:</strong>&nbsp;&nbsp;{{request.discount_authorization}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="text-left bg-light text-dark p-1 custom-border mb-4 mt-4">
-        <h5 class="mb-4">Asignaciones</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <form class="form-reviewer mb-3" method="post" action="{% url 'update_reviewer' request.id %}">
-                    {% csrf_token %}
-                    <div class="form-control-user">
-                        {{ select_reviewer }}
+                <div class="text-left bg-light text-dark p-3 custom-border">
+                    <h5 class="mb-4">Información de la solicitud</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                            </p>
+                            <p>
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.reason_trip }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.legalization_date }}
+                            </p>
+                            <p>
+                                <strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                            </p>
+                            <p>
+                                <strong>Fecha de partida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
+                            </p>
+                            <p>
+                                <strong>Autorización descuento:</strong>&nbsp;&nbsp;{{ request.discount_authorization }}
+                            </p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Asignar Revisor</button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <form class="form-reviewer mb-3" method="post" action="{% url 'update_approver' request.id %}">
-                    {% csrf_token %}
-                    <div class="form-control-user">
-                        {{ select_approver }}
+                </div>
+                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Asignaciones</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form class="d-inline-flex"
+                                      method="post"
+                                      action="{% url 'update_reviewer' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Revisor:</label>
+                                    {{ select_reviewer }}
+                                    <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="d-inline-flex"
+                                      method="post"
+                                      action="{% url 'update_approver' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Aprobador:</label>
+                                    {{ select_approver }}
+                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block">Asignar Aprobador</button>
-                </form>
+                {% endif %}
             </div>
         </div>
-    </div>
-
-</div>
-{% endif %}
+    {% endif %}
 {% endblock %}
