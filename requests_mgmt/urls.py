@@ -4,6 +4,7 @@ from django.urls import path
 from .views import (
     SearchRequestView,
     AdvanceRequest,
+    AdvanceRequestView,
     ChargeAccountView,
     DeleteRequestView,
     DetailsRequestView,
@@ -11,6 +12,7 @@ from .views import (
     HomeView,
     InvoiceLegalizationView,
     RequestsListView,
+    RequestsMadeView,
     RequestsView,
     TravelExpensesRequest,
     UpdateApproverView,
@@ -54,12 +56,17 @@ urlpatterns = [
     
     path(
         "nueva/anticipos",
-        login_required(AdvanceRequest.as_view()),
+        login_required(AdvanceRequestView.as_view()),
         name="advance_request",
     ),
     path(
         "nueva/viaticos",
         login_required(TravelExpensesRequest.as_view()),
         name="travel_expenses",
+    ),
+    path(
+        "mis solicitudes",
+        login_required(RequestsMadeView.as_view()),
+        name="requests_made",
     ),
 ]

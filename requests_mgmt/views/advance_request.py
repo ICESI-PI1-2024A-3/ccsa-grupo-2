@@ -1,16 +1,11 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 
-from ..forms import (
-    UserInfoForm,
-    AdvanceRequest,
-    ExpenseBudget,
-    UploadDocuments
-)
+from ..forms import AdvanceRequest, ExpenseBudget, UploadDocuments, UserInfoForm
 
 from ..models import AdvanceRequest as AdvanceRequestModel,RequestStatus
 
-class AdvanceRequest(View):
+class AdvanceRequestView(View):
     template_name = "requests/create_advance_request.html"
     user_info = UserInfoForm
     advance_request_info = AdvanceRequest
@@ -18,6 +13,7 @@ class AdvanceRequest(View):
     upload_documents = UploadDocuments
 
     def get(self, request, *args, **kwargs):
+
         return render(request, self.template_name,{
             "user_info": self.user_info(),
             "advance_request_info": self.advance_request_info(),
@@ -69,3 +65,4 @@ class AdvanceRequest(View):
             return redirect("requests_list")
         except ValueError:
             return HttpResponse('Please enter a Valid Value')
+
