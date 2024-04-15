@@ -6,46 +6,18 @@
     <div class="header">
         <h2>Solicitudes por aprobar</h2>
     </div>
-    <div class="request_cards">
+    <div class="row">
         {% for request in requests_to_approval %}
-        <a href="{% url 'detail_request' request.id %}">
-            <div class="container text-center">
-                <div = "row">
-                    <div = "col">
-                        <p class="type_request">{{request.type}}</p>
-                        <p>{{request.requester}}</p>
-                        <p> {{ request.initial_date|date:"d/m/Y" }}</p>
-                    </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'detail_request' request.id %}" class="card text-center custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.type }}</h5>
+                    <p class="card-text">{{ request.requester }}</p>
+                    <p class="card-text">{{ request.initial_date|date:"d/m/Y" }}</p>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>
-<!--
-    <script>
-        function approveUser(userId) {
-            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
-            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
-            if (confirm("¿Estás seguro de aprobar este usuario?")) {
-                document.getElementById('user_id').value = userId;
-                document.getElementById('action').value = 'approve';
-                document.getElementById('approveForm').submit();
-            }
-        }
-
-        function rejectUser(userId) {
-            // Aquí puedes realizar alguna acción antes de enviar el formulario si es necesario
-            // Por ejemplo, puedes mostrar un popup de confirmación antes de enviar el formulario
-            if (confirm("¿Estás seguro de rechazar este usuario?")) {
-                document.getElementById('user_id').value = userId;
-                document.getElementById('action').value = 'reject';
-                document.getElementById('approveForm').submit();
-            }
-        }
-    </script>
-
--->
 {% endblock %}
-
-  

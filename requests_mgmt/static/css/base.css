@@ -185,5 +185,16 @@ Debe estar en base.css de user_mgmt
     align-items: center; 
 }
 */
+.card-body {
+    background-color: #639bcf; /* Cambia el color de fondo a tu preferencia */
+    color: #ffffff; /* Cambia el color del texto si es necesario para que se vea bien con el nuevo color de fondo */
+}
+.custom-card{
+    text-decoration: none; /* Elimina el subrayado del texto en los enlaces dentro de las tarjetas */
+    border-radius: 15px; /* Ajusta el radio de borde para que las tarjetas sean redondeadas */
+
+}
+
+
 
 
