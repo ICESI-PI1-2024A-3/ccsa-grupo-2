@@ -5,12 +5,12 @@ from users_mgmt.models import CustomUser
 
 class AddApproverForm(forms.Form):
     request_id = forms.IntegerField(widget=forms.HiddenInput())
-    type =forms.CharField(widget=forms.HiddenInput())
-    Aprovadores =forms.ChoiceField(required=False)
+    type = forms.CharField(widget=forms.HiddenInput())
+    approvers = forms.ChoiceField(required=False, label='Aprovadores')  #
 
     def __init__(self, *args, **kwargs):
         super(AddApproverForm, self).__init__(*args, **kwargs)
-        Aprovadores = CustomUser.objects.filter(role="Approver")
-        approver_choices = [(approver.id, approver) for approver in Aprovadores]
-        approver_choices.insert(0,('', '< selecione un aprovador >'))
-        self.fields['Aprovadores'].choices =approver_choices
+        approvers = CustomUser.objects.filter(role="Approver")
+        approver_choices = [(approver.id, approver) for approver in approvers]
+        approver_choices.insert(0,('', '< seleccione un aprovador >'))
+        self.fields['approvers'].choices = approver_choices
