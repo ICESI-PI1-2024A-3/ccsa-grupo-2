@@ -23,6 +23,7 @@ class DetailsRequestView(View):
             self.template_name,
             {
                 "request": gotten_request,
+                "user": request.user,
                 "select_reviewer": self.select_reviewer_form(),
                 "select_approver": self.select_approver_form(),
             },

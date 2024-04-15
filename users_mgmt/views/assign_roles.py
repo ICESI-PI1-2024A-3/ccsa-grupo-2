@@ -13,9 +13,8 @@ class AssignRolesView(View):
         users = User.objects.all()
         forms = []
         for user in users:
-            forms.append(
-                self.form_class(initial={"role": user.role, "user_id": user.id})
-            )
+            forms.append(self.form_class(initial={"role": user.role}))
+        print("user.id", user.id)
         users_and_forms = zip(users, forms)
         return render(
             request,
@@ -51,9 +50,7 @@ class AssignRolesView(View):
             users = User.objects.all()
             forms = []
             for user in users:
-                forms.append(
-                    self.form_class(initial={"role": user.role, "user_id": user.id})
-                )
+                forms.append(self.form_class(initial={"role": user.role}))
             users_and_forms = zip(users, forms)
 
             return render(
@@ -69,9 +66,7 @@ class AssignRolesView(View):
             users = User.objects.all()
             forms = []
             for user in users:
-                forms.append(
-                    self.form_class(initial={"role": user.role, "user_id": user.id})
-                )
+                forms.append(self.form_class(initial={"role": user.role}))
             users_and_forms = zip(users, forms)
             return render(
                 request,

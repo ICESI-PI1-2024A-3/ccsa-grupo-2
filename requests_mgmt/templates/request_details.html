@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Asignaciones</h5>
                         <div class="row">
