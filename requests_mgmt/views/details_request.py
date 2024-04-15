@@ -13,6 +13,17 @@ class DetailsRequestView(View):
     def get(self, request, request_id, *args, **kwargs):
         intance_request = Request.objects.get(pk=request_id)
 
+        self.select_reviewer_form = AddReviewerForm(
+            selected_reviewer_id=(
+                intance_request.reviewer.id if intance_request.reviewer else None
+            )
+        )
+        self.select_approver_form = AddApproverForm(
+            selected_approver_id=(
+                intance_request.approver.id if intance_request.approver else None
+            )
+        )
+
         if intance_request.type == "Cuenta de Cobro":
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
         if intance_request.type == "Legalización de Factura":
@@ -24,7 +35,7 @@ class DetailsRequestView(View):
             {
                 "request": gotten_request,
                 "user": request.user,
-                "select_reviewer": self.select_reviewer_form(),
-                "select_approver": self.select_approver_form(),
+                "select_reviewer": self.select_reviewer_form,
+                "select_approver": self.select_approver_form,
             },
         )
