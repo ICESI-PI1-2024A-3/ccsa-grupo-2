@@ -2,7 +2,12 @@ from django.shortcuts import render
 from django.views import View
 
 from ..forms import AddApproverForm, AddReviewerForm
-from ..models import ChargeAccountRequest, InvoiceLegalizationRequest, Request
+from ..models import (
+    ChargeAccountRequest,
+    AdvanceRequest,
+    InvoiceLegalizationRequest,
+    Request,
+    )
 
 
 class DetailsRequestView(View):
@@ -17,6 +22,8 @@ class DetailsRequestView(View):
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
         if intance_request.type == "Legalizacion de Factura":
             gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
+        if intance_request.type == "Anticipos":
+            gotten_request = AdvanceRequest.objects.get(pk=request_id)
         return render(
             request,
             self.template_name,
