@@ -10,73 +10,96 @@
 
 <body>
     {% block content %}
-    <h1 class="with-margin"> Nueva solicitud - Cuenta de cobro</h1>
+    {% include "sidemenu.html" %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Nueva solicitud - Cuenta de cobro</h1>
 
-    <form method="POST" class="with-margin">
-        {% csrf_token %}
-        <div class="form-container-flex with-margin">
-            {{ user_info_form.as_p }}
-        </div>
-
-        <div class="with-margin form-container">
-            {{ charge_account_form.as_p }}
-        </div>
-
-        <div>
-            <p>
-                Con el fin de atender lo establecido en la Ley 2277 del año 2022, reglamentada con el Decreto 2231 de
-                diciembre de 2023 Declaro, bajo la gravedad de juramento, que:
-
-                Los ingresos recibidos como persona natural por concepto de renta de trabajo no proveniente de una
-                relación laboral, legal o reglamentaria correspondiente a los servicios prestados a LA UNIVERSIDAD ICESI
-                durante el año 2024, se les dará el siguiente tratamiento:
-            </p>
-
-            <div class="with-margin form-container">
-                {{ tax_treatment_form }}
+        <form method="POST" class="mb-5">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ user_info_form.as_p }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ charge_account_form.as_p }}
+                    </div>
+                </div>
             </div>
 
-            <div class="with-margin form-container">
-                {{ checkbox_form }}
+            <div class="mt-5">
+                <p>
+                    Con el fin de atender lo establecido en la Ley 2277 del año 2022, reglamentada con el Decreto 2231
+                    de diciembre de 2023 Declaro, bajo la gravedad de juramento, que: Los ingresos recibidos como
+                    persona natural por concepto de renta de trabajo no proveniente de una relación laboral, legal o
+                    reglamentaria correspondiente a los servicios prestados a LA UNIVERSIDAD ICESI durante el año 2024,
+                    se les dará el siguiente tratamiento:
+                </p>
             </div>
 
-            <div class="with-margin form-container-flex">
-                {{ city_date_form }}
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tax_treatment">Se tomarán costos y deducciones asociados a las rentas de trabajo por
+                            los servicios prestados:</label>
+                        {{ tax_treatment_form }}
+                    </div>
+                </div>
             </div>
 
-        </div>
-
-        <div>
-            <h2> Información bancaria </h2>
-            <div class="with-margin form-container-flex">
-                {{ bank_info_form }}
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="city">Ciudad:</label>
+                        {{ city_date_form.city }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Fecha:</label>
+                        {{ city_date_form.date }}
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group with-margin">
-            <h3>Documentos</h3>
-
-            <li>
-                <label for="id_documents">RUT:</label>
-
-                {{ upload_documents.documents }}
-            </li>
-
-            <li>
-                <label for="id_documents">Certificado bancario:</label>
-
-                {{ upload_documents.documents }}
-            </li>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ checkbox_form }}
+                    </div>
+                </div>
+            </div>
 
 
 
 
-        </div>
 
+            <div class="mt-5">
+                <h2>Información bancaria</h2>
+                <div class="form-group">
+                    {{ bank_info_form }}
+                </div>
+            </div>
 
-        <button type="submit" class="submit-button">Enviar</button>
-    </form>
+            <div class="mt-5">
+                <h3>Documentos</h3>
 
+                <div class="form-group">
+                    <label for="id_documents">RUT:</label>
+                    {{ upload_documents.documents }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_documents">Certificado bancario:</label>
+                    {{ upload_documents.documents }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </form>
+    </div>
     {% endblock %}
 </body>
 
