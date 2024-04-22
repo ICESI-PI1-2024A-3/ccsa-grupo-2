@@ -1,24 +1,84 @@
 {% extends "layouts/base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Nueva solicitud {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
     {% include "sidemenu.html" %}
     <div>
-        <h1 class="with-margin">Nueva solicitud</h1>
+        <h1 class="container nb-5">Nueva solicitud</h1>
     </div>
-    <main class="container-main">
-        <a href="{% url 'charge_account' %}">
-            <div class="card">Cuenta de cobro</div>
-        </a>
-        <a href="{% url 'invoice_legalization' %}">
-            <div class="card">Legalización de facturas</div>
-        </a>
-        <a href="{% url 'advance_request' %}">
-            <div class="card">Anticipos</div>
-        </a>
-        <a href="{% url 'travel_expenses' %}">
-            <div class="card">Viáticos</div>
-        </a>
-        <a href="{% url 'invoice_legalization' %}">
-            <div class="card">Facturas</div>
-        </a>
+    <main class="container">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'charge_account' %}" class="card-link text-decoration-none">
+                    <div class="card bg-light mb-3 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Cuenta de cobro</h5>
+                            <p class="card-text">Solicita el pago de servicios o productos prestados.</p>
+                            <p class="card-text">Haz clic aquí para ir a la página de cuenta de cobro.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'invoice_legalization' %}" class="card-link text-decoration-none">
+                    <div class="card bg-light mb-3 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Legalización de facturas</h5>
+                            <p class="card-text">Registra y gestiona la legalización de facturas pendientes.</p>
+                            <p class="card-text">Haz clic aquí para ir a la página de legalización de facturas.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'advance_request' %}" class="card-link text-decoration-none">
+                    <div class="card bg-light mb-3 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Anticipos</h5>
+                            <p class="card-text">Solicita anticipos de fondos para gastos futuros.</p>
+                            <p class="card-text">Haz clic aquí para ir a la página de anticipos.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'travel_expenses' %}" class="card-link text-decoration-none">
+                    <div class="card bg-light mb-3 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Viáticos</h5>
+                            <p class="card-text">Solicita el reembolso de gastos de viaje.</p>
+                            <p class="card-text">Haz clic aquí para ir a la página de viáticos.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'invoice_legalization' %}" class="card-link text-decoration-none">
+                    <div class="card bg-light mb-3 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Facturas</h5>
+                            <p class="card-text">Accede a la gestión de facturas y documentos relacionados.</p>
+                            <p class="card-text">Haz clic aquí para ir a la página de facturas.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </main>
-{% endblock %}
+
+    <style>
+        .card-link:hover{
+            background-color: #1E4072;
+            transition: background-color 0.5s ease;
+        }
+    </style>
+    {% endblock %}
+</body>
