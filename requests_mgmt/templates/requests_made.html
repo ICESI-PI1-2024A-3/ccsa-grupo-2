@@ -18,15 +18,43 @@
             <tbody>
                 {% for request in requests %}
                     <tr>
-                        <td class="text-center">{{ request.type }}</td>
-                        <td class="text-center">{{ request.manager }}</td>
-                        <td class="text-center">{{ request.initial_date|date:"d/m/Y" }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.type }}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.manager }}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.initial_date|date:"d/m/Y" }}
+                            </a>
+                        </td>
                         {% if request.closing_date %}
-                            <td class="text-center">{{ request.closing_date|date:"d/m/Y" }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'detail_request' request.id %}"
+                                   class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                    {{ request.closing_date|date:"d/m/Y" }}
+                                </a>
+                            </td>
                         {% else %}
-                            <td class="text-center">---</td>
+                            <td class="text-center">
+                                <a href="{% url 'detail_request' request.id %}"
+                                   class="link-offset-2 link-underline link-underline-opacity-0 link-dark">---</a>
+                            </td>
                         {% endif %}
-                        <td class="text-center">{{ request.status.status }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.status.status }}
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
