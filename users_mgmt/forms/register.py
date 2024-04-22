@@ -6,21 +6,21 @@ class RegisterForm(forms.Form):
         label="",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "Nombre"}
+            attrs={"class": "form-control", "placeholder": "Nombre"}
         ),
     )
     last_name = forms.CharField(
         label="",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "Apellido"}
+            attrs={"class": "form-control", "placeholder": "Apellido"}
         ),
     )
     phone = forms.CharField(
         label="",
         max_length=20,
         widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "Teléfono"}
+            attrs={"class": "form-control", "placeholder": "Teléfono"}
         ),
     )
     id_type = forms.ChoiceField(
@@ -31,34 +31,34 @@ class RegisterForm(forms.Form):
             ("TI", "Tarjeta de Identidad"),
         ],
         widget=forms.Select(
-            attrs={"class": "form_control", "placeholder": "Tipo de Documento"}
+            attrs={"class": "form-control", "placeholder": "Tipo de Documento"}
         ),
     )
     id_number = forms.CharField(
         label="",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "No. de Documento"}
+            attrs={"class": "form-control", "placeholder": "No. de Documento"}
         ),
     )
     email = forms.EmailField(
         label="",
         max_length=100,
         widget=forms.EmailInput(
-            attrs={"class": "form_control", "placeholder": "Correo Electrónico"}
+            attrs={"class": "form-control", "placeholder": "Correo Electrónico"}
         ),
     )
     password = forms.CharField(
         label="",
         max_length=100,
         widget=forms.PasswordInput(
-            attrs={"class": "form_control", "placeholder": "Contraseña"}
+            attrs={"class": "form-control", "placeholder": "Contraseña"}
         ),
     )
     password_confirm = forms.CharField(
         label="",
         max_length=100,
         widget=forms.PasswordInput(
-            attrs={"class": "form_control", "placeholder": "Confirmar Contraseña"}
+            attrs={"class": "form-control", "placeholder": "Confirmar Contraseña"}
         ),
     )
