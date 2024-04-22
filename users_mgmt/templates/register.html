@@ -1,12 +1,5 @@
 {% extends "layouts/base_auth.html" %}
 {% block content %}
-    {% comment %} {% if error %}<div class="alert_danger" role="alert">{{ error }}</div>{% endif %}
-    <form method="post" class="form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="form_button" type="submit" value="Registrarse">
-        <a href="{% url 'login' %}">Ya tengo una cuenta</a>
-    </form> {% endcomment %}
     <div class="container">
         <div class="row align-items-center justify-content-center"
              style="height: 100vh">
@@ -16,14 +9,7 @@
                         {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
                         <form method="post">
                             {% csrf_token %}
-                            <div class="mb-3">{{ form.first_name }}</div>
-                            <div class="mb-3">{{ form.last_name }}</div>
-                            <div class="mb-3">{{ form.phone }}</div>
-                            <div class="mb-3">{{ form.id_type }}</div>
-                            <div class="mb-3">{{ form.id_number }}</div>
-                            <div class="mb-3">{{ form.email }}</div>
-                            <div class="mb-3">{{ form.password }}</div>
-                            <div class="mb-3">{{ form.password_confirm }}</div>
+                            {% for field in form %}<div class="mb-3">{{ field }}</div>{% endfor %}
                             <div class="row">
                                 <div class="col-12 text-center mb-3">
                                     <button type="submit" class="btn btn-primary w-100">Registrarse</button>

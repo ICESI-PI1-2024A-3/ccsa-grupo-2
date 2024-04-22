@@ -6,13 +6,13 @@ class LoginForm(forms.Form):
         label="",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"class": "form_control", "placeholder": "Usuario"}
+            attrs={"class": "form-control", "placeholder": "Usuario"}
         ),
     )
     password = forms.CharField(
         label="",
         max_length=100,
         widget=forms.PasswordInput(
-            attrs={"class": "form_control", "placeholder": "Contraseña"}
+            attrs={"class": "form-control", "placeholder": "Contraseña"}
         ),
     )
