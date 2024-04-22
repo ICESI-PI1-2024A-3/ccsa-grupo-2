@@ -111,7 +111,41 @@
                             </div>
                         </div>
                     </div>
+
+                    {% if user.role == "Aprobador" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Revisor</h5>
+                        <div class="form-group">
+                            <label for="comentario">Pon tu comentario:</label>
+                            <textarea class="form-control" id="comentario" rows="3"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-success me-4">Aceptar</button>
+                            <button type="button" class="btn btn-danger">Rechazar</button>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if user.role == "Approver" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Aprobador</h5>
+                        <div class="form-group">
+                            <label for="comentario">Pon tu comentario:</label>
+                            <textarea class="form-control" id="comentario" rows="3"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-success me-4">Aprobar</button>
+                            <button type="button" class="btn btn-danger">Rechazar</button>
+                        </div>
+                    </div>
+                    {% endif %}
+
                 {% endif %}
+
+                
+                
+                
+
             </div>
         </div>
     {% endif %}
@@ -194,33 +228,65 @@
                         </div>
                     </div>
                 </div>
-                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
-                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
-                        <h5 class="mb-4">Asignaciones</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form class="d-inline-flex"
-                                      method="post"
-                                      action="{% url 'update_reviewer' request.id %}">
-                                    {% csrf_token %}
-                                    <label class="form-label fw-bold me-2">Revisor:</label>
-                                    {{ select_reviewer }}
-                                    <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form class="d-inline-flex"
-                                      method="post"
-                                      action="{% url 'update_approver' request.id %}">
-                                    {% csrf_token %}
-                                    <label class="form-label fw-bold me-2">Aprobador:</label>
-                                    {{ select_approver }}
-                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
-                                </form>
-                            </div>
+                {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                    <h5 class="mb-4">Asignaciones</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="d-inline-flex"
+                                method="post"
+                                action="{% url 'update_reviewer' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Revisor:</label>
+                                {{ select_reviewer }}
+                                <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="d-inline-flex"
+                                method="post"
+                                action="{% url 'update_approver' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Aprobador:</label>
+                                {{ select_approver }}
+                                <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
+                            </form>
                         </div>
                     </div>
+                </div>
+
+                {% if user.role == "Approver" %}
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                    <h5 class="mb-4">Acciones - Revisor</h5>
+                    <div class="form-group">
+                        <label for="comentario">Pon tu comentario:</label>
+                        <textarea class="form-control" id="comentario" rows="3"></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-success me-4">Aprobar</button>
+                        <button type="button" class="btn btn-danger">Rechazar</button>
+                    </div>
+                </div>
                 {% endif %}
+
+                {% if user.role == "Aprobador" %}
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                    <h5 class="mb-4">Acciones - Aprobador</h5>
+                    <div class="form-group">
+                        <label for="comentario">Pon tu comentario:</label>
+                        <textarea class="form-control" id="comentario" rows="3"></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-success me-4">Aceptar</button>
+                        <button type="button" class="btn btn-danger">Rechazar</button>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endif %}
+
+                
+
             </div>
         </div>
     {% endif %}
