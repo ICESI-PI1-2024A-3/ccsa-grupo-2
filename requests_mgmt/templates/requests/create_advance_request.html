@@ -8,69 +8,86 @@
 </head>
 <body>
     {% block content %}
-    <h1 class="with-margin"> Nueva solicitud - Anticipos </h1>
-    <div class="with-margin">
-        <h3>Por favor, tener en cuenta: </h3>
-        <ol>
-            <li>Los anticipos en moneda nacional deben solicitarse con tres días hábiles antes de la fecha de viaje (como mínimo)</li>
-            <li>Los anticipos en moneda extranjera (dólar y euro) deben solicitarse cinco días hábiles antes de la fecha de viaje (como mínimo) </li>
-            <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5. Documento sin este requisito, será rechazado en la legalización.</li>
-        </ol>
-    </div>
-    <div class="forms-container">
-        <form method="POST" class="with-margin"> 
-            {% csrf_token %}
-            <div class="div-with-space">
-                <h3>Información del viajero </h3>
-                <div class="form-container-flex">
-                    {{user_info}}
-                </div>
-            </div>
-
-            <div class="form-container-flex">
-                <div class="">
-                    <div class="form-container-column">
-                        <label for="id_request_date">Fecha de solicitud:</label>
-                        {{ advance_request_info.request_date }}
-                        <label for="id_dependency">Dependencia:</label>
-                        {{ advance_request_info.dependency }}
-                        <label for="id_destination_city">Ciudad de destino:</label>
-                        {{ advance_request_info.destination_city }}
-                        <label for="id_departure_date">Fecha de salida:</label>
-                        {{ advance_request_info.departure_date }}
+    {% include "sidemenu.html" %}
+    <div class="container">
+        <h1 class="my-4">Nueva solicitud - Anticipos</h1>
+        <div class="my-4">
+            <h3>Por favor, tener en cuenta: </h3>
+            <ol>
+                <li>Los anticipos en moneda nacional deben solicitarse con tres días hábiles antes de la fecha de viaje (como mínimo)</li>
+                <li>Los anticipos en moneda extranjera (dólar y euro) deben solicitarse cinco días hábiles antes de la fecha de viaje (como mínimo) </li>
+                <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5. Documento sin este requisito, será rechazado en la legalización.</li>
+            </ol>
+        </div>
+        <div>
+            <form method="POST" class="mb-4"> 
+                {% csrf_token %}
+                <div class="mx-auto mb-4">
+                    <h3>Información del viajero </h3>
+                    <div class="row">
+                        <div class="col">
+                            {{user_info}}
+                        </div>
                     </div>
                 </div>
 
-                <div class="">
-                    <div class="form-container-column">
-                        <label for="id_return_date">Fecha de regreso:</label>
-                        {{ advance_request_info.return_date }}
-                        <label for="id_reason_trip">Motivo de viaje:</label>
-                        {{ advance_request_info.reason_trip }}
-                        <label for="id_advance_currency">Moneda:</label>
-                        {{ advance_request_info.advance_currency }}
-                        <label for="id_icesi_last_day_date">Último día en Icesi antes del viaje:</label>
-                        {{ advance_request_info.icesi_last_day_date }}
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_request_date">Fecha de solicitud:</label>
+                            {{ advance_request_info.request_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_dependency">Dependencia:</label>
+                            {{ advance_request_info.dependency }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_destination_city">Ciudad de destino:</label>
+                            {{ advance_request_info.destination_city }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_departure_date">Fecha de salida:</label>
+                            {{ advance_request_info.departure_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_icesi_last_day_date">Último día en Icesi antes del viaje:</label>
+                            {{ advance_request_info.icesi_last_day_date }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_return_date">Fecha de regreso:</label>
+                            {{ advance_request_info.return_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_reason_trip">Motivo de viaje:</label>
+                            {{ advance_request_info.reason_trip }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_advance_currency">Moneda:</label>
+                            {{ advance_request_info.advance_currency }}
+                        </div>
+                        
                     </div>
                 </div>
-            </div>
-            
 
-            <div class="form-container-column">
-                <h3> Presupuesto de gastos</h3>
-                <div class="form-container">
-                    {{ expense_budget }}
+                <div class="mb-4">
+                    <h3>Presupuesto de gastos</h3>
+                    <div class="form-group">
+                        {{ expense_budget }}
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group with-margin">
-                <h3>Documentos</h3>
+                <div class="form-group mb-4">
+                    <h3>Documentos</h3>
+                    {{ upload_documents }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
                 
-                {{ upload_documents }}
-                
-            </div>
-            <button type="submit" class="submit-button">Enviar </button>
-        </form>
+            </form>
+        </div>
     </div>
     {% endblock %}
 </body>
