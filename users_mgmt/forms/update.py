@@ -13,4 +13,3 @@ class UpdateRoleForm(forms.Form):
         ],
         widget=forms.Select(attrs={"class": "role-select"}),
     )
-    user_id = forms.IntegerField(widget=forms.HiddenInput())

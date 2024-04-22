@@ -85,12 +85,12 @@
                         </div>
                     </div>
                 </div>
-                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Asignaciones</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                <form class="d-inline-flex"
+                                <form class="d-inline-flex align-items-center"
                                       method="post"
                                       action="{% url 'update_reviewer' request.id %}">
                                     {% csrf_token %}
@@ -100,7 +100,7 @@
                                 </form>
                             </div>
                             <div class="col-md-6">
-                                <form class="d-inline-flex"
+                                <form class="d-inline-flex align-items-center"
                                       method="post"
                                       action="{% url 'update_approver' request.id %}">
                                     {% csrf_token %}
@@ -199,7 +199,7 @@
                         <h5 class="mb-4">Asignaciones</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                <form class="d-inline-flex"
+                                <form class="d-inline-flex align-items-center"
                                       method="post"
                                       action="{% url 'update_reviewer' request.id %}">
                                     {% csrf_token %}
@@ -209,7 +209,7 @@
                                 </form>
                             </div>
                             <div class="col-md-6">
-                                <form class="d-inline-flex"
+                                <form class="d-inline-flex align-items-center"
                                       method="post"
                                       action="{% url 'update_approver' request.id %}">
                                     {% csrf_token %}
