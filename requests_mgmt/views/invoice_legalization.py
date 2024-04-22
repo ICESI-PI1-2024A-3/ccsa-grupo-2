@@ -36,6 +36,7 @@ class InvoiceLegalizationView(View):
     
     def post(self, request, *args, **kwargs):
         try:
+            print("\n\n ### ENtra a Post de Invoice View ####\n")
             legalization_date = request.POST.get("legalization_date")
             dependency = request.POST.get("dependency")
             destination_city = request.POST.get("destination_city")
@@ -48,7 +49,7 @@ class InvoiceLegalizationView(View):
             requester = request.user
             invoice_legalization_request = InvoiceLegalizationRequest.objects.create(
                 requester = requester,
-                type = 'Legalizacion de Factura',
+                type = 'Legalización de Factura',
                 status = RequestStatus.objects.get(id=1),
                 legalization_date = legalization_date,
                 dependency = dependency,

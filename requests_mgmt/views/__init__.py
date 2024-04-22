@@ -12,4 +12,5 @@ from .travel_expenses import *
 from .search_request import *
 from .update_approver import *
 from .update_reviewer import *
+from .request_expenses import *
 

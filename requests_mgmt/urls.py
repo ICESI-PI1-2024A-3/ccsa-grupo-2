@@ -17,6 +17,7 @@ from .views import (
     TravelExpensesRequest,
     UpdateApproverView,
     UpdateReviewerView,
+    RequestExpenses,
 )
 
 urlpatterns = [
@@ -60,6 +61,11 @@ urlpatterns = [
         name="advance_request",
     ),
     path(
+        "nuevo gasto",
+        login_required(RequestExpenses.as_view()),
+        name="request_expense",
+    ),
+    path(
         "nueva/viaticos",
         login_required(TravelExpensesRequest.as_view()),
         name="travel_expenses",
@@ -69,4 +75,5 @@ urlpatterns = [
         login_required(RequestsMadeView.as_view()),
         name="requests_made",
     ),
+    
 ]

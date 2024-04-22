@@ -42,7 +42,7 @@
         </div>
 
         <h2> Relación de gastos </h2>
-
+ 
         <div class="div-with-space">
             <div id="expense-container" class="">
                 <div class="form-container-flex" id="rubros-table">
@@ -51,6 +51,11 @@
             </div>
 
             <button type="button" onclick="addExpense()" class="simple-button">Agregar Gasto</button>
+            
+            <form method ='get' action="{% url 'request_expense' %}">
+                {% csrf_token %}
+                <button>Guardar</button>
+            </form>
 
         </div>
 
@@ -75,6 +80,7 @@
 
     <script>
         function addExpense() {
+            
             var expenseContainer = document.querySelector('#expense-container');
             var newExpenseContainer = document.createElement('div');
             var newExpenseRow = document.createElement('div');
