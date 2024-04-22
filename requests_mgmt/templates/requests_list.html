@@ -1,48 +1,73 @@
 {% extends "layouts/base.html" %}
 {% block content %}
     {% include "sidemenu.html" %}
-    <div class="container">
-        <div class="header">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center">
             <h2>Solicitudes</h2>
-            <form method="get" action="{% url 'home' %}">
+            <form method="get" action="{% url "requests_list" %}" class="d-flex">
                 <input type="text"
-                       class="search"
+                       class="form-control me-2"
                        name="search_query"
                        placeholder="Buscar por nombre...">
-                <button type="submit" class="button">Buscar</button>
+                <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
         </div>
-        <table class="table-users">
+        <table class="table table-striped table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>Solicitante</th>
-                    <th>Tipo de Solicitud</th>
-                    <th>Gestor</th>
-                    <th>Fecha de inicio</th>
-                    <th>Fecha de cierre</th>
-                    <th>Estado</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Solicitante</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Tipo de solicitud</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Gestor asignado</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Fecha de inicio</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Fecha de cierre</th>
+                    <th style="background-color: #1E4072;" class="text-light text-center">Estado</th>
                 </tr>
             </thead>
             <tbody>
-                {% for chargeRequest in requests %}
+                {% for request in requests %}
                     <tr>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.requester }}</a>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.requester }}
+                            </a>
                         </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.type }}</a>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.type }}
+                            </a>
                         </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.manager }}</a>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.manager }}
+                            </a>
                         </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.initial_date }}</a>
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.initial_date|date:"d/m/Y" }}
+                            </a>
                         </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.closing_date }}</a>
-                        </td>
-                        <td>
-                            <a href="{% url 'detail_request' chargeRequest.id %}">{{ chargeRequest.status.status }}</a>
+                        {% if request.closing_date %}
+                            <td class="text-center">
+                                <a href="{% url 'detail_request' request.id %}"
+                                   class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                    {{ request.closing_date|date:"d/m/Y" }}
+                                </a>
+                            </td>
+                        {% else %}
+                            <td class="text-center">
+                                <a href="{% url 'detail_request' request.id %}"
+                                   class="link-offset-2 link-underline link-underline-opacity-0 link-dark">---</a>
+                            </td>
+                        {% endif %}
+                        <td class="text-center">
+                            <a href="{% url 'detail_request' request.id %}"
+                               class="link-offset-2 link-underline link-underline-opacity-0 link-dark">
+                                {{ request.status.status }}
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
