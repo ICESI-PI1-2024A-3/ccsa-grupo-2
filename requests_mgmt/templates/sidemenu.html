@@ -21,27 +21,31 @@
                     <span class="ms-2">Inicio</span>
                 </div>
             </a>
-            <a href="{% url 'assign_roles' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="material-symbols-outlined">people</span>
-                    <span class="ms-2">Usuarios</span>
-                </div>
-            </a>
-            <a href="{% url 'requests_list' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="material-symbols-outlined">list</span>
-                    <span class="ms-2">Solicitudes</span>
-                </div>
-            </a>
-            <a href="{% url 'requests_index' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="material-symbols-outlined">add</span>
-                    <span class="ms-2">Nueva solicitud</span>
-                </div>
-            </a>
+            {% if user.role == "Admin" %}
+                <a href="{% url 'assign_roles' %}"
+                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="material-symbols-outlined">people</span>
+                        <span class="ms-2">Usuarios</span>
+                    </div>
+                </a>
+            {% endif %}
+            {% if user.role == "Admin" or user.role == "Process Leader" or user.role == "Accounting Manager" %}
+                <a href="{% url 'requests_list' %}"
+                   class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="material-symbols-outlined">list</span>
+                        <span class="ms-2">Solicitudes</span>
+                    </div>
+                </a>
+                <a href="{% url 'requests_index' %}"
+                   class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="material-symbols-outlined">add</span>
+                        <span class="ms-2">Nueva solicitud</span>
+                    </div>
+                </a>
+            {% endif %}
             <a href="{% url 'approve_as_reviewer' %}"
                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
