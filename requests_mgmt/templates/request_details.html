@@ -112,7 +112,10 @@
                         </div>
                     </div>
 
-                    {% if user.role == "Aprobador" %}
+
+                {% endif %}
+
+                {% if user.role == "Approver" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Revisor</h5>
                         <div class="form-group">
@@ -124,9 +127,9 @@
                             <button type="button" class="btn btn-danger">Rechazar</button>
                         </div>
                     </div>
-                    {% endif %}
+                {% endif %}
 
-                    {% if user.role == "Approver" %}
+                {% if user.role == "Approver" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
                         <div class="form-group">
@@ -138,13 +141,7 @@
                             <button type="button" class="btn btn-danger">Rechazar</button>
                         </div>
                     </div>
-                    {% endif %}
-
                 {% endif %}
-
-                
-                
-                
 
             </div>
         </div>
