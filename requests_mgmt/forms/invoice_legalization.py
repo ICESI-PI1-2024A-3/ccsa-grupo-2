@@ -32,7 +32,7 @@ class BalanceDiscountAutorizationForm(forms.Form):
     autorizar_descuento = forms.ChoiceField(
         label="Autorizo el descuento en una sola cuota en el siguiente pago de nómina",
         choices=CHOICES,
-        widget=forms.RadioSelect(attrs={'class': 'form-control'})
+        widget=forms.RadioSelect
     )
 
 class InvoiceLegalizationObservations(forms.Form):
