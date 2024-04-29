@@ -300,10 +300,13 @@
             </div>
         </div>
     {% endif %}
-    <form method ='get' action="{% url 'delete_request' request.id %}">
+<!--
+        <form method ='get' action="{% url 'delete_request' request.id %}">
         {% csrf_token %}
         <button>
             DELETE
         </button>
     </form>
+-->
+    
 {% endblock %}
