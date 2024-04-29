@@ -8,15 +8,17 @@
     </div>
     <div class="row">
         {% for request in requests_to_approval %}
-        <div class="col-md-4 mb-4">
-            <a href="{% url 'detail_request' request.id %}" class="card text-center custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ request.type }}</h5>
-                    <p class="card-text">{{ request.requester }}</p>
-                    <p class="card-text">{{ request.initial_date|date:"d/m/Y" }}</p>
+            {% if request.status.status == "Revisión" %}
+                <div class="col-md-4 mb-4">
+                    <a href="{% url 'detail_request' request.id %}" class="card text-center custom-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ request.type }}</h5>
+                            <p class="card-text">{{ request.requester }}</p>
+                            <p class="card-text">{{ request.initial_date|date:"d/m/Y" }}</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
