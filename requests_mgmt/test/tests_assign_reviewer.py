@@ -60,7 +60,7 @@ class AssignReviewerTestCase(TestCase):
         charge_request = ChargeAccountRequest.objects.first()
 
 
-    def test_assign_reviewer(self):
+    def test_assign_reviewer_exist(self):
         # Obtener el revisor con el nombre de usuario "123"
         reviewer = User.objects.get(username="123")
 
@@ -89,3 +89,24 @@ class AssignReviewerTestCase(TestCase):
 
         # Verificar que el revisor fue asignado correctamente
         self.assertEqual(charge_request.reviewer, reviewer)
+
+        
+    def test_post_request_non_existing_user(self):
+        # Intentar enviar una solicitud de cuenta de cobro para un usuario que no existe
+        data = {
+            'amount': '200',
+            'concept': 'Test concept for non existing user',
+            'city': 'Test city',
+            'date': '2024-04-01',
+            'bank_name': 'Test bank',
+            'account_type': 'Test type',
+            'account_number': 'Test number',
+            'cex_no': 'Test cex',
+            'rent_tax_declarant': True,
+            'fiscal_resident': False,
+            'checkbox_choices': 'Test choice',
+            'user_id': 999,  # ID de usuario que no existe
+        }
+        charge_request = ChargeAccountRequest.objects.first()
+        self.assertIsNone(charge_request.reviewer)
+
