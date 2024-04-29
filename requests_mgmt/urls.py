@@ -80,4 +80,5 @@ urlpatterns = [
         login_required(RequestsMadeView.as_view()),
         name="requests_made",
     ),
+    
 ]

@@ -3,6 +3,9 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    
+    needs_approval = models.BooleanField(default=True)
+    
     ADMIN = "admin"
     PROCESS_LEADER = "process_leader"
     ACCOUNTING_MANAGER = "accounting_manager"
@@ -41,3 +44,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+    def __str__(self):
+        return self.username
