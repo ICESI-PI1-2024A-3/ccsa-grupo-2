@@ -36,7 +36,6 @@ class InvoiceLegalizationView(View):
     
     def post(self, request, *args, **kwargs):
         try:
-            print("\n\n ### ENtra a Post de Invoice View ####\n")
             legalization_date = request.POST.get("legalization_date")
             dependency = request.POST.get("dependency")
             destination_city = request.POST.get("destination_city")

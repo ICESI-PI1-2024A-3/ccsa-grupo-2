@@ -33,6 +33,8 @@ class DetailsRequestView(View):
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
         if intance_request.type == "Legalización de Factura":
             gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
+        if intance_request.type == "Legalizacion de Factura":
+            gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
         if intance_request.type == "Anticipos":
             gotten_request = AdvanceRequest.objects.get(pk=request_id)
         return render(
