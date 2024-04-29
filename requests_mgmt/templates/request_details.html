@@ -115,31 +115,37 @@
 
                 {% endif %}
 
-                {% if user.role == "Approver" %}
+                {% if user.role == "Reviewer" and request.status.status == "Revisión" %} <!-- filtro para que solo permita solicitudes que estén en Revisión -->
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Revisor</h5>
-                        <div class="form-group">
-                            <label for="comentario">Pon tu comentario:</label>
-                            <textarea class="form-control" id="comentario" rows="3"></textarea>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="button" class="btn btn-success me-4">Aceptar</button>
-                            <button type="button" class="btn btn-danger">Rechazar</button>
-                        </div>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comentario">Pon tu comentario:</label>
+                                <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
+                                <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                            </div>
+                        </form>
                     </div>
                 {% endif %}
 
-                {% if user.role == "Approver" %}
+                {% if user.role == "Aprobador" and request.status.status == "Aceptado" %} <!-- filtro para que solo permita solicitudes que estén en Aceptado -->
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
-                        <div class="form-group">
-                            <label for="comentario">Pon tu comentario:</label>
-                            <textarea class="form-control" id="comentario" rows="3"></textarea>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="button" class="btn btn-success me-4">Aprobar</button>
-                            <button type="button" class="btn btn-danger">Rechazar</button>
-                        </div>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="comentario">Pon tu comentario:</label>
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center">                       
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aprobar">Aprobar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
                     </div>
                 {% endif %}
 
@@ -253,32 +259,38 @@
                     </div>
                 </div>
 
-                {% if user.role == "Approver" %}
-                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
-                    <h5 class="mb-4">Acciones - Revisor</h5>
-                    <div class="form-group">
-                        <label for="comentario">Pon tu comentario:</label>
-                        <textarea class="form-control" id="comentario" rows="3"></textarea>
+                {% if user.role == "Reviewer" and request.status.status == "Revisión" %} <!-- filtro para que solo permita solicitudes que estén en Revisión -->
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Revisor</h5>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="comentario">Pon tu comentario:</label>
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
                     </div>
-                    <div class="form-group text-center">
-                        <button type="button" class="btn btn-success me-4">Aprobar</button>
-                        <button type="button" class="btn btn-danger">Rechazar</button>
-                    </div>
-                </div>
                 {% endif %}
 
-                {% if user.role == "Aprobador" %}
-                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
-                    <h5 class="mb-4">Acciones - Aprobador</h5>
-                    <div class="form-group">
-                        <label for="comentario">Pon tu comentario:</label>
-                        <textarea class="form-control" id="comentario" rows="3"></textarea>
+                {% if user.role == "Aprobador" and request.status.status == "Aceptado" %} <!-- filtro para que solo permita solicitudes que estén en Aceptado -->
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Aprobador</h5>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="comentario">Pon tu comentario:</label>
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center">                       
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aprobar">Aprobar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
                     </div>
-                    <div class="form-group text-center">
-                        <button type="button" class="btn btn-success me-4">Aceptar</button>
-                        <button type="button" class="btn btn-danger">Rechazar</button>
-                    </div>
-                </div>
                 {% endif %}
 
             {% endif %}
