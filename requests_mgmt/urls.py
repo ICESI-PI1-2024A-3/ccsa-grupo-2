@@ -61,7 +61,7 @@ urlpatterns = [
         name="advance_request",
     ),
     path(
-        "nuevo gasto",
+        "<int:request_id>/nuevo gasto",
         login_required(RequestExpenses.as_view()),
         name="request_expense",
     ),
