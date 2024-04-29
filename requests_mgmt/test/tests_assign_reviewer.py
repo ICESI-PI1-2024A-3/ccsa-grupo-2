@@ -89,8 +89,6 @@ class AssignReviewerTestCase(TestCase):
 
         # Verificar que el revisor fue asignado correctamente
         self.assertEqual(charge_request.reviewer, reviewer)
-
-        
     def test_post_request_non_existing_user(self):
         # Intentar enviar una solicitud de cuenta de cobro para un usuario que no existe
         data = {
@@ -107,6 +105,10 @@ class AssignReviewerTestCase(TestCase):
             'checkbox_choices': 'Test choice',
             'user_id': 999,  # ID de usuario que no existe
         }
+        response = self.client.post(reverse('charge_account'), data=data)
+
+
+        # Verificar que el revisor asignado es nulo
         charge_request = ChargeAccountRequest.objects.first()
         self.assertIsNone(charge_request.reviewer)
 
