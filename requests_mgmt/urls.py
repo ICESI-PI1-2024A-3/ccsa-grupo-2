@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from .views import (
+    SearchRequestView,
+    AdvanceRequest,
     AdvanceRequestView,
     ChargeAccountView,
     DeleteRequestView,
@@ -15,6 +17,7 @@ from .views import (
     TravelExpensesRequest,
     UpdateApproverView,
     UpdateReviewerView,
+    RequestExpenses,
 )
 
 urlpatterns = [
@@ -24,6 +27,7 @@ urlpatterns = [
         login_required(DetailsRequestView.as_view()),
         name="detail_request",
     ),
+    path("search/<str:requester>", login_required(SearchRequestView.as_view()),name="search_request"),
     path(
         "update_reviewer/<int:request_id>",
         login_required(UpdateReviewerView.as_view()),
@@ -50,25 +54,16 @@ urlpatterns = [
         login_required(InvoiceLegalizationView.as_view()),
         name="invoice_legalization",
     ),
-    path(
-        "nueva/adelanto",
-        login_required(InvoiceLegalizationView.as_view()),
-        name="advance_request",
-    ),
-    path(
-        "nueva/legalizacion de facturas",
-        login_required(InvoiceLegalizationView.as_view()),
-        name="perdiem_request",
-    ),
-    path(
-        "nueva/legalizacion de facturas",
-        login_required(InvoiceLegalizationView.as_view()),
-        name="invoice_legalization",
-    ),
+    
     path(
         "nueva/anticipos",
         login_required(AdvanceRequestView.as_view()),
         name="advance_request",
+    ),
+    path(
+        "<int:request_id>/nuevo gasto",
+        login_required(RequestExpenses.as_view()),
+        name="request_expense",
     ),
     path(
         "nueva/viaticos",

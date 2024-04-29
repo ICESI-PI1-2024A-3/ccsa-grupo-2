@@ -176,6 +176,12 @@
                         <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
                     </p>
                 </div>
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <h5 class="mb-4">Gastos</h5>
+                    <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
+                        Agregar Gasto 
+                    </a>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -304,4 +310,13 @@
             </div>
         </div>
     {% endif %}
+<!--
+        <form method ='get' action="{% url 'delete_request' request.id %}">
+        {% csrf_token %}
+        <button>
+            DELETE
+        </button>
+    </form>
+-->
+    
 {% endblock %}
