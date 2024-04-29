@@ -140,7 +140,7 @@
                             <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
                                 {% csrf_token %}
                                     <div class="form-group">
-                                        <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="5" style="width: 100%;""></textarea>
+                                        <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="5" style="width: 100%;"></textarea>
                                     </div>
                                     <div class="form-group mt-3 d-flex justify-content-center">                       
                                         <button type="submit" class="btn btn-success me-3" name="action" value="Aprobar">Aprobar</button>
