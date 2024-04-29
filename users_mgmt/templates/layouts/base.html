@@ -19,6 +19,8 @@
             <a href="{% url 'assign_roles' %}" class="navigation">ROLES</a>
             <a href="{% url 'requests_list' %}" class="navigation">SOLICITUDES</a>
             <a href="{% url 'charge_account' %}" class="navigation">CREAR SOLICITUD</a>
+            <a href="{% url 'approve_as_reviewer' %}" class="navigation">REVISOR</a>
+            <a href="{% url 'approve_as_approver' %}" class="navigation">APROBADOR</a>
             <div class="user-info">
                 <span>{{ user }}</span>
                 <a href="{% url 'logout' %}">Salir</a>
@@ -33,6 +35,8 @@
                     {% comment %} <a href="{% url 'assign_roles' %}" "{% if request.resolver_match.url_name == 'assign_roles' %} active {% endif %}">ROLES</a> {% endcomment %}
                     {% comment %} <a href="{% url 'requests_list' %}" "{% if request.resolver_match.url_name == 'requests_list' %} active {% endif %}">SOLICITUDES</a> {% endcomment %}
                     {% comment %} <a href="{% url 'requests_index' %}" "{% if request.resolver_match.url_name == 'requests_index' %} active {% endif %}">CREAR SOLICITUD</a> {% endcomment %}
+                    {% comment %} <a href="{% url 'approve_as_reviewer' %}" "{% if request.resolver_match.url_name == 'approve_as_reviewer' %} active {% endif %}">REVISOR</a> {% endcomment %}
+                    {% comment %} <a href="{% url 'approve_as_approver' %}" "{% if request.resolver_match.url_name == 'approve_as_approver' %} active {% endif %}">APROBADOR</a> {% endcomment %}
                     <div class="d-flex align-items-center me-2">
                         <span class="me-4" style="color: white;">{{ user }}</span>
                         <a href="{% url 'logout' %}" class="btn btn-danger">Salir</a>
