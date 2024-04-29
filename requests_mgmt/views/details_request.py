@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
+
+from requests_mgmt.models.request_status import RequestStatus
 
 from ..forms import AddApproverForm, AddReviewerForm
 from ..models import (
@@ -47,3 +49,30 @@ class DetailsRequestView(View):
                 "select_approver": self.select_approver_form,
             },
         )
+    
+    def post(self, request, request_id, *args, **kwargs):
+        action = request.POST.get("action")
+        comment = request.POST.get("comentario") 
+
+        instance_request = Request.objects.get(pk=request_id)
+        
+        if action == "Aceptar":
+            new_status = RequestStatus.objects.get(status="Aceptado")
+            instance_request.status = new_status
+        elif action == "Aprobar":
+            new_status = RequestStatus.objects.get(status="Aprobado")
+            instance_request.status = new_status
+        elif action == "Rechazar":
+            new_status = RequestStatus.objects.get(status="Rechazado")
+            instance_request.status = new_status
+            
+            
+        if comment:
+            instance_request.comments = comment
+        
+        instance_request.save()
+
+        if request.user.role == "Reviewer":
+            return redirect("approve_as_reviewer")
+        elif request.user.role == "Approver":
+            return redirect("approve_as_approver")

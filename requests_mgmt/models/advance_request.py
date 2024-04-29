@@ -1,7 +1,7 @@
 from django.db import models
+from django.views import View
 
 from .request import Request
-
 
 class AdvanceRequest(Request):
     request_date = models.DateField(null=True,blank=True)
@@ -29,3 +29,4 @@ class AdvanceRequest(Request):
     others = models.FloatField(default=0)
     
     widget = models.FloatField(default=0)
+
