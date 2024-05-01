@@ -16,7 +16,6 @@ class CreateChargeAccount(StaticLiveServerTestCase):
         self.driver.quit()
 
     def test_create_charge_account(self):
-        print("ejecuta Test 1")
         user = self.driver.find_element(By.NAME, "username")
         user.send_keys("123")
         password = self.driver.find_element(By.NAME, "password")
@@ -105,7 +104,6 @@ class CreateChargeAccount(StaticLiveServerTestCase):
         self.assertEqual(expected_element.text,'Solicitudes')
 
 class CreateChargeAccount2(StaticLiveServerTestCase):
-    print("ejecuta Test 2")
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("http://127.0.0.1:8000/")
@@ -130,14 +128,14 @@ class CreateChargeAccount2(StaticLiveServerTestCase):
         chargeAccountOption.click()
         time.sleep(1)
 
-        starting_request_number = len(Request.objects.all())
+        #starting_request_number = len(Request.objects.all())
         
         user_name = self.driver.find_element(By.NAME, "user_name")
-        user_name.send_keys("Arthur")
+        user_name.send_keys("Roberto")
         time.sleep(1)
 
         user_id = self.driver.find_element(By.NAME, "user_id")
-        user_id.send_keys("123")
+        user_id.send_keys("999")
         time.sleep(1)
 
         doc_type = self.driver.find_element(By.NAME, "document_type")
@@ -145,7 +143,7 @@ class CreateChargeAccount2(StaticLiveServerTestCase):
         time.sleep(1)
 
         amount = self.driver.find_element(By.NAME, "amount")
-        amount.send_keys("100000")
+        amount.send_keys("40000")
         time.sleep(1)
 
         concept = self.driver.find_element(By.NAME, "concept")
@@ -158,29 +156,27 @@ class CreateChargeAccount2(StaticLiveServerTestCase):
         self.driver.execute_script("window.scrollTo(0,600);")
 
         # Esperar un momento para que la página se desplace completamente
-        time.sleep(1)
 
         # Ahora el checkbox debería estar visible, puedes hacer clic en él
         check = self.driver.find_element(By.ID, "id_checkbox_choices_0")
         check.click()
 
         city = self.driver.find_element(By.NAME, "city")
-        city.send_keys("Cali")
-        time.sleep(1)
+        city.send_keys("Medellin")
 
         date = self.driver.find_element(By.NAME, "date")
-        date.send_keys("5/8/2024")
+        date.send_keys("2/3/2024")
         time.sleep(1)
 
         #rent = self.driver.find_element(By.NAME, "rent_tax_declarant")
         #rent.click()
 
         bankName = self.driver.find_element(By.NAME, "bank_name")
-        bankName.send_keys("TestBank")
+        bankName.send_keys("Bank")
         time.sleep(1)
 
         account_number = self.driver.find_element(By.NAME, "account_number")
-        account_number.send_keys("189372")
+        account_number.send_keys("635270")
         time.sleep(1)
 
         account_type = self.driver.find_element(By.NAME, "account_type")
@@ -188,17 +184,17 @@ class CreateChargeAccount2(StaticLiveServerTestCase):
         time.sleep(1)
 
         cex_no = self.driver.find_element(By.NAME, "cex_no")
-        cex_no.send_keys("236632")
+        cex_no.send_keys("42725")
         time.sleep(1)
 
         sendButton = self.driver.find_element(By.NAME, "submit_button")
         sendButton.click()
         time.sleep(1)
 
-        final_request_number = len(Request.objects.all())
+        #final_request_number = len(Request.objects.all())
 
-        print(starting_request_number)
-        print(final_request_number)
+        #print(starting_request_number)
+        #print(final_request_number)
 
         expected_element = self.driver.find_element(By.XPATH, '/html/body/div[3]/div/h2')
         self.assertEqual(expected_element.text,'Solicitudes')
