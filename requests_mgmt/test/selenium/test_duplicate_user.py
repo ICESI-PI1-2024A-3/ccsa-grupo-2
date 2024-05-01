@@ -1,10 +1,10 @@
-import random
 import unittest
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+import random
 
-class Register(StaticLiveServerTestCase):
+class DuplicateUserRegistration(StaticLiveServerTestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("http://127.0.0.1:8000/")
@@ -13,6 +13,7 @@ class Register(StaticLiveServerTestCase):
 
     def tearDown(self):
         self.driver.quit()
+    
 
     def test_login(self):
         registerButton = self.driver.find_element(By.XPATH, "/html/body/div/div/div/div/div/form/div[3]/div[2]/a")
@@ -28,13 +29,12 @@ class Register(StaticLiveServerTestCase):
         id_type = self.driver.find_element(By.NAME, "id_type")
         id_type.send_keys("Cédula de Ciudadanía")
 
-        number = random.randint(1000,10000)
         id_number = self.driver.find_element(By.NAME, "id_number")
-        id_number.send_keys(f"{number}")
+        id_number.send_keys("123")
 
         number = random.randint(1000,10000)
         email = self.driver.find_element(By.NAME, "email")
-        email.send_keys(f"testMail{number}@mail.com")
+        email.send_keys(f"testUser{number}@mail.com")
 
         password = self.driver.find_element(By.NAME, "password")
         password.send_keys("password123")
@@ -45,8 +45,11 @@ class Register(StaticLiveServerTestCase):
         sendButton = self.driver.find_element(By.XPATH, "/html/body/div/div/div/div/div/form/div[9]/div[1]/button")
         sendButton.click()
 
-        text_expected = self.driver.find_element(By.NAME, 'welcome')
-        self.assertEqual(text_expected.text, "Bienvenido")
+        text_expected = self.driver.find_element(By.XPATH, '/html/body/div/div/div/div/div/div')
+        self.assertEqual(text_expected.text, "El número de identificación ya está registrado")
+    
+    
+
 
 if __name__ == "_main_":
     unittest.main()
