@@ -1,83 +1,36 @@
-from django.shortcuts import redirect, render, HttpResponse
-from django.views import View
+from django.test import TestCase
+from django.urls import reverse
 
-from ..forms import (
-    BankInformation,
-    CheckboxRentResidentForm,
-    CityDateForm,
-    NewChargeAccountForm,
-    TaxTreatmentForm,
-    UserInfoForm,
-    UploadDocuments
-)
-from ..models import ChargeAccountRequest,RequestStatus
+from ..models import ChargeAccountRequest,Request
+from users_mgmt.models import CustomUser
 
+class ChargeAccountTestCase(TestCase):
+    def setUp(self):
+        self.user = CustomUser.objects.create_user(username='testuser', password='12345')
+        self.client.login(username='testuser', password='12345')
 
-class ChargeAccountView(View):
-    template_name = "requests/create_charge_account_request.html"
-    bank_info_form = BankInformation
-    checkbox_form = CheckboxRentResidentForm
-    city_date_form = CityDateForm
-    charge_account_form = NewChargeAccountForm
-    tax_treatment_form = TaxTreatmentForm
-    user_info_form = UserInfoForm
-    upload_documents = UploadDocuments
+    def test_get_request(self):
+        response = self.client.get(reverse('charge_account'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'requests/create_charge_account_request.html')
 
-    def get(self, request, *args, **kwargs):
-        return render(
-            request,
-            self.template_name,
-            {
-                "bank_info_form": self.bank_info_form(),
-                "checkbox_form": self.checkbox_form(),
-                "city_date_form": self.city_date_form(),
-                "charge_account_form": self.charge_account_form(),
-                "tax_treatment_form": self.tax_treatment_form(),
-                "user_info_form": self.user_info_form(),
-                "upload_documents": self.upload_documents
-            },
-        )
-
-    def post(self, request, *args, **kwargs):
-        try:
-            amount = request.POST.get("amount")
-            concept = request.POST.get("concept")
-            city = request.POST.get("city")
-            date = request.POST.get("date")
-            bank_name = request.POST.get("bank_name")
-            account_type = request.POST.get("account_type")
-            account_number = request.POST.get("account_number")
-            cex_no = request.POST.get("cex_no")
-            rent_tax_declarant = request.POST.get("rent_tax_declarant")
-            fiscal_resident = request.POST.get("fiscal_resident")
-            costs_and_deductions = request.POST.get("checkbox_choices")
-            requester = request.user
-            chargeRequest = ChargeAccountRequest.objects.create(
-                requester=requester,
-                type = 'Cuenta de Cobro',
-                status = RequestStatus.objects.get(id=1),
-                amount=amount,
-                concept=concept,
-                city=city,
-                costs_and_deductions=costs_and_deductions,
-                date=date,
-                bank_name=bank_name,
-                account_type=account_type,
-                account_number=account_number,
-                cex_no=cex_no,
-            )
-            if rent_tax_declarant:
-                chargeRequest.isRent_Tax_Declarant(True)
-            else:
-                chargeRequest.isRent_Tax_Declarant(False)
-
-            if fiscal_resident:
-                chargeRequest.isFiscal_Resident(True)
-            else:
-                chargeRequest.isFiscal_Resident(False)
-
-            chargeRequest.save()
-
-            return redirect("requests_list")
-        except ValueError:
-            return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION
+    def test_post_request(self):
+        data = {
+            'amount': '100',
+            'concept': 'Test concept',
+            'city': 'Test city',
+            'date': '2024-04-01',
+            'bank_name': 'Test bank',
+            'account_type': 'Test type',
+            'account_number': 'Test number',
+            'cex_no': 'Test cex',
+            'rent_tax_declarant': True,
+            'fiscal_resident': False,
+            'checkbox_choices': 'Test choice',
+        }
+        response = self.client.post(reverse('charge_account'), data=data)
+        self.assertEqual(response.status_code, 302)  # 302 because of redirect
+        self.assertEqual(ChargeAccountRequest.objects.count(), 1)
+        charge_request = ChargeAccountRequest.objects.first()
+        self.assertEqual(charge_request.amount, '100')
+        self.assertEqual(charge_request.concept, 'Test concept')
