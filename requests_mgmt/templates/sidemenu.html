@@ -53,7 +53,7 @@
                     <span class="ms-2">Mis solicitudes</span>
                 </div>
             </a>
-            {% if user.role == "Reviewer" or user.role == "Admin" %}
+            {% if user.role == "Reviewer" %}
             <a href="{% url 'approve_as_reviewer' %}"
                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
@@ -62,7 +62,7 @@
                 </div>
             </a>
             {% endif %}
-            {% if user.role == "Approver" or user.role == "Admin" %}
+            {% if user.role == "Approver" %}
             <a href="{% url 'approve_as_approver' %}"
                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">

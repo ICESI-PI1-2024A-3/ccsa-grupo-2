@@ -25,6 +25,13 @@ class ExpenseRatioForm(forms.Form):
     nit = forms.CharField(label='Nit', max_length=200, widget=forms.TextInput(attrs={"class": "form-control"}))
     concepto = forms.CharField(label='Concepto', max_length=200, widget=forms.TextInput(attrs={"class": "form-control"}))
     advance_currency = forms.ChoiceField(label='Moneda', choices=[('Pesos colombianos', 'Pesos colombianos'), ('Dólares', 'Dólares'), ('Euros', 'Euros')], widget=forms.Select(attrs={'class': 'form-control'}))
+    
+    amount = forms.DecimalField(
+        label="Monto $",
+        max_digits=10,
+        decimal_places=2,
+        widget=forms.NumberInput(attrs={"class": "form-control"}),
+    )
 
 
 class BalanceDiscountAutorizationForm(forms.Form):

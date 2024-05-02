@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    {% include "sidemenu.html" %}
+    
+    <main class="container">
+        <form method="POST" class="card card-body">
+            {% csrf_token %}
+            {{expense_ratio_form}}
+            <input type="hidden" name="request_id" value="{{ request.id }}">
+            <button type="submit" class="btn btn-primary">
+                Agregar Gasto 
+            </button>
+        </form>
+        
+    </main>
+    
+
+{% endblock %}
