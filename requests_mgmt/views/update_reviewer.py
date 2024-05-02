@@ -1,10 +1,7 @@
 from django.shortcuts import redirect
 from django.views import View
-
+from ..models import Request, RequestStatus
 from users_mgmt.models import CustomUser
-
-from ..models import Request
-
 
 class UpdateReviewerView(View):
 
@@ -18,6 +15,12 @@ class UpdateReviewerView(View):
             user = CustomUser.objects.get(pk=user_id)
             instance_request.reviewer = user
             instance_request.save()
+            
+            # Actualizar el estado de la solicitud a "Revisión"
+            new_status = RequestStatus.objects.get(status='Revisión')
+            instance_request.status = new_status
+            instance_request.save()
+            
             return redirect("detail_request", request_id=request_id)
         except (Request.DoesNotExist, CustomUser.DoesNotExist) as e:
             instance_request = Request.objects.get(pk=request_id)

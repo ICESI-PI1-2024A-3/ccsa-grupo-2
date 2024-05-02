@@ -1,4 +1,6 @@
+
 from django.db import models
+
 
 
 class Request(models.Model):
@@ -34,6 +36,3 @@ class Request(models.Model):
     initial_date = models.DateTimeField(auto_now_add=True)
     closing_date = models.DateTimeField(null=True, blank=True)
 
-    def update_status(self, new_status):
-        self.status = new_status
-        self.save()
