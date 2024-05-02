@@ -20,6 +20,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#LOGIN_REDIRECT_URL = 'login'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -78,13 +79,17 @@ WSGI_APPLICATION = "accounting_management.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+#https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DB_NAME = os.getenv('DB_NAME')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
+
+
+
+#Conexion con Postgres
 
 DATABASES = {
     'default': {
@@ -96,6 +101,9 @@ DATABASES = {
         'PORT': DB_PORT,
     }
 }
+
+
+#Conexion con Sqlite
 
 # DATABASES = {
 #     "default": {

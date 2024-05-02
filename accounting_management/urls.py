@@ -24,7 +24,7 @@ from users_mgmt.views import LoginView, LogoutView, RegisterView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("iniciar sesion/", LoginView.as_view(), name="login"),
+    path("accounts/login/", LoginView.as_view(), name="login"),
     path("registrarse/", RegisterView.as_view(), name="register"),
     path("cerrar sesion/", login_required(LogoutView.as_view()), name="logout"),
     path("", login_required(HomeView.as_view()), name="home"),
