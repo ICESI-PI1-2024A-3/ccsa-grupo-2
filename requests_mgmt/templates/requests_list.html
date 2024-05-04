@@ -5,6 +5,15 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2>Solicitudes</h2>
             <form method="get" action="{% url "requests_list" %}" class="d-flex">
+                <select id="statusFilter" class="form-select me-2" name="status">
+                    <option value="">Todos</option>
+                    <option value="Pendiente de Aceptación">Pendiente de Aceptación</option>
+                    <option value="Revisión">Revisión</option>
+                    <option value="Aceptado">Aceptado</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Rechazado">Rechazado</option>
+                </select>
+                <button type="submit" class="btn btn-primary me-4">Filtrar</button>
                 <input type="text"
                        class="form-control me-2"
                        name="search_query"
