@@ -86,50 +86,67 @@
                     </div>
                 </div>
                 {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
-                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
-                        <h5 class="mb-4">Asignaciones</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form class="d-inline-flex align-items-center"
-                                      method="post"
-                                      action="{% url 'update_reviewer' request.id %}">
-                                    {% csrf_token %}
-                                    <label class="form-label fw-bold me-2">Revisor:</label>
-                                    {{ select_reviewer }}
-                                    <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
-                                </form>
-                            </div>
-                            <div class="col-md-6">
-                                <form class="d-inline-flex align-items-center"
-                                      method="post"
-                                      action="{% url 'update_approver' request.id %}">
-                                    {% csrf_token %}
-                                    <label class="form-label fw-bold me-2">Aprobador:</label>
-                                    {{ select_approver }}
-                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
-                                </form>
-                            </div>
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                    <h5 class="mb-4">Asignaciones</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="d-inline-flex align-items-center"
+                                method="post"
+                                action="{% url 'update_reviewer' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Revisor:</label>
+                                {{ select_reviewer }}
+                                <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Asignación Exitosa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Se ha asignado el revisor correctamente.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="d-inline-flex align-items-center"
+                                method="post"
+                                action="{% url 'update_approver' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Aprobador:</label>
+                                {{ select_approver }}
+                                <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
+                                <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Asignación Exitosa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Se ha asignado el aprovador correctamente.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
                         </div>
                     </div>
+                </div>
 
-
-                {% endif %}
-
-                {% if user.role == "Reviewer" and request.status.status == "Revisión" %}
-                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
-                        <h5 class="mb-4">Acciones - Revisor</h5>
-                        <label for="comentario">Pon tu comentario:</label>
-                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
-                            {% csrf_token %}
-                                <div class="form-group">
-                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
-                                </div>
-                                <div class="form-group text-center d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
-                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
-                                </div>
-                        </form>
-                    </div>
                 {% endif %}
 
                 {% if user.role == "Approver" and request.status.status == "Aceptado" %}
