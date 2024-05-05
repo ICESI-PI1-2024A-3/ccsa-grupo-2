@@ -7,7 +7,7 @@
         <h2>Solicitudes por aprobar</h2>
     </div>
     <div class="row">
-        {% if requests_to_approval and request.status.status == "Aceptado"}
+        {% if requests_to_approval and request.status.status == "Aceptado" %}
             {% for request in requests_to_approval %}
                 {% if request.status.status == "Aceptado" %}
                     <div class="col-md-4 mb-4">
