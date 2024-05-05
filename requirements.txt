@@ -4,6 +4,7 @@ cfgv==3.4.0
 click==8.1.7
 colorama==0.4.6
 distlib==0.3.8
+dj-database-url==2.1.0
 Django==5.0.3
 filelock==3.13.1
 gunicorn==22.0.0
@@ -14,6 +15,7 @@ packaging==24.0
 platformdirs==4.2.0
 pre-commit==3.6.2
 psycopg==3.1.18
+psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 PyYAML==6.0.1
 setuptools==69.1.1
