@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "requests_mgmt",
     "users_mgmt",
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
