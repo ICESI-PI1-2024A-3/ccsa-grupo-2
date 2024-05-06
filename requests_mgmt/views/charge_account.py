@@ -2,7 +2,6 @@ from django.conf import settings
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 from pathlib import Path
-from docx import Document
 import os
 
 from ..forms import (
