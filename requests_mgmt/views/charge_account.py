@@ -111,14 +111,11 @@ class ChargeAccountView(View):
         
     def handle_uploaded_file(self, uploaded_file):
         upload_dir = os.path.join(settings.BASE_DIR, 'archivos')
-        # Crea la carpeta si no existe
         if not os.path.exists(upload_dir):
             os.makedirs(upload_dir)
-        # Construye la ruta completa del archivo
         
         file_path = os.path.join(upload_dir, uploaded_file.name)
 
-        # Guarda el archivo en la ubicación especificada
         with open(file_path, 'wb+') as destination:
             for chunk in uploaded_file.chunks():
                 destination.write(chunk)
