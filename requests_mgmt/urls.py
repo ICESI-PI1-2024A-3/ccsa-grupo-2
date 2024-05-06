@@ -18,6 +18,7 @@ from .views import (
     UpdateApproverView,
     UpdateReviewerView,
     RequestExpenses,
+    SetClosingDate
 )
 
 urlpatterns = [
@@ -78,6 +79,11 @@ urlpatterns = [
         "mis solicitudes",
         login_required(RequestsMadeView.as_view()),
         name="requests_made",
+    ),
+    path(
+        "<int:request_id>/Cierre",
+        login_required(SetClosingDate.as_view()),
+        name="set_closing_date",
     ),
     
 ]

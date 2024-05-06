@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 
@@ -40,6 +42,15 @@ class AdvanceRequestView(View):
             widget =airport_transport+local_transport+feeding+accommodation+departure_taxes+others
             requester = request.user
 
+            document_path = ""
+
+            document = request.POST.get("documents")
+            if document!="":
+                form = UploadDocuments(request.POST, request.FILES)
+                if form.is_valid():
+                    uploaded_file = request.FILES['documents']
+                    document_path = self.handle_uploaded_file(uploaded_file)
+
             advance_request = AdvanceRequestModel.objects.create(
                 requester = requester,
                 type = 'Anticipos',
@@ -58,6 +69,7 @@ class AdvanceRequestView(View):
                 departure_taxes = departure_taxes,
                 others=others,
                 widget=widget,
+                document_path = document_path,
             )
 
             advance_request.save()
@@ -65,4 +77,16 @@ class AdvanceRequestView(View):
             return redirect("requests_list")
         except ValueError:
             return HttpResponse('Please enter a Valid Value')
+        
+    def handle_uploaded_file(self, uploaded_file):
+        upload_dir = os.path.join(settings.BASE_DIR, 'archivos')
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+        
+        file_path = os.path.join(upload_dir, uploaded_file.name)
+
+        with open(file_path, 'wb+') as destination:
+            for chunk in uploaded_file.chunks():
+                destination.write(chunk)
+        return file_path
 

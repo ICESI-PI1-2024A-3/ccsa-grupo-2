@@ -30,3 +30,5 @@ class AdvanceRequest(Request):
     
     widget = models.FloatField(default=0)
 
+    document_path = models.CharField(default='',max_length=350)
+
