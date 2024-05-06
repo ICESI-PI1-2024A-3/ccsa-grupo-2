@@ -1,0 +1,137 @@
+{% extends "layouts/base.html"%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Legalzación de facturas {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+    {% include "sidemenu.html" %}
+
+    <main class="container mb-5">
+        <h1 class="text-center mt-5"> Nueva solicitud - Legalización de facturas </h1>
+
+        <form method="POST" class="mt-5" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h3>Información del viajero: </h3>
+                <div class="row gx-3">
+                    <div class="col-md-6">
+                        {{ user_info }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="id_legalization_date" class="form-label">Fecha de legalización:</label>
+                    {{ invoice_legalization_form.legalization_date }}
+                </div>
+                <div class="col-md-6">
+                    <label for="id_departure_date" class="form-label">Fecha de salida:</label>
+                    {{ invoice_legalization_form.departure_date }}
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="id_dependency" class="form-label">Dependencia:</label>
+                {{ invoice_legalization_form.dependency }}
+            </div>
+            <div class="mb-4">
+                <label for="id_destination_city" class="form-label">Ciudad de destino:</label>
+                {{ invoice_legalization_form.destination_city }}
+            </div>
+            <div class="mb-4">
+                <label for="id_reason_trip" class="form-label">Motivo de viaje:</label>
+                {{ invoice_legalization_form.reason_trip }}
+            </div>
+    <!--
+        <h2 class="mt-5"> Relación de gastos </h2>
+            <div class="mb-4">
+                <div id="expense-container" class="row">
+                    <div class="col">
+                        <div class="row g-3">
+                            <div class="col">
+                                <label for="rubro" class="form-label">Rubro:</label>
+                                {{ expense_ratio_form.rubro }}
+                            </div>
+                            <div class="col">
+                                <label for="proveedor" class="form-label">Proveedor:</label>
+                                {{ expense_ratio_form.proveedor }}
+                            </div>
+                            <div class="col">
+                                <label for="nit" class="form-label">Nit:</label>
+                                {{ expense_ratio_form.nit }}
+                            </div>
+                            <div class="col">
+                                <label for="concepto" class="form-label">Concepto:</label>
+                                {{ expense_ratio_form.concepto }}
+                            </div>
+                            <div class="col">
+                                <label for="moneda" class="form-label">Moneda:</label>
+                                {{ expense_ratio_form.advance_currency }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onclick="addExpense()" class="btn btn-primary mb-4">Agregar Gasto</button>
+    -->
+            
+            <div class="mb-4">
+                {{ balance_discount_autorization_form }}
+            </div>
+            <div class="mb-4">
+                {{ bank_information }}
+            </div>
+            <div class="mb-4">
+                {{ observations }}
+            </div>
+            <div class="mb-4">
+                <h3>Documentos</h3>
+                {{ upload_documents }}
+            </div>
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </form>
+    </main>
+
+
+    <script>
+        function addExpense() {
+            
+            var expenseContainer = document.querySelector('#expense-container');
+            var newExpenseContainer = document.createElement('div');
+            newExpenseContainer.className = 'row g-3';
+            newExpenseContainer.innerHTML = `
+                <div class="col">
+                    <label for="rubro" class="form-label">Rubro:</label>
+                    {{ expense_ratio_form.rubro }}
+                </div>
+                <div class="col">
+                    <label for="proveedor" class="form-label">Proveedor:</label>
+                    {{ expense_ratio_form.proveedor }}
+                </div>
+                <div class="col">
+                    <label for="nit" class="form-label">Nit:</label>
+                    {{ expense_ratio_form.nit }}
+                </div>
+                <div class="col">
+                    <label for="concepto" class="form-label">Concepto:</label>
+                    {{ expense_ratio_form.concepto }}
+                </div>
+                <div class="col">
+                    <label for="moneda" class="form-label">Moneda:</label>
+                    {{ expense_ratio_form.advance_currency }}
+                </div>
+            `;
+            expenseContainer.appendChild(newExpenseContainer);
+        }
+    </script>
+
+    {% endblock %}
+</body>
+
+</html>

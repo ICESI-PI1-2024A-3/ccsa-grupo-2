@@ -1,0 +1,94 @@
+{% extends "layouts/base.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Legalzación de facturas {% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+    {% include "sidemenu.html" %}
+    <div class="container">
+        <h1 class="my-4">Nueva solicitud - Anticipos</h1>
+        <div class="my-4">
+            <h3>Por favor, tener en cuenta: </h3>
+            <ol>
+                <li>Los anticipos en moneda nacional deben solicitarse con tres días hábiles antes de la fecha de viaje (como mínimo)</li>
+                <li>Los anticipos en moneda extranjera (dólar y euro) deben solicitarse cinco días hábiles antes de la fecha de viaje (como mínimo) </li>
+                <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5. Documento sin este requisito, será rechazado en la legalización.</li>
+            </ol>
+        </div>
+        <div>
+            <form method="POST" class="mb-4" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                <div class="mx-auto mb-4">
+                    <h3>Información del viajero </h3>
+                    <div class="row">
+                        <div class="col">
+                            {{user_info}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_request_date">Fecha de solicitud:</label>
+                            {{ advance_request_info.request_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_dependency">Dependencia:</label>
+                            {{ advance_request_info.dependency }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_destination_city">Ciudad de destino:</label>
+                            {{ advance_request_info.destination_city }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_departure_date">Fecha de salida:</label>
+                            {{ advance_request_info.departure_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_icesi_last_day_date">Último día en Icesi antes del viaje:</label>
+                            {{ advance_request_info.icesi_last_day_date }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_return_date">Fecha de regreso:</label>
+                            {{ advance_request_info.return_date }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_reason_trip">Motivo de viaje:</label>
+                            {{ advance_request_info.reason_trip }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_advance_currency">Moneda:</label>
+                            {{ advance_request_info.advance_currency }}
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3>Presupuesto de gastos</h3>
+                    <div class="form-group">
+                        {{ expense_budget }}
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <h3>Documentos</h3>
+                    {{ upload_documents }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success" name="submit_button">Enviar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

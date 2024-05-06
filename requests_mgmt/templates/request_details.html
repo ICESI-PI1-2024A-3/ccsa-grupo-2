@@ -1,0 +1,646 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<!--
+    <form method ='get' action="{% url 'delete_request' request.id %}">
+        {% csrf_token %}
+        <button>
+            DELETE
+        </button>
+    </form>
+-->
+    {% if request.type == 'Cuenta de Cobro' %}
+        <div class="request-info">
+            <style>
+                .custom-border {
+                    border: 1px solid rgba(0, 0, 0, 0.125);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+                .container-md {
+                    margin-top: 20px;
+                }
+            </style>
+            {% include "sidemenu.html" %}
+            <div class="container-md">
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
+                    
+                </div>               
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información del solicitante</h5>
+                            <p>
+                                <strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{ request.requester }}
+                            </p>
+                            <p>
+                                <strong>Identificación:</strong>&nbsp;&nbsp;{{ request.requester.id_type }}&nbsp;&nbsp;{{ request.requester.id_number }}
+                            </p>
+                            <p>
+                                <strong>Correo electrónico:</strong>&nbsp;&nbsp;{{ request.requester.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información bancaria</h5>
+                            <p>
+                                <strong>Banco:</strong>&nbsp;&nbsp;{{ request.bank_name }}
+                            </p>
+                            <p>
+                                <strong>No. de cuenta:</strong>&nbsp;&nbsp;{{ request.account_number }}
+                            </p>
+                            <p>
+                                <strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{ request.account_type }}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{ request.cex_no }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-left bg-light text-dark p-3 custom-border">
+                    <h5 class="mb-4">Información de la solicitud</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                            </p>
+                            <p>
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.concept }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Costos y deducciones:</strong>&nbsp;&nbsp;{{ request.costs_and_deductions }}
+                            </p>
+                            <p>
+                                <strong>Declarante de impuesto de renta:</strong>&nbsp;&nbsp;
+                                {% if request.rent_tax_declarant %}
+                                    Si
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </p>
+                            <p>
+                                <strong>Residente fiscal:</strong>&nbsp;&nbsp;
+                                {% if request.fiscal_resident %}
+                                    Si
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                    <h5 class="mb-4">Asignaciones</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="d-inline-flex align-items-center"
+                                method="post"
+                                action="{% url 'update_reviewer' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Revisor:</label>
+                                {{ select_reviewer }}
+                                <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Asignación Exitosa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Se ha asignado el revisor correctamente.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="d-inline-flex align-items-center"
+                                method="post"
+                                action="{% url 'update_approver' request.id %}">
+                                {% csrf_token %}
+                                <label class="form-label fw-bold me-2">Aprobador:</label>
+                                {{ select_approver }}
+                                <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
+                                <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Asignación Exitosa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Se ha asignado el aprovador correctamente.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
+
+                {% if user.role == "Approver" and request.status.status == "Aceptado" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Aprobador</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <div class=" d-flex justify-content-center">
+                            <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="5" style="width: 100%;"></textarea>
+                                    </div>
+                                    <div class="form-group mt-3 d-flex justify-content-center">                       
+                                        <button type="submit" class="btn btn-success me-3" name="action" value="Aprobar">Aprobar</button>
+                                        <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    {% endif %}
+    {% if request.type == 'Legalizacion de Factura' %}
+        <style>
+    .custom-border {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .container-md {
+        margin-top: 20px;
+    }
+
+        </style>
+        <div class="request-info">
+            {% include "sidemenu.html" %}
+            <div class="container-md">
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información del solicitante</h5>
+                            <p>
+                                <strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{ request.requester }}
+                            </p>
+                            <p>
+                                <strong>Identificación:</strong>&nbsp;&nbsp;{{ request.requester.id_type }}&nbsp;&nbsp;{{ request.requester.id_number }}
+                            </p>
+                            <p>
+                                <strong>Correo electrónico:</strong>&nbsp;&nbsp;{{ request.requester.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información bancaria</h5>
+                            <p>
+                                <strong>Banco:</strong>&nbsp;&nbsp;{{ request.bank_name }}
+                            </p>
+                            <p>
+                                <strong>No. de cuenta:</strong>&nbsp;&nbsp;{{ request.account_number }}
+                            </p>
+                            <p>
+                                <strong>Tipo de cuenta:</strong>&nbsp;&nbsp;{{ request.account_type }}&nbsp;&nbsp;<strong>CEX No:</strong>&nbsp;&nbsp;{{ request.cex_no }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-left bg-light text-dark p-3 custom-border">
+                    <h5 class="mb-4">Información de la Solicitud</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                            </p>
+                            <p>
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.reason_trip }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.legalization_date }}
+                            </p>
+                            <p>
+                                <strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                            </p>
+                            <p>
+                                <strong>Fecha de partida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
+                            </p>
+                            <p>
+                                <strong>Autorización descuento:</strong>&nbsp;&nbsp;{{ request.discount_authorization }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-left bg-light text-dark p-3 custom-border row mt-4">
+                    <div class="row">
+                        <div class="col-md-10"> 
+                            <table class="table table-striped table-bordered mt-4">
+                                <thead>
+                                    <tr>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Rubro</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Proveedor</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">nit</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Concepto</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Moneda</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for expense in expenses %}
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ expense.rubro }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.proveedor }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.nit }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.concepto }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.advance_currency }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.amount }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
+                                Agregar Gasto 
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Asignaciones</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form class="d-inline-flex align-items-center"
+                                      method="post"
+                                      action="{% url 'update_reviewer' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Revisor:</label>
+                                    {{ select_reviewer }}
+                                    <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Asignación Exitosa</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Se ha asignado el revisor correctamente.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="d-inline-flex align-items-center"
+                                      method="post"
+                                      action="{% url 'update_approver' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Aprobador:</label>
+                                    {{ select_approver }}
+                                    <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
+                                    <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Asignación Exitosa</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Se ha asignado el aprovador exitosamente.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.role == "Reviewer" or "Admin" and request.status.status == "Revisión" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Revisor</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% if user.role == "Approver" or "Admin" and request.status.status == "Aceptado" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Aprobador</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <div class=" d-flex justify-content-center">
+                            <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="5" style="width: 100%;""></textarea>
+                                    </div>
+                                    <div class="form-group mt-3 d-flex justify-content-center">                       
+                                        <button type="submit" class="btn btn-success me-3" name="action" value="Aprobar">Aprobar</button>
+                                        <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+            </div>
+        </div>
+    {% endif %}
+<!--
+        <form method ='get' action="{% url 'delete_request' request.id %}">
+        {% csrf_token %}
+        <button>
+            DELETE
+        </button>
+    </form>
+-->
+    {% if request.type == 'Anticipos' %}
+        <style>
+    .custom-border {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .container-md {
+        margin-top: 20px;
+    }
+
+        </style>
+        <div class="request-info">
+            {% include "sidemenu.html" %}
+            <div class="container-md">
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <h5 class="mb-4">Información general</h5>
+                    <p>
+                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.request_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                    </p>
+                </div>
+                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                    <h5 class="mb-4">Gastos</h5>
+                    <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
+                        Agregar Gasto 
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información del viajero</h5>
+                            <p>
+                                <strong>Nombre del solicitante:</strong>&nbsp;&nbsp;{{ request.requester }}
+                            </p>
+                            <p>
+                                <strong>Identificación:</strong>&nbsp;&nbsp;{{ request.requester.id_type }}&nbsp;&nbsp;{{ request.requester.id_number }}
+                            </p>
+                            <p>
+                                <strong>Correo electrónico:</strong>&nbsp;&nbsp;{{ request.requester.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-left bg-light text-dark p-3 custom-border mb-4">
+                            <h5 class="mb-4">Información relevante del viaje</h5>
+                            <p>
+                                <strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                            </p>
+                            <p>
+                                <strong>Fecha de salida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
+                            </p>
+                            <p>
+                                <strong>Dependencia:</strong>&nbsp;&nbsp;{{ request.dependency }}&nbsp;&nbsp;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-left bg-light text-dark p-3 custom-border">
+                    <h5 class="mb-4">Información de la solicitud</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                            </p>
+                            <p>
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.reason_trip }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.legalization_date }}
+                            </p>
+                            <p>
+                                <strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                            </p>
+                            <p>
+                                <strong>Fecha de partida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
+                            </p>
+                            <p>
+                                <strong>Autorización descuento:</strong>&nbsp;&nbsp;{{ request.discount_authorization }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Asignaciones</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form class="d-inline-flex align-items-center"
+                                      method="post"
+                                      action="{% url 'update_reviewer' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Revisor:</label>
+                                    {{ select_reviewer }}
+                                    <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Asignación Exitosa</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Se ha asignado el revisor correctamente.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="d-inline-flex align-items-center"
+                                      method="post"
+                                      action="{% url 'update_approver' request.id %}">
+                                    {% csrf_token %}
+                                    <label class="form-label fw-bold me-2">Aprobador:</label>
+                                    {{ select_approver }}
+                                    <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
+                                <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Asignación Exitosa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Se ha asignado el aprovador correctamente.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.role == "Reviewer" and request.status.status == "Revisión" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Revisor</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% if user.role == "Approver" and request.status.status == "Aceptado" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Aprobador</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <div class=" d-flex justify-content-center">
+                            <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="5" style="width: 100%;""></textarea>
+                                    </div>
+                                    <div class="form-group mt-3 d-flex justify-content-center">                       
+                                        <button type="submit" class="btn btn-success me-3" name="action" value="Aprobar">Aprobar</button>
+                                        <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+                
+
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- <form method ='get' action="{% url 'delete_request' request.id %}">
+            {% csrf_token %}
+            <button>
+                DELETE
+            </button>
+        </form> -->
+
+
+    
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layouts/base_auth.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row align-items-center justify-content-center"
+             style="height: 100vh">
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 rounded-lg bg-light-subtle">
+                    <div class="card-body">
+                        {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}<div class="mb-3">{{ field }}</div>{% endfor %}
+                            <div class="row">
+                                <div class="col-12 text-center mb-3">
+                                    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                                </div>
+                                <div class="col-12 text-center mb-1">
+                                    <a href="{% url 'login' %}"
+                                       class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                        Ya tengo una cuenta
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
