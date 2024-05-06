@@ -284,7 +284,7 @@
                     </div>
                 {% endif %}
 
-                {% if user.role == "Approver" and request.status.status == "Aceptado" %}
+                {% if user.role == "Approver" or "Admin" and request.status.status == "Aceptado" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
                         <label for="comentario">Pon tu comentario:</label>
@@ -310,13 +310,13 @@
             </div>
         </div>
     {% endif %}
-<!--
-        <form method ='get' action="{% url 'delete_request' request.id %}">
-        {% csrf_token %}
-        <button>
-            DELETE
-        </button>
-    </form>
--->
+
+        <!-- <form method ='get' action="{% url 'delete_request' request.id %}">
+            {% csrf_token %}
+            <button>
+                DELETE
+            </button>
+        </form> -->
+
     
 {% endblock %}
