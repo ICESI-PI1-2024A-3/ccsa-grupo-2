@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "requests_mgmt",
     "users_mgmt",
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +88,8 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 
+
+
 #Conexion con Postgres
 
 # DATABASES = {
@@ -99,6 +102,7 @@ DB_PORT = os.getenv('DB_PORT')
 #         'PORT': DB_PORT,
 #     }
 # }
+
 
 #Conexion con Sqlite
 

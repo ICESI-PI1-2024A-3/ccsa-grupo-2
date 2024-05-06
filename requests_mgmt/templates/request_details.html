@@ -1,5 +1,13 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+<!--
+    <form method ='get' action="{% url 'delete_request' request.id %}">
+        {% csrf_token %}
+        <button>
+            DELETE
+        </button>
+    </form>
+-->
     {% if request.type == 'Cuenta de Cobro' %}
         <div class="request-info">
             <style>
@@ -14,13 +22,27 @@
             {% include "sidemenu.html" %}
             <div class="container-md">
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Información general</h5>
-                    <p>
-                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
-                    </p>
-                </div>
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
+                    
+                </div>               
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -169,19 +191,26 @@
             {% include "sidemenu.html" %}
             <div class="container-md">
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Información general</h5>
-                    <p>
-                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
-                    </p>
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
                 </div>
-                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Gastos</h5>
-                    <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
-                        Agregar Gasto 
-                    </a>
-                </div>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -213,7 +242,7 @@
                     </div>
                 </div>
                 <div class="text-left bg-light text-dark p-3 custom-border">
-                    <h5 class="mb-4">Información de la solicitud</h5>
+                    <h5 class="mb-4">Información de la Solicitud</h5>
                     <div class="row">
                         <div class="col-md-6">
                             <p>
@@ -238,6 +267,55 @@
                             </p>
                         </div>
                     </div>
+                </div>
+                
+                <div class="text-left bg-light text-dark p-3 custom-border row mt-4">
+                    <div class="row">
+                        <div class="col-md-10"> 
+                            <table class="table table-striped table-bordered mt-4">
+                                <thead>
+                                    <tr>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Rubro</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Proveedor</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">nit</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Concepto</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Moneda</th>
+                                        <th style="background-color: #1E4072;" class="text-light text-center">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for expense in expenses %}
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ expense.rubro }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.proveedor }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.nit }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.concepto }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.advance_currency }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ expense.amount }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
+                                Agregar Gasto 
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
                 {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
@@ -304,8 +382,6 @@
                 {% endif %}
 
             {% endif %}
-
-                
 
             </div>
         </div>

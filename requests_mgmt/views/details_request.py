@@ -7,6 +7,7 @@ from ..models import (
     AdvanceRequest,
     InvoiceLegalizationRequest,
     Request,
+    Expense
 )
 
 
@@ -29,12 +30,12 @@ class DetailsRequestView(View):
             )
         )
 
+        expenses = []
         if intance_request.type == "Cuenta de Cobro":
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
-        if intance_request.type == "Legalización de Factura":
+        if intance_request.type == "Legalización de Factura" or intance_request.type == "Legalizacion de Factura":
             gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
-        if intance_request.type == "Legalizacion de Factura":
-            gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
+            expenses = Expense.objects.filter(request_id_number_id=request_id)
         if intance_request.type == "Anticipos":
             gotten_request = AdvanceRequest.objects.get(pk=request_id)
         return render(
@@ -45,6 +46,7 @@ class DetailsRequestView(View):
                 "user": request.user,
                 "select_reviewer": self.select_reviewer_form,
                 "select_approver": self.select_approver_form,
+                "expenses":expenses
             },
         )
     

@@ -1,5 +1,9 @@
+from django.conf import settings
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
+from pathlib import Path
+from docx import Document
+import os
 
 from ..forms import (
     BankInformation,
@@ -52,6 +56,24 @@ class ChargeAccountView(View):
             fiscal_resident = request.POST.get("fiscal_resident")
             costs_and_deductions = request.POST.get("checkbox_choices")
             requester = request.user
+
+            bankCertificate_file_path = ""
+            rut_file_path = ""
+
+            rut_document = request.POST.get("documents")
+            if rut_document!="":
+                form = UploadDocuments(request.POST, request.FILES)
+                if form.is_valid():
+                    uploaded_file = request.FILES['documents']
+                    rut_file_path = self.handle_uploaded_file(uploaded_file)
+            
+            bc_document = request.POST.get("bank_certificate")
+            if bc_document!="":
+                form = UploadDocuments(request.POST, request.FILES)
+                if form.is_valid():
+                    uploaded_bc = request.FILES['bank_certificate']
+                    bankCertificate_file_path = self.handle_uploaded_file(uploaded_bc)
+
             chargeRequest = ChargeAccountRequest.objects.create(
                 requester=requester,
                 type = 'Cuenta de Cobro',
@@ -65,6 +87,9 @@ class ChargeAccountView(View):
                 account_type=account_type,
                 account_number=account_number,
                 cex_no=cex_no,
+                rut_file_path = rut_file_path,
+                bank_certificate_file_path=bankCertificate_file_path,
+
             )
             if rent_tax_declarant:
                 chargeRequest.isRent_Tax_Declarant(True)
@@ -78,6 +103,20 @@ class ChargeAccountView(View):
 
             chargeRequest.save()
 
-            return redirect("requests_list")
-        except ValueError:
+            return redirect("requests_made")
+    
+        except ValueError as e:
+            print(e)
             return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION
+        
+    def handle_uploaded_file(self, uploaded_file):
+        upload_dir = os.path.join(settings.BASE_DIR, 'archivos')
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+        
+        file_path = os.path.join(upload_dir, uploaded_file.name)
+
+        with open(file_path, 'wb+') as destination:
+            for chunk in uploaded_file.chunks():
+                destination.write(chunk)
+        return file_path
