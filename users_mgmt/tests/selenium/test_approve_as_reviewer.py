@@ -8,8 +8,8 @@ class ApproveAsReviewer(StaticLiveServerTestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("http://127.0.0.1:8000/")
-        self.driver.implicitlywait(15)
-        self.driver.maximizewindow()
+        self.driver.implicitly_wait(15)
+        self.driver.maximize_window()
 
     def tearDown(self):
         self.driver.quit()
@@ -22,7 +22,7 @@ class ApproveAsReviewer(StaticLiveServerTestCase):
         text_expected = self.driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/h2')
         self.assertEqual(text_expected.text, "Solicitudes por revisar")
         
-class ApproveAsReviewer(StaticLiveServerTestCase):
+class RejectAsReviewer(StaticLiveServerTestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("http://127.0.0.1:8000/")
@@ -40,5 +40,5 @@ class ApproveAsReviewer(StaticLiveServerTestCase):
         text_expected = self.driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/h2')
         self.assertEqual(text_expected.text, "Solicitudes por revisar")
 
-if __name__ == "main":
+if __name__ == "__main__":
     unittest.main()
