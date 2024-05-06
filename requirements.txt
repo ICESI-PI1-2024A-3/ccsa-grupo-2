@@ -12,12 +12,14 @@ filelock==3.13.1
 gunicorn==22.0.0
 h11==0.14.0
 identify==2.5.35
+lxml==5.2.1
 nodeenv==1.8.0
 packaging==24.0
 platformdirs==4.2.0
 pre-commit==3.6.2
 psycopg==3.1.18
 psycopg2-binary==2.9.9
+python-docx==1.1.2
 python-dotenv==1.0.1
 PyYAML==6.0.1
 setuptools==69.1.1
