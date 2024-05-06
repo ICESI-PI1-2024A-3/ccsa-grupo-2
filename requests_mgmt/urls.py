@@ -22,7 +22,11 @@ from .views import (
 )
 
 urlpatterns = [
-    path("", login_required(RequestsListView.as_view()), name="requests_list"),
+    path(
+        "", 
+        login_required(RequestsListView.as_view()), 
+        name="requests_list", 
+        ),
     path(
         "<int:request_id>",
         login_required(DetailsRequestView.as_view()),
