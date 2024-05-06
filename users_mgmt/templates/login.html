@@ -12,7 +12,7 @@
                             {% for field in form %}<div class="mb-3">{{ field }}</div>{% endfor %}
                             <div class="row">
                                 <div class="col-12 text-center mb-3">
-                                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                                    <button type="submit" name="submit_btn" class="btn btn-primary w-100">Iniciar Sesión</button>
                                 </div>
                                 <div class="col-12 text-center mb-1">
                                     <a href="{% url 'register' %}"
