@@ -103,7 +103,7 @@ class ChargeAccountView(View):
 
             chargeRequest.save()
 
-            return redirect("requests_list")
+            return redirect("requests_made")
     
         except ValueError as e:
             print(e)

@@ -77,7 +77,7 @@ class InvoiceLegalizationView(View):
 
             invoice_legalization_request.save()
 
-            return redirect("requests_list")
+            return redirect("requests_made")
         except ValueError:
             return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION:
     

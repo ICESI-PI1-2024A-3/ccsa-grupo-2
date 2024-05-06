@@ -22,13 +22,27 @@
             {% include "sidemenu.html" %}
             <div class="container-md">
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Información general</h5>
-                    <p>
-                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
-                    </p>
-                </div>
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
+                    
+                </div>               
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -177,12 +191,24 @@
             {% include "sidemenu.html" %}
             <div class="container-md">
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Información general</h5>
-                    <p>
-                        <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha:</strong>&nbsp;&nbsp;{{ request.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
-                    </p>
+                    <form method="get" action="{% url 'set_closing_date' request.id %}">
+                        <h5>Información General</h5>
+                        {% csrf_token %}
+                        <p>
+                            <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
+                            {% if user.role != "Requester"%}
+                                <input type="date" name="closing_date" value="{{ request.closing_date }}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-secondary">Cambiar</button>
+                            {% endif %}
+                            
+                            <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.city }}
+                        </p>
+                        
+                    </form>
+                        
                 </div>
                 
                 <div class="row">
@@ -356,8 +382,6 @@
                 {% endif %}
 
             {% endif %}
-
-                
 
             </div>
         </div>
