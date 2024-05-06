@@ -7,20 +7,25 @@
         <h2>Solicitudes por aprobar</h2>
     </div>
     <div class="row">
-        {% if requests_to_approval and request.status.status == "Aceptado"}
-            {% for request in requests_to_approval %}
-                {% if request.status.status == "Aceptado" %}
+        {% if requests_to_approval %}
+            {% for req in requests_to_approval %}
+                {% if req.status.status == "Aceptado" %}
                     <div class="col-md-4 mb-4">
-                        <a href="{% url 'detail_request' request.id %}" class="card text-center custom-card">
+                        <a href="{% url 'detail_request' req.id %}" class="card text-center custom-card">
                             <div class="card-body">
-                                <h5 class="card-title">{{ request.type }}</h5>
-                                <p class="card-text">{{ request.requester }}</p>
-                                <p class="card-text">{{ request.initial_date|date:"d/m/Y" }}</p>
+                                <h5 class="card-title">{{ req.type }}</h5>
+                                <p class="card-text">{{ req.requester }}</p>
+                                <p class="card-text">{{ req.initial_date|date:"d/m/Y" }}</p>
                             </div>
                         </a>
                     </div>
                 {% endif %}
             {% endfor %}
+            {% if not has_review_requests %}
+                <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
+                    <p class="text-center fs-3">No hay solicitudes por aprobar</p>
+                </div>
+            {% endif %}
         {% else %}
             <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
                 <p class="text-center fs-3">No hay solicitudes por aprobar</p>

@@ -8,46 +8,20 @@ class ApproveAsReviewerView(View):
     template_name = "approve_as_reviewer.html"
     
     def get(self, request):
-        # Obtener todos los usuarios que necesitan aprobación
-        # users_needing_approval = User.objects.filter(needs_approval=True)
+        # Obtener todas las solicitudes asignadas al revisor actual
         requests_to_approval = Request.objects.filter(reviewer=request.user.id)
+        
+        # Filtrar las solicitudes en estado de "Revisión"
+        review_requests = requests_to_approval.filter(status__status="Revisión")
+        
+        # Determinar si hay solicitudes en estado de "Revisión"
+        has_review_requests = review_requests.exists()
         
         return render(
             request, 
             self.template_name,
-            # {"users_needing_approval": users_needing_approval}
-            {"requests_to_approval": requests_to_approval}
+            {
+                "requests_to_approval": review_requests,  # Pasar solo las solicitudes en estado de "Revisión"
+                "has_review_requests": has_review_requests  # Pasar la variable que indica si hay solicitudes en estado de "Revisión"
+            }
         )
-
-    # def post(self, request):
-    #     user_id = request.POST.get("user_id")
-    #     action = request.POST.get("action")  # Aquí se podría definir algún campo en el formulario para la acción, como un botón de "aprobar"
-
-    #     try:
-    #         user = User.objects.get(pk=user_id)
-    #         if action == "approve":
-    #             # Lógica para aprobar al usuario
-    #             user.approved = True
-    #             user.save()
-    #             message = "Usuario aprobado correctamente"
-    #         elif action == "reject":
-    #             # Lógica para rechazar al usuario
-    #             user.approved = False
-    #             user.save()
-    #             message = "Usuario rechazado correctamente"
-    #         else:
-    #             message = "Acción no válida"
-
-    #         # Obtener todos los usuarios que necesitan aprobación después de la acción realizada
-    #         users_needing_approval = User.objects.filter(needs_approval=True)
-    #         return render(
-    #             request,
-    #             self.template_name,
-    #             {"users_needing_approval": users_needing_approval, "success": message},
-    #         )
-    #     except User.DoesNotExist:
-    #         return render(
-    #             request,
-    #             self.template_name,
-    #             {"error": "Usuario no encontrado"},
-    #         )
