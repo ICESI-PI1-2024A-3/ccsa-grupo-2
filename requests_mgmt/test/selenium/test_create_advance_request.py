@@ -16,49 +16,50 @@ class TestCreateAdvanceRequest(StaticLiveServerTestCase):
         self.driver.quit()
 
     def test_create_advance_request_1(self):
-        self.fill_form("John Doe", "12345", "Passport", "10/04/2024", "05/05/2024", "Engineering Department", "Business trip", "New York", "20/04/2024", "25/04/2024", "US Dollars", "1000000", "75000", "200000", "400000", "70000", "100000")
+        self.fill_form("John Doe", "12345", "Cédula de extranjería", "10/04/2024", "05/05/2024", "Engineering Department", "Business trip", "New York", "20/04/2024", "25/04/2024", "US Dollars", "1000000", "75000", "200000", "400000", "70000", "100000")
 
     def test_create_advance_request_2(self):
-        self.fill_form("Jane Smith", "67890", "ID Card", "12/04/2024", "07/05/2024", "Marketing Department", "Conference", "London", "22/04/2024", "27/04/2024", "Euros", "1200000", "80000", "250000", "450000", "80000", "120000")
+        self.fill_form("Jane Smith", "67890", "Cédula de extranjería", "12/04/2024", "07/05/2024", "Marketing Department", "Conference", "London", "22/04/2024", "27/04/2024", "Euros", "1200000", "80000", "250000", "450000", "80000", "120000")
 
     def test_create_advance_request_3(self):
-        self.fill_form("Michael Johnson", "54321", "Driver's License", "15/04/2024", "10/05/2024", "HR Department", "Interview", "Paris", "25/04/2024", "30/04/2024", "Pounds Sterling", "900000", "70000", "180000", "350000", "60000", "90000")
+        self.fill_form("Michael Johnson", "54321", "Cédula de extranjería", "15/04/2024", "10/05/2024", "HR Department", "Interview", "Paris", "25/04/2024", "30/04/2024", "Pounds Sterling", "900000", "70000", "180000", "350000", "60000", "90000")
 
     def test_create_advance_request_4(self):
-        self.fill_form("Luisa Fernanda Gómez", "765432", "Cédula de Ciudadanía", "10/05/2024", "15/06/2024", "Departamento de Finanzas", "Capacitación", "Madrid", "20/05/2024", "25/05/2024", "Euros", "1500000", "90000", "300000", "500000", "100000", "200000")
+        self.fill_form("Juan Camilo Restrepo", "54321001", "Cédula de ciudadanía", "13/04/2024", "08/05/2024", "Departamento de Finanzas", "Reunión de negocios", "Bogotá", "23/04/2024", "28/04/2024", "Pesos colombianos", "800000", "60000", "150000", "300000", "50000", "80000")
 
     def test_create_advance_request_5(self):
-        self.fill_form("Carlos Andrés López", "234567", "Tarjeta de Identidad", "12/05/2024", "17/06/2024", "Departamento de Ventas", "Reunión de Negocios", "Buenos Aires", "22/05/2024", "27/05/2024", "Pesos Argentinos", "1300000", "85000", "280000", "450000", "85000", "130000")
+        self.fill_form("María Fernanda Gómez", "98765001", "Cédula de extranjería", "16/04/2024", "11/05/2024", "Departamento de Recursos Humanos", "Entrevista de trabajo", "Medellín", "26/04/2024", "01/05/2024", "Pesos colombianos", "700000", "55000", "130000", "250000", "45000", "75000")
 
     def test_create_advance_request_6(self):
-        self.fill_form("María Fernanda Ramírez", "876543", "Cédula de Ciudadanía", "15/05/2024", "20/06/2024", "Departamento de Recursos Humanos", "Entrevista", "Santiago de Chile", "25/05/2024", "30/05/2024", "Pesos Chilenos", "1100000", "80000", "250000", "400000", "75000", "110000")
+        self.fill_form("Luisa Sánchez", "1122334455", "Cédula de ciudadanía", "19/04/2024", "14/05/2024", "Departamento de Marketing", "Presentación en conferencia", "Cali", "29/04/2024", "04/05/2024", "Pesos colombianos", "850000", "70000", "160000", "280000", "60000", "90000")
 
     def test_create_advance_request_7(self):
-        self.fill_form("Juan Pablo Herrera", "345678", "Cédula de Ciudadanía", "18/05/2024", "23/06/2024", "Departamento de Logística", "Visita a Proveedores", "Ciudad de México", "28/05/2024", "02/06/2024", "Pesos Mexicanos", "1250000", "85000", "270000", "430000", "90000", "125000")
+        self.fill_form("Andrés López", "9988776655", "Cédula de ciudadanía", "22/04/2024", "17/05/2024", "Departamento de Tecnología", "Capacitación en tecnologías emergentes", "Cartagena", "02/05/2024", "07/05/2024", "Pesos colombianos", "750000", "60000", "140000", "270000", "55000", "85000")
 
     def test_create_advance_request_8(self):
-        self.fill_form("Laura Rodríguez", "987654", "Cédula de Ciudadanía", "20/05/2024", "25/06/2024", "Departamento de Tecnología", "Congreso", "Río de Janeiro", "30/05/2024", "04/06/2024", "Reales Brasileños", "1400000", "95000", "320000", "480000", "95000", "140000")
+        self.fill_form("Camila Martínez", "3344556677", "Cédula de ciudadanía", "25/04/2024", "20/05/2024", "Departamento de Logística", "Visita a proveedores", "Bucaramanga", "05/05/2024", "10/05/2024", "Pesos colombianos", "900000", "65000", "170000", "320000", "65000", "100000")
 
     def test_create_advance_request_9(self):
-        self.fill_form("Camilo Sánchez", "456789", "Cédula de Ciudadanía", "22/05/2024", "27/06/2024", "Departamento de Investigación y Desarrollo", "Presentación de Producto", "Tokio", "01/06/2024", "06/06/2024", "Yenes Japoneses", "1600000", "100000", "350000", "520000", "100000", "160000")
+        self.fill_form("José Rodríguez", "1122334455", "Cédula de ciudadanía", "28/04/2024", "23/05/2024", "Departamento de Ventas", "Negociación con clientes", "Pereira", "08/05/2024", "13/05/2024", "Pesos colombianos", "800000", "60000", "150000", "300000", "50000", "80000")
 
     def test_create_advance_request_10(self):
-        self.fill_form("Valentina Gutiérrez", "876543", "Cédula de Ciudadanía", "25/05/2024", "30/06/2024", "Departamento de Contabilidad", "Auditoría Externa", "Berlín", "05/06/2024", "10/06/2024", "Euros", "1700000", "105000", "380000", "550000", "105000", "170000")
+        self.fill_form("Laura Pérez", "9988776655", "Cédula de ciudadanía", "01/05/2024", "26/05/2024", "Departamento de Investigación y Desarrollo", "Presentación de resultados de investigación", "Manizales", "11/05/2024", "16/05/2024", "Pesos colombianos", "700000", "55000", "130000", "250000", "45000", "75000")
 
     def test_create_advance_request_11(self):
-        self.fill_form("Andrés Felipe Martínez", "654321", "Cédula de Ciudadanía", "28/05/2024", "03/07/2024", "Departamento de Marketing", "Lanzamiento de Producto", "Roma", "08/06/2024", "13/06/2024", "Euros", "1800000", "110000", "400000", "600000", "110000", "180000")
+        self.fill_form("Carlos Gutiérrez", "3344556677", "Cédula de ciudadanía", "04/05/2024", "29/05/2024", "Departamento de Calidad", "Auditoría interna", "Cúcuta", "14/05/2024", "19/05/2024", "Pesos colombianos", "850000", "70000", "160000", "280000", "60000", "90000")
 
     def test_create_advance_request_12(self):
-        self.fill_form("Diana López", "234567", "Cédula de Ciudadanía", "30/05/2024", "05/07/2024", "Departamento de Producción", "Capacitación", "Ciudad del Cabo", "10/06/2024", "15/06/2024", "Rand Sudafricano", "1900000", "115000", "420000", "650000", "115000", "190000")
+        self.fill_form("Isabella Hernández", "1122334455", "Cédula de ciudadanía", "07/05/2024", "01/06/2024", "Departamento Legal", "Reunión con abogados externos", "Ibagué", "17/05/2024", "22/05/2024", "Pesos colombianos", "750000", "60000", "140000", "270000", "55000", "85000")
 
     def test_create_advance_request_13(self):
-        self.fill_form("Santiago Gómez", "345678", "Cédula de Ciudadanía", "01/06/2024", "07/07/2024", "Departamento de Ventas", "Negociación de Contrato", "Sídney", "12/06/2024", "17/06/2024", "Dólares Australianos", "2000000", "120000", "450000", "700000", "120000", "200000")
+        self.fill_form("Daniel Ramírez", "9988776655", "Cédula de ciudadanía", "10/05/2024", "05/06/2024", "Departamento de Compras", "Visita a feria internacional", "Santa Marta", "20/05/2024", "25/05/2024", "Pesos colombianos", "900000", "65000", "170000", "320000", "65000", "100000")
 
     def test_create_advance_request_14(self):
-        self.fill_form("Laura Pérez", "456789", "Cédula de Ciudadanía", "03/06/2024", "09/07/2024", "Departamento de Recursos Humanos", "Reclutamiento", "Nueva Delhi", "14/06/2024", "19/06/2024", "Rupia India", "2100000", "125000", "480000", "750000", "125000", "210000")
+        self.fill_form("Valentina Gómez", "3344556677", "Cédula de ciudadanía", "13/05/2024", "08/06/2024", "Departamento de Recursos Humanos", "Entrevistas de selección", "Pasto", "23/05/2024", "28/05/2024", "Pesos colombianos", "800000", "60000", "150000", "300000", "50000", "80000")
 
     def test_create_advance_request_15(self):
-        self.fill_form("Mateo Rodríguez", "567890", "Cédula de Ciudadanía", "05/06/2024", "11/07/2024", "Departamento de Logística", "Suministro de Materiales", "Singapur", "16/06/2024", "21/06/2024", "Dólares de Singapur", "2200000", "130000", "510000", "800000", "130000", "220000")
+        self.fill_form("Santiago Morales", "1122334455", "Cédula de ciudadanía", "16/05/2024", "11/06/2024", "Departamento de Finanzas", "Reunión con entidades financieras", "Tunja", "26/05/2024", "31/05/2024", "Pesos colombianos", "700000", "55000", "130000", "250000", "45000", "75000")
+
 
 
     def fill_form(self, user_name, user_id, doc_type, request_date, return_date, user_dependency, reason_trip, destination_city, departure_date, icesi_last_day_date, advance_currency, airport_transport, local_transport, feeding, accommodation, departure_taxes, others):
