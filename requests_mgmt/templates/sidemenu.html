@@ -1,21 +1,15 @@
 <div class="d-flex justify-content-start mt-3 ms-3">
-    <button class="btn d-flex align-items-center"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions"
-            aria-controls="offcanvasWithBothOptions">
+    <button class="btn d-flex align-items-center" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
         <span class="material-symbols-outlined">menu</span>
     </button>
 </div>
-<div class="offcanvas offcanvas-start w-25"
-     data-bs-scroll="true"
-     tabindex="-1"
-     id="offcanvasWithBothOptions"
-     aria-labelledby="offcanvasWithBothOptionsLabel">
+<div class="offcanvas offcanvas-start w-25" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-body">
         <div class="row">
             <a href="{% url 'home' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
+                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="material-symbols-outlined">home</span>
                     <span class="ms-2">Inicio</span>
@@ -23,7 +17,7 @@
             </a>
             {% if user.role == "Admin" %}
                 <a href="{% url 'assign_roles' %}"
-                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                    class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="material-symbols-outlined">people</span>
                         <span class="ms-2">Usuarios</span>
@@ -32,21 +26,21 @@
             {% endif %}
             {% if user.role == "Admin" or user.role == "Process Leader" or user.role == "Accounting Manager" %}
                 <a href="{% url 'requests_list' %}"
-                   class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                    class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="material-symbols-outlined">list</span>
                         <span class="ms-2">Solicitudes</span>
                     </div>
                 </a>
-                {% endif %}
-                <a href="{% url 'requests_index' %}"
-                   class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="material-symbols-outlined">add</span>
-                        <span class="ms-2">Nueva solicitud</span>
-                    </div>
-                </a>
-            
+            {% endif %}
+            <a href="{% url 'requests_index' %}"
+                class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="material-symbols-outlined">add</span>
+                    <span class="ms-2">Nueva solicitud</span>
+                </div>
+            </a>
+
             <a href="{% url 'requests_made' %}"
                 class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 py-2 mb-2}">
                 <div class="d-flex w-100 justify-content-start align-items-center">
@@ -55,22 +49,22 @@
                 </div>
             </a>
             {% if user.role == "Reviewer" %}
-            <a href="{% url 'approve_as_reviewer' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="material-symbols-outlined">Search</span>
-                    <span class="ms-2">Revisor</span>
-                </div>
-            </a>
+                <a href="{% url 'approve_as_reviewer' %}"
+                    class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="material-symbols-outlined">Search</span>
+                        <span class="ms-2">Revisor</span>
+                    </div>
+                </a>
             {% endif %}
             {% if user.role == "Approver" %}
-            <a href="{% url 'approve_as_approver' %}"
-               class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="material-symbols-outlined">check</span>
-                    <span class="ms-2">Aprobador</span>
-                </div>
-            </a>
+                <a href="{% url 'approve_as_approver' %}"
+                    class="navigation link-offset-2 link-underline link-underline-opacity-0 h5 hover-opacity-1 py-2 mb-2">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="material-symbols-outlined">check</span>
+                        <span class="ms-2">Aprobador</span>
+                    </div>
+                </a>
             {% endif %}
         </div>
     </div>
