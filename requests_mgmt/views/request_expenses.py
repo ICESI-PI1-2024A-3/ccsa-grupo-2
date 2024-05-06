@@ -45,5 +45,5 @@ class RequestExpenses(View):
         )
         instance_expense.save()
 
-        return redirect("requests_made")
+        return redirect("detail_request",request_id=request_id_number)
         

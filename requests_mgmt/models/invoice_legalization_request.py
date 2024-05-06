@@ -18,4 +18,5 @@ class InvoiceLegalizationRequest(Request):
     bank_name = models.CharField(default="Not Set", max_length=20)
     account_type = models.CharField(default="Not Set", max_length=20)
     account_number = models.CharField(default="Not Set", max_length=20)
+    document_path = models.CharField(default='',max_length=350)
 
