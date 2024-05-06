@@ -1,15 +1,13 @@
 from django.shortcuts import redirect, render
 from django.views import View
-
 from requests_mgmt.models.request_status import RequestStatus
-
 from ..forms import AddApproverForm, AddReviewerForm
 from ..models import (
     ChargeAccountRequest,
     AdvanceRequest,
     InvoiceLegalizationRequest,
     Request,
-    )
+)
 
 
 class DetailsRequestView(View):
@@ -59,14 +57,16 @@ class DetailsRequestView(View):
         if action == "Aceptar":
             new_status = RequestStatus.objects.get(status="Aceptado")
             instance_request.status = new_status
+            instance_request.save()  # Cambiar el estado de la solicitud a "Aceptado"
         elif action == "Aprobar":
             new_status = RequestStatus.objects.get(status="Aprobado")
             instance_request.status = new_status
+            instance_request.save()
         elif action == "Rechazar":
             new_status = RequestStatus.objects.get(status="Rechazado")
             instance_request.status = new_status
-            
-            
+            instance_request.save()
+        
         if comment:
             instance_request.comments = comment
         
