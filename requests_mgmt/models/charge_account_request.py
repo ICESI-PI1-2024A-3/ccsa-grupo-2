@@ -15,6 +15,8 @@ class ChargeAccountRequest(Request):
     account_type = models.CharField(default="Not Set", max_length=20)
     account_number = models.CharField(default="Not Set", max_length=20)
     cex_no = models.CharField(default="Not Set", max_length=20)
+    rut_file_path = models.CharField(default="", max_length=250)
+    bank_certificate_file_path = models.CharField(default="", max_length=250)
 
     def isRent_Tax_Declarant(self, element: bool):
         if element:

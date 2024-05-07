@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="mt-5 mb-4">Nueva solicitud - Cuenta de cobro</h1>
 
-        <form method="POST" class="mb-5">
+        <form method="POST" class="mb-5" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-6">
@@ -92,9 +92,22 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="id_documents">Certificado Bancario:</label>
+                    <input type="file" name="bank_certificate">
+                </div>
+<!--
+                
+                <div class="form-group">
+                    <label for="id_documents">RUT:</label>
+                    <input type="file" name="bank_certificate">
+                </div>
+
+                <div class="form-group">
                     <label for="id_documents">Certificado bancario:</label>
                     {{ upload_documents.documents }}
                 </div>
+-->
+                
             </div>
 
             <button name="submit_button" type="submit" class="btn btn-success">Enviar</button>

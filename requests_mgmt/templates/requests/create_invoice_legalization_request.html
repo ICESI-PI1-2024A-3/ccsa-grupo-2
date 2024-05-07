@@ -16,7 +16,7 @@
     <main class="container mb-5">
         <h1 class="text-center mt-5"> Nueva solicitud - Legalización de facturas </h1>
 
-        <form method="POST" class="mt-5">
+        <form method="POST" class="mt-5" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-4">
                 <h3>Información del viajero: </h3>

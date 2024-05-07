@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 
@@ -46,6 +48,16 @@ class InvoiceLegalizationView(View):
             account_type = request.POST.get("account_type")
             account_number = request.POST.get("account_number")
             requester = request.user
+            document_path = ""
+
+            document = request.POST.get("documents")
+            if document!="":
+                form = UploadDocuments(request.POST, request.FILES)
+                if form.is_valid():
+                    uploaded_file = request.FILES['documents']
+                    document_path = self.handle_uploaded_file(uploaded_file)
+
+
             invoice_legalization_request = InvoiceLegalizationRequest.objects.create(
                 requester = requester,
                 type = 'Legalización de Factura',
@@ -58,12 +70,25 @@ class InvoiceLegalizationView(View):
                 discount_authorization = discount_authorization,
                 bank_name = bank_name,
                 account_type = account_type,
-                account_number = account_number
+                account_number = account_number,
+                document_path = document_path
 
             )
 
             invoice_legalization_request.save()
 
-            return redirect("requests_list")
+            return redirect("requests_made")
         except ValueError:
             return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION:
+    
+    def handle_uploaded_file(self, uploaded_file):
+        upload_dir = os.path.join(settings.BASE_DIR, 'archivos')
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+        
+        file_path = os.path.join(upload_dir, uploaded_file.name)
+
+        with open(file_path, 'wb+') as destination:
+            for chunk in uploaded_file.chunks():
+                destination.write(chunk)
+        return file_path

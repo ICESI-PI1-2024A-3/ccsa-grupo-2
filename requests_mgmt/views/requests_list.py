@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.db.models import Q
 
 from ..models import (
     AdvanceRequest,
@@ -22,6 +23,10 @@ class RequestsListView(View):
 
     def get(self, request):
         requests = Request.objects.all()
-        return render(request, self.template_name,{
-            'requests':requests
-        })
+        status_filter = request.GET.get('status', None)
+        print("Status Filter:", status_filter)  # Agrega este print para depurar
+        if status_filter:
+            requests = Request.objects.filter(status__status=status_filter)
+        else:
+            requests = Request.objects.all()
+        return render(request, self.template_name, {'requests': requests})
