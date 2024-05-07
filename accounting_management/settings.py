@@ -120,12 +120,12 @@ DATABASES = {
 
 #Conexion con Sqlite
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation
@@ -179,6 +179,6 @@ EMAIL_BACKENDS = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Puerto de Gmail para TLS
 EMAIL_HOST_USER = 'proyectoi1ccsa@gmail.com'  # Tu dirección de correo electrónico de Gmail
-EMAIL_HOST_PASSWORD = 'pi1ccsa123'  # La contraseña de tu correo electrónico de Gmail
+EMAIL_HOST_PASSWORD = 'fmuv akix xfpw ltkf'  # La contraseña de tu correo electrónico de Gmail
 EMAIL_USE_TLS = True
 
