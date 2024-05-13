@@ -3,6 +3,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.conf import settings
 from django.views import View
+from django.contrib import messages
 
 from ..models import Request, RequestStatus
 
@@ -29,7 +30,7 @@ class UpdateApproverView(View):
              
             subject = 'Cambio de estado de solicitud'
             recipient_list = user.email
-            template='detail_request'
+            template = f"Su solicitud ha sido asignada al aprobador {user}."
             email = EmailMessage(
                 subject,
                 template,
