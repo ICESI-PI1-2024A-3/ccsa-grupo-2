@@ -106,8 +106,8 @@ class ChargeAccountView(View):
     
         except ValueError as e:
             print(e)
-            return HttpResponse("An Error Has Ocurred")  ## CAMBIAR ESTO POR REDIRECCION
-        
+            return HttpResponse("An Error Has Ocurred")
+    
     def handle_uploaded_file(self, uploaded_file):
         upload_dir = os.path.join(settings.BASE_DIR, 'archivos')
         if not os.path.exists(upload_dir):
