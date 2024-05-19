@@ -1,0 +1,30 @@
+[
+  {
+    "model": "requests_mgmt.requeststatus",
+    "pk": 1,
+    "fields": {
+      "status": "Pendiente"
+    }
+  },
+  {
+    "model": "requests_mgmt.RequestStatus",
+    "pk": 2,
+    "fields": {
+      "status": "Aceptado"
+    }
+  },
+  {
+    "model": "requests_mgmt.RequestStatus",
+    "pk": 3,
+    "fields": {
+      "status": "Aprobado"
+    }
+  },
+  {
+    "model": "requests_mgmt.RequestStatus",
+    "pk": 4,
+    "fields": {
+      "status": "Rechazado"
+    }
+  }
+]
