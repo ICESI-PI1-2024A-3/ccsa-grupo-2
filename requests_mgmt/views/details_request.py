@@ -1,7 +1,10 @@
 from django.shortcuts import redirect, render
 from django.views import View
+from django.conf import settings
+from django.core.mail import EmailMessage
 from requests_mgmt.models.request_status import RequestStatus
 from ..forms import AddApproverForm, AddReviewerForm
+from users_mgmt.models import CustomUser
 from ..models import (
     ChargeAccountRequest,
     AdvanceRequest,
@@ -38,7 +41,7 @@ class DetailsRequestView(View):
             expenses = Expense.objects.filter(request_id_number_id=request_id)
         if intance_request.type == "Anticipos":
             gotten_request = AdvanceRequest.objects.get(pk=request_id)
-        if intance_request.type == ""
+        if intance_request.type == "":
             gotten_request = AdvanceRequest.objects.get(pk=request_id)
         return render(
             request,
@@ -67,6 +70,19 @@ class DetailsRequestView(View):
             new_status = RequestStatus.objects.get(status="Aprobado")
             instance_request.status = new_status
             instance_request.save()
+            CustomUser.objects.get
+            subject = 'Cambio de estado de solicitud'
+            recipient_list = user.email
+            template = f"Su solicitud ha finalizado por el proceso de revision y aprovación {user}."
+            email = EmailMessage(
+                subject,
+                template,
+                settings.EMAIL_HOST_USER,
+                [recipient_list]
+                
+            )
+            email.fail_silently=False
+            email.send()
         elif action == "Rechazar":
             new_status = RequestStatus.objects.get(status="Rechazado")
             instance_request.status = new_status
