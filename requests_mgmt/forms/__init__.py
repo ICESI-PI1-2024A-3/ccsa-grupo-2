@@ -10,3 +10,4 @@ from .add_reviewer import *
 from .advance_request import *
 from .travel_expenses import *
 from .documents import *
+from .assign_accounting_maganer import *

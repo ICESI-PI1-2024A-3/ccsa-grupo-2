@@ -90,7 +90,7 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 
 
-#Conexion con Postgres
+# Conexion con Postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -105,7 +105,7 @@ DATABASES = {
 
 #Conexion con Sqlite
 # DATABASES = {
-#     "default": {
+#  "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
