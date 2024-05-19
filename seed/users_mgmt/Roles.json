@@ -1,0 +1,44 @@
+[
+  {
+    "model": "users_mgmt.Roles",
+    "pk": 1,
+    "fields": {
+      "name": "admin"
+    }
+  },
+  {
+    "model": "users_mgmt.Roles",
+    "pk": 2,
+    "fields": {
+      "name": "lider de proceso"
+    }
+  },
+  {
+    "model": "users_mgmt.Roles",
+    "pk": 3,
+    "fields": {
+      "name": "gestor de contabilidad"
+    }
+  },
+  {
+    "model": "users_mgmt.Roles",
+    "pk": 4,
+    "fields": {
+      "name": "solicitante"
+    }
+  },
+  {
+    "model": "users_mgmt.Roles",
+    "pk": 5,
+    "fields": {
+      "name": "revisor"
+    }
+  },
+  {
+    "model": "users_mgmt.roles",
+    "pk": 6,
+    "fields": {
+      "name": "aprobador"
+    }
+  }
+]

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 
 from ..forms import UpdateRoleForm
-from ..models import CustomUser as User
+from ..models import CustomUser as User, Roles
 
 
 class AssignRolesView(View):
@@ -14,7 +14,7 @@ class AssignRolesView(View):
         forms = []
         for user in users:
             forms.append(self.form_class(initial={"role": user.role}))
-        print("user.id", user.id)
+        print("user.id", user.id)  # user.id 1
         users_and_forms = zip(users, forms)
         return render(
             request,
@@ -35,16 +35,12 @@ class AssignRolesView(View):
             if not user:
                 raise ValueError("User not found")
 
-            if role not in [
-                "Process Leader",
-                "Accounting Manager",
-                "Requester",
-                "Reviewer",
-                "Approver",
-            ]:
+            new_role = Roles.objects.get(name=role)
+
+            if not new_role:
                 raise ValueError("Invalid role")
 
-            user.role = role
+            user.role = new_role
             user.save()
 
             users = User.objects.all()

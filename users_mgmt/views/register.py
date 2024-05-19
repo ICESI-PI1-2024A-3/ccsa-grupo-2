@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from ..forms import RegisterForm
-from ..models import CustomUser as User
+from ..models import CustomUser as User, Roles
 
 
 class RegisterView(View):
@@ -48,6 +48,8 @@ class RegisterView(View):
                         },
                     )
                 else:
+                    role = Roles.objects.get(name="Solicitante")
+
                     user = User.objects.create(
                         first_name=first_name,
                         last_name=last_name,
@@ -57,6 +59,7 @@ class RegisterView(View):
                         username=id_number,
                         email=email,
                         password=password,
+                        role=role,
                     )
                     login(request, user)
                     return redirect("home")
