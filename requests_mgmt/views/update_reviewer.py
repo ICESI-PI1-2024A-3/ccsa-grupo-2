@@ -8,8 +8,10 @@ class UpdateReviewerView(View):
 
     def post(self, request, request_id, *args, **kwargs):
         form = AddReviewerForm(request.POST) 
+        print("form", form)
         if form.is_valid(): 
             user_id = form.cleaned_data["reviewers"]
+            print("user_id", user_id)
             if user_id != "0":  # Verificar si se ha seleccionado un revisor
                 try:
                     instance_request = Request.objects.get(pk=request_id)
