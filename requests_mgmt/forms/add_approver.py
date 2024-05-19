@@ -1,6 +1,6 @@
 from django import forms
 
-from users_mgmt.models import CustomUser
+from users_mgmt.models import CustomUser as User, Roles
 
 
 class AddApproverForm(forms.Form):
@@ -11,7 +11,8 @@ class AddApproverForm(forms.Form):
     def __init__(self, *args, **kwargs):
         selected_approver_id = kwargs.pop("selected_approver_id", None)
         super(AddApproverForm, self).__init__(*args, **kwargs)
-        approvers = CustomUser.objects.filter(role="Approver")
+        approver_role = Roles.objects.get(name="aprobador")
+        approvers = User.objects.filter(role=approver_role)
         approver_choices = [(0, "Selecione un aprobador")] + [
             (approver.id, approver) for approver in approvers
         ]
@@ -19,3 +20,10 @@ class AddApproverForm(forms.Form):
 
         if selected_approver_id:
             self.fields["approvers"].initial = selected_approver_id
+
+
+# class AddApproverForm(forms.Form):
+#     approver_role = Roles.objects.get(name="aprobador")
+#     approvers = User.objects.filter(role=approver_role)
+#     approver_choices = [(approver.id, approver) for approver in approvers]
+#     selected_approver_id = forms.ChoiceField(choices=approver_choices, required=False)

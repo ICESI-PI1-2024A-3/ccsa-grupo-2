@@ -48,7 +48,7 @@ class RegisterView(View):
                         },
                     )
                 else:
-                    role = Roles.objects.get(name="Solicitante")
+                    role = Roles.objects.get(name="solicitante")
 
                     user = User.objects.create(
                         first_name=first_name,
