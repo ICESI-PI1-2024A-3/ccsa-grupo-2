@@ -18,7 +18,8 @@ from .views import (
     UpdateApproverView,
     UpdateReviewerView,
     RequestExpenses,
-    SetClosingDate
+    SetClosingDate,
+    InvoicesRequestView
 )
 
 urlpatterns = [
@@ -75,6 +76,9 @@ urlpatterns = [
         login_required(TravelExpensesRequest.as_view()),
         name="travel_expenses",
     ),
+    path("nueva/facturas",
+         login_required(InvoicesRequestView.as_view()),
+         name="invoice"),
     path(
         "mis solicitudes",
         login_required(RequestsMadeView.as_view()),
