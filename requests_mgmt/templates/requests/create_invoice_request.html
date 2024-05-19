@@ -1,14 +1,66 @@
-{% extends "layouts/base.html"%}
+{% extends "layouts/base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Facturas {% endblock %}</title>
+    <style>
+        .main-container {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .card-custom {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            transition: box-shadow 0.3s ease;
+        }
+        .card-custom:hover {
+            box-shadow: 0 0 11px rgba(33,33,33,.2);
+        }
+        .btn-custom {
+            background-color: #1E4072;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #16345a;
+            color: white;
+        }
+        .card-header-custom {
+            background-color: #1E4072;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     {% block content %}
     {% include "sidemenu.html" %}
-    
+    <div class="container main-container">
+        <h1 class="mb-4">Gestión de Facturas</h1>
+        <div class="card card-custom mb-4">
+            <div class="card-header card-header-custom">
+                Cargar Nuevos Documentos
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="invoiceFile" class="form-label">Subir Factura</label>
+                        <input class="form-control" type="file" id="invoiceFile">
+                    </div>
+                    <div class="mb-3">
+                        <label for="additionalDocs" class="form-label">Subir Documentos Adicionales</label>
+                        <input class="form-control" type="file" id="additionalDocs" multiple>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+        
+    </div>
+    {% endblock %}
 </body>
 </html>
