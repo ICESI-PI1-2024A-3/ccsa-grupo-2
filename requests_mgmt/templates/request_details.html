@@ -3,15 +3,6 @@
 
     {% if request.type == 'Cuenta de Cobro' %}
         <div class="request-info">
-            <style>
-                .custom-border {
-                    border: 1px solid rgba(0, 0, 0, 0.125);
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                }
-                .container-md {
-                    margin-top: 20px;
-                }
-            </style>
             {% include "sidemenu.html" %}
             <div class="container-md">
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -153,16 +144,7 @@
         </div>
     {% endif %}
     {% if request.type == 'Legalizacion de Factura' %}
-        <style>
-    .custom-border {
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .container-md {
-        margin-top: 20px;
-    }
 
-        </style>
         <div class="request-info">
             {% include "sidemenu.html" %}
             <div class="container-md">
@@ -304,24 +286,7 @@
                                     {% csrf_token %}
                                     <label class="form-label fw-bold me-2">Revisor:</label>
                                     {{ select_reviewer }}
-                                    <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Asignación Exitosa</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Se ha asignado el revisor correctamente.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>                                            
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
                                 </form>
                             </div>
                             <div class="col-md-6">
@@ -331,23 +296,7 @@
                                     {% csrf_token %}
                                     <label class="form-label fw-bold me-2">Aprobador:</label>
                                     {{ select_approver }}
-                                    <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
-                                    <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Asignación Exitosa</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Se ha asignado el aprovador exitosamente.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>                                            
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
                                 </form>
                             </div>
                         </div>
@@ -395,25 +344,8 @@
             </div>
         </div>
     {% endif %}
-<!--
-        <form method ='get' action="{% url 'delete_request' request.id %}">
-        {% csrf_token %}
-        <button>
-            DELETE
-        </button>
-    </form>
--->
     {% if request.type == 'Anticipos' %}
-        <style>
-    .custom-border {
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .container-md {
-        margin-top: 20px;
-    }
 
-        </style>
         <div class="request-info">
             {% include "sidemenu.html" %}
             <div class="container-md">
@@ -421,16 +353,10 @@
                     <h5 class="mb-4">Información general</h5>
                     <p>
                         <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.request_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Ciudad:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                        <strong>Fecha de solictud:</strong>&nbsp;&nbsp;{{ request.request_date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                 </div>
-                <div class="text-left bg-light text-dark p-3 custom-border mb-4">
-                    <h5 class="mb-4">Gastos</h5>
-                    <a href="{% url 'request_expense' request.id %}" class="btn btn-primary">
-                        Agregar Gasto 
-                    </a>
-                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-left bg-light text-dark p-3 custom-border mb-4">
@@ -456,7 +382,7 @@
                                 <strong>Fecha de salida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
                             </p>
                             <p>
-                                <strong>Dependencia:</strong>&nbsp;&nbsp;{{ request.dependency }}&nbsp;&nbsp;
+                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.reason_trip }}
                             </p>
                         </div>
                     </div>
@@ -466,24 +392,36 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p>
-                                <strong>Monto:</strong>&nbsp;&nbsp;$&nbsp;{{ request.amount }}
+                                <strong>Ultimo dia en Icesi:</strong>&nbsp;&nbsp;&nbsp;{{ request.icesi_last_day_date }}
                             </p>
                             <p>
-                                <strong>Concepto:</strong>&nbsp;&nbsp;{{ request.reason_trip }}
+                                <strong>Transporte aeropuerto:</strong>&nbsp;$&nbsp;{{ request.airport_transport }}
+                            </p>
+                            <p>
+                                <strong>Alimentacion:</strong>&nbsp;$&nbsp;{{ request.feeding }}
+                            </p>
+                            <p>
+                                <strong>Impuestos:</strong>&nbsp;$&nbsp;{{ request.departure_taxes }}
+                            </p>
+                            <p>
+                                <strong>Dependencia:</strong>&nbsp;&nbsp;{{ request.dependency }}
                             </p>
                         </div>
                         <div class="col-md-6">
                             <p>
-                                <strong>Fecha de legalización:</strong>&nbsp;&nbsp;{{ request.legalization_date }}
+                                <strong>Fecha de regreso:</strong>&nbsp;&nbsp;{{ request.return_date }}
                             </p>
                             <p>
-                                <strong>Ciudad de destino:</strong>&nbsp;&nbsp;{{ request.destination_city }}
+                                <strong>Transporte Local:</strong>&nbsp;$&nbsp;{{ request.local_transport }}
                             </p>
                             <p>
-                                <strong>Fecha de partida:</strong>&nbsp;&nbsp;{{ request.departure_date }}
+                                <strong>Hospedaje:</strong>&nbsp;$&nbsp;{{ request.accommodation }}
                             </p>
                             <p>
-                                <strong>Autorización descuento:</strong>&nbsp;&nbsp;{{ request.discount_authorization }}
+                                <strong>Otros:</strong>&nbsp;$&nbsp;{{ request.others }}
+                            </p>
+                            <p>
+                                <strong>Moneda:</strong>&nbsp;&nbsp;{{ request.advance_currency }}
                             </p>
                         </div>
                     </div>
@@ -499,24 +437,7 @@
                                     {% csrf_token %}
                                     <label class="form-label fw-bold me-2">Revisor:</label>
                                     {{ select_reviewer }}
-                                    <button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal" data-bs-target="#successModalReviewer">Asignar Revisor</button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="successModalReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Asignación Exitosa</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Se ha asignado el revisor correctamente.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>                                            
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary ms-4">Asignar Revisor</button>
                                 </form>
                             </div>
                             <div class="col-md-6">
@@ -526,23 +447,7 @@
                                     {% csrf_token %}
                                     <label class="form-label fw-bold me-2">Aprobador:</label>
                                     {{ select_approver }}
-                                    <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
-                                <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Asignación Exitosa</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Se ha asignado el aprovador correctamente.
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
-                                            </div>                                            
-                                        </div>
-                                    </div>
-                                </div>
+                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
                                 </form>
                             </div>
                         </div>
@@ -587,19 +492,11 @@
 
             {% endif %}
 
-                
-
             </div>
+
         </div>
+
     {% endif %}
-
-        <!-- <form method ='get' action="{% url 'delete_request' request.id %}">
-            {% csrf_token %}
-            <button>
-                DELETE
-            </button>
-        </form> -->
-
 
     
 {% endblock %}

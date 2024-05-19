@@ -1,9 +1,7 @@
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.conf import settings
 from django.views import View
-from django.contrib import messages
 
 from ..models import Request, RequestStatus
 

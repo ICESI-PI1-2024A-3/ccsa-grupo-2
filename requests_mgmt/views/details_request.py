@@ -38,6 +38,8 @@ class DetailsRequestView(View):
             expenses = Expense.objects.filter(request_id_number_id=request_id)
         if intance_request.type == "Anticipos":
             gotten_request = AdvanceRequest.objects.get(pk=request_id)
+        if intance_request.type == ""
+            gotten_request = AdvanceRequest.objects.get(pk=request_id)
         return render(
             request,
             self.template_name,
@@ -60,6 +62,7 @@ class DetailsRequestView(View):
             new_status = RequestStatus.objects.get(status="Aceptado")
             instance_request.status = new_status
             instance_request.save()  # Cambiar el estado de la solicitud a "Aceptado"
+
         elif action == "Aprobar":
             new_status = RequestStatus.objects.get(status="Aprobado")
             instance_request.status = new_status
@@ -78,3 +81,4 @@ class DetailsRequestView(View):
             return redirect("approve_as_reviewer")
         elif request.user.role == "Approver":
             return redirect("approve_as_approver")
+            
