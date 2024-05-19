@@ -27,6 +27,13 @@ class ChargeAccountView(View):
     upload_documents = UploadDocuments
 
     def get(self, request, *args, **kwargs):
+        initial_data = {
+            "user_name": request.user,
+            "user_id": request.user.id_number,
+            "document_type": request.user.id_type
+        }
+        user_info_form = self.user_info_form(initial=initial_data)
+        
         return render(
             request,
             self.template_name,
@@ -36,7 +43,7 @@ class ChargeAccountView(View):
                 "city_date_form": self.city_date_form(),
                 "charge_account_form": self.charge_account_form(),
                 "tax_treatment_form": self.tax_treatment_form(),
-                "user_info_form": self.user_info_form(),
+                "user_info_form": user_info_form,
                 "upload_documents": self.upload_documents
             },
         )
@@ -64,14 +71,16 @@ class ChargeAccountView(View):
                 form = UploadDocuments(request.POST, request.FILES)
                 if form.is_valid():
                     uploaded_file = request.FILES['documents']
-                    rut_file_path = self.handle_uploaded_file(uploaded_file)
+                    if uploaded_file.name.endswith('.pdf'):
+                        rut_file_path = self.handle_uploaded_file(uploaded_file)
             
             bc_document = request.POST.get("bank_certificate")
             if bc_document!="":
                 form = UploadDocuments(request.POST, request.FILES)
                 if form.is_valid():
                     uploaded_bc = request.FILES['bank_certificate']
-                    bankCertificate_file_path = self.handle_uploaded_file(uploaded_bc)
+                    if uploaded_bc.name.endswith('.pdf'):
+                        bankCertificate_file_path = self.handle_uploaded_file(uploaded_bc)
 
             chargeRequest = ChargeAccountRequest.objects.create(
                 requester=requester,
