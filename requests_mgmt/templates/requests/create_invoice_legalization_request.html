@@ -15,7 +15,16 @@
 
     <main class="container mb-5">
         <h1 class="text-center mt-5"> Nueva solicitud - Legalización de facturas </h1>
-
+        <div class="my-4">
+            <h3>Por favor, tener en cuenta: </h3>
+            <ol>
+                <li>Todos los soportes de legalización deben venir a nombre de la Universidad Icesi Nit. 890.316.745-5. Documento sin este requisito, será rechazado en la legalización.</li>
+                <li>Si hay saldo es a favor de la Universidad ICESI, se debe regresar el dinero en la caja de la Universidad o autorizar en este formato el descuento por nomina </li>
+                <li>Si hay saldo a favor del colaborador, se procede a  reintegrar a la cuenta de nomina </li>
+                <li>Si el soporte de pago es una factura Pos, debe solicitar a la empresa la factura electrónica.</li>
+                <li>Se debe legalizar en la moneda que se recibió en el anticipo (Pesos colombianos, Euros, Dólares) Si el colaborador gasto en una moneda diferente, debe pasar los gastos a la      moneda original del anticipo y dejar registro del cambio de moneda. </li>
+            </ol>
+        </div>
         <form method="POST" class="mt-5" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-4">
@@ -94,7 +103,10 @@
                 <h3>Documentos</h3>
                 {{ upload_documents }}
             </div>
-            <button type="submit" class="btn btn-success">Enviar</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+            
         </form>
     </main>
 
