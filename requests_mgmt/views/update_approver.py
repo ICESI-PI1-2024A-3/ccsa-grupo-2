@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.conf import settings
@@ -22,13 +21,14 @@ class UpdateApproverView(View):
             instance_request = Request.objects.get(pk=request_id)
             user = CustomUser.objects.get(pk=user_id)
             instance_request.approver = user
+            instance_request.save()
+
             new_status = RequestStatus.objects.get(status='Aceptado')
             instance_request.status = new_status
-            instance_request.save()
-            '''
-             subject = 'Cambio de estado de solicitud'
-            recipient_list = CustomUser.email
-            template='detail_request'
+             
+            subject = 'Cambio de estado de solicitud'
+            recipient_list = user.email
+            template = f"Su solicitud ha sido asignada al aprobador {user}."
             email = EmailMessage(
                 subject,
                 template,
@@ -38,7 +38,6 @@ class UpdateApproverView(View):
             )
             email.fail_silently=False
             email.send()
-            '''
             
             return redirect("detail_request", request_id=request_id)
         
