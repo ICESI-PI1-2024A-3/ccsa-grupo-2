@@ -29,7 +29,7 @@
                             <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
-                            {% if user.role != "Requester"%}
+                            {% if user.role.name != "revisor"%}
                                 <input type="date" name="closing_date" value="{{ request.closing_date }}">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button type="submit" class="btn btn-secondary">Cambiar</button>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                {% if user.role == "Accounting Manager" or user.role == "Process Leader" or user.role == "Admin" %}
+                {% if user.role.name == "gestor de contabilidad" or user.role.name == "lider de proceso" or user.role.name == "admin" %}
                 <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                     <h5 class="mb-4">Asignaciones</h5>
                     <div class="row">
@@ -131,7 +131,7 @@
                                                 Se ha asignado el revisor correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                                 Se ha asignado el aprovador correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -171,7 +171,24 @@
 
                 {% endif %}
 
-                {% if user.role == "Approver" and request.status.status == "Aceptado" %}
+                {% if user.role.name == "revisor" or user.role.name == "admin" and request.status.status == "Revisión" %}
+                    <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
+                        <h5 class="mb-4">Acciones - Revisor</h5>
+                        <label for="comentario">Pon tu comentario:</label>
+                        <form method="post" action="{% url 'detail_request' request.id %}" class="d-inline-flex flex-column" style="width: 100%;">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control" id="comentario_{{ request.id }}" name="comentario" rows="3"></textarea>
+                                </div>
+                                <div class="form-group text-center d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success me-4" name="action" value="Aceptar">Aceptar</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="Rechazar">Rechazar</button>
+                                </div>
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% if user.role.name == "aprobador" and request.status.status == "Aceptado" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
                         <label for="comentario">Pon tu comentario:</label>
@@ -215,7 +232,7 @@
                             <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <strong>Fecha de Inicio:</strong>&nbsp;&nbsp;{{ request.initial_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <strong>Fecha de Cierre:</strong>{{ request.closing_date }}&nbsp;&nbsp;
-                            {% if user.role != "Requester"%}
+                            {% if user.role.name != "solicitante" %}
                                 <input type="date" name="closing_date" value="{{ request.closing_date }}">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button type="submit" class="btn btn-secondary">Cambiar</button>
@@ -334,7 +351,7 @@
                     </div>
                     
                 </div>
-                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                {% if user.role.name == "gestor de contabilidad" or user.role.name == "lider de proceso" or user.role.name == "admin" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Asignaciones</h5>
                         <div class="row">
@@ -358,8 +375,8 @@
                                                     Se ha asignado el revisor correctamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>                                            
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>                                
                                             </div>
                                         </div>
                                     </div>
@@ -384,7 +401,7 @@
                                                     Se ha asignado el aprovador exitosamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -395,7 +412,7 @@
                     </div>
                 </div>
 
-                {% if user.role == "Reviewer" or "Admin" and request.status.status == "Revisión" %}
+                {% if user.role.name == "revisor" or user.role.name == "admin" and request.status.status == "Revisión" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Revisor</h5>
                         <label for="comentario">Pon tu comentario:</label>
@@ -412,7 +429,7 @@
                     </div>
                 {% endif %}
 
-                {% if user.role == "Approver" or "Admin" and request.status.status == "Aceptado" %}
+                {% if user.role.name == "aprobador" or user.role.name == "admin" and request.status.status == "Aceptado" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
                         <label for="comentario">Pon tu comentario:</label>
@@ -529,7 +546,7 @@
                         </div>
                     </div>
                 </div>
-                {% if user.role == "Accounting Manager" or "Process Leader" or "Admin" %}
+                {% if user.role.name == "gestor de contabilidad" or user.role.name == "lider de proceso" or user.role.name == "admin" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Asignaciones</h5>
                         <div class="row">
@@ -553,7 +570,7 @@
                                                     Se ha asignado el revisor correctamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -579,7 +596,7 @@
                                                 Se ha asignado el aprovador correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -590,7 +607,7 @@
                     </div>
                 </div>
 
-                {% if user.role == "Reviewer" and request.status.status == "Revisión" %}
+                {% if user.role.name == "revisor" and request.status.status == "Revisión" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Revisor</h5>
                         <label for="comentario">Pon tu comentario:</label>
@@ -607,7 +624,7 @@
                     </div>
                 {% endif %}
 
-                {% if user.role == "Approver" and request.status.status == "Aceptado" %}
+                {% if user.role.name == "aprobador" and request.status.status == "Aceptado" %}
                     <div class="text-left bg-light text-dark p-3 custom-border mb-4 mt-4">
                         <h5 class="mb-4">Acciones - Aprobador</h5>
                         <label for="comentario">Pon tu comentario:</label>
