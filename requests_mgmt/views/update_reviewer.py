@@ -1,4 +1,6 @@
 from django.shortcuts import redirect
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.views import View
 from ..models import Request, RequestStatus
 from users_mgmt.models import CustomUser
@@ -23,8 +25,20 @@ class UpdateReviewerView(View):
                     new_status = RequestStatus.objects.get(status='Revisión')
                     instance_request.status = new_status
                     instance_request.save()
-                    
+                    subject = 'Cambio de estado de solicitud'
+                    recipient_list = user.email
+                    template = f"Su solicitud ha sido asignada al Revisor {user}."
+                    email = EmailMessage(
+                    subject,
+                    template,
+                    settings.EMAIL_HOST_USER,
+                    [recipient_list]
+                    )
+                    email.fail_silently=False
+                    email.send()
+            
                     return redirect("detail_request", request_id=request_id)
+                    
                 except (Request.DoesNotExist, CustomUser.DoesNotExist) as e:
                     instance_request = Request.objects.get(pk=request_id)
                     instance_request.reviewer = None
