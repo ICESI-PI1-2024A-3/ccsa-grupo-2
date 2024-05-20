@@ -19,7 +19,7 @@
         <div class="row g-4">
             <div class="col-md-3">
                 <a href="{% url 'charge_account' %}" class="card-link text-decoration-none">
-                    <div class="card h-100 shadow-sm" style="background-color: #f8f9fa;">
+                    <div class="card h-100 shadow-sm" style="background-color: #fffafa;">
                         <div class="card-body">
                             <h5 class="card-title">Cuenta de cobro</h5>
                             <p class="card-text">Solicita el pago de servicios o productos prestados.</p>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-3">
                 <a href="{% url 'invoice_legalization' %}" class="card-link text-decoration-none">
-                    <div class="card h-100 shadow-sm" style="background-color: #f8f9fa;">
+                    <div class="card h-100 shadow-sm" style="background-color: #fffafa;">
                         <div class="card-body">
                             <h5 class="card-title">Legalización de facturas</h5>
                             <p class="card-text">Registra y gestiona la legalización de facturas pendientes.</p>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-3">
                 <a href="{% url 'advance_request' %}" class="card-link text-decoration-none">
-                    <div class="card h-100 shadow-sm" style="background-color: #f8f9fa;">
+                    <div class="card h-100 shadow-sm" style="background-color: #fffafa;">
                         <div class="card-body">
                             <h5 class="card-title">Anticipos y viáticos</h5>
                             <p class="card-text">Solicita anticipos de fondos para gastos futuros o solicita el reembolso de gastos de viaje.</p>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-3">
                 <a href="{% url 'invoice' %}" class="card-link text-decoration-none">
-                    <div class="card h-100 shadow-sm" style="background-color: #f8f9fa;">
+                    <div class="card h-100 shadow-sm" style="background-color: #fffafa;">
                         <div class="card-body">
                             <h5 class="card-title">Facturas</h5>
                             <p class="card-text">Accede a la gestión de facturas y documentos relacionados.</p>
@@ -71,13 +71,13 @@
 
         .card-link:hover .card {
             background-color: #1E4072;
-            color: white;
+            {% comment %} color: white; {% endcomment %}
             transform: scale(1.05);
         }
 
         .card-link:hover .card-title,
         .card-link:hover .card-text {
-            color: white;
+            {% comment %} color: white; {% endcomment %}
         }
 
         .card-title {
