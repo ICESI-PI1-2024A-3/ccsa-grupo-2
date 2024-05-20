@@ -67,6 +67,7 @@ class DetailsRequestView(View):
         elif action == "Aprobar":
             new_status = RequestStatus.objects.get(status="Aprobado")
             instance_request.status = new_status
+            '''
             instance_request.save()
             CustomUser.objects.get
             subject = 'Cambio de estado de solicitud'
@@ -81,6 +82,8 @@ class DetailsRequestView(View):
             )
             email.fail_silently=False
             email.send()
+
+            '''
         elif action == "Rechazar":
             new_status = RequestStatus.objects.get(status="Rechazado")
             instance_request.status = new_status

@@ -115,7 +115,7 @@
                                                 Se ha asignado el revisor correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@
                                                 Se ha asignado el aprovador correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>                                            
                                         </div>
                                     </div>
@@ -350,7 +350,7 @@
                                                     Se ha asignado el revisor correctamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -376,7 +376,7 @@
                                                     Se ha asignado el aprovador exitosamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -437,7 +437,7 @@
                     <h5 class="mb-4">Información general</h5>
                     <p>
                         <strong>Tipo de solicitud:</strong>&nbsp;&nbsp;{{ request.type }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>Fecha de solictud:</strong>&nbsp;&nbsp;{{ request.request_date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Fecha de solicitud:</strong>&nbsp;&nbsp;{{ request.initial_date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                 </div>
 
@@ -534,7 +534,7 @@
                                                     Se ha asignado el revisor correctamente.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
                                                 </div>                                            
                                             </div>
                                         </div>
@@ -548,7 +548,24 @@
                                     {% csrf_token %}
                                     <label class="form-label fw-bold me-2">Aprobador:</label>
                                     {{ select_approver }}
-                                    <button type="submit" class="btn btn-success ms-4">Asignar Aprobador</button>
+                                    <button type="button" class="btn btn-success ms-4" data-bs-toggle="modal" data-bs-target="#successModalApprover">Asignar Aprobador</button>
+                                    <!-- Modal -->
+                                        <div class="modal fade" id="successModalApprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Asignación Exitosa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Se ha asignado el aprovador correctamente.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    </div>                                            
+                                                </div>
+                                            </div>
+                                        </div>
                                 </form>
                             </div>
                         </div>
