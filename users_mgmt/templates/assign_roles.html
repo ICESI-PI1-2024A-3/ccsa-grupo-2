@@ -48,10 +48,10 @@
                                 <form method="post" action="{% url 'assign_roles' %}" class="d-inline-flex">
                                     {% csrf_token %}
                                     {{ form.role }}
-                                    {% if user.role != form.role.data %}<input type="hidden" name="user_id" value="{{ user.id }}">{% endif %}
+                                    {% if user.role.name != form.role.data %}<input type="hidden" name="user_id" value="{{ user.id }}">{% endif %}
                                     <button type="submit"
                                             class="btn btn-primary ms-2"
-                                            {% if user.role == form.role.data %}disabled{% endif %}>Cambiar</button>
+                                            {% if user.role.name == form.role.data %}disabled{% endif %}>Cambiar</button>
                                 </form>
                             </td>
                         </tr>
@@ -74,10 +74,10 @@
                                 <form method="post" action="{% url 'assign_roles' %}" class="d-inline-flex">
                                     {% csrf_token %}
                                     {{ form.role }}
-                                    {% if user.role != form.role.data %}<input type="hidden" name="user_id" value="{{ user.id }}">{% endif %}
+                                    {% if user.role.name != form.role.data %}<input type="hidden" name="user_id" value="{{ user.id }}">{% endif %}
                                     <button type="submit"
                                             class="btn btn-primary ms-2"
-                                            {% if user.role == form.role.data %}disabled{% endif %}>Cambiar</button>
+                                            {% if user.role.name == form.role.data %}disabled{% endif %}>Cambiar</button>
                                 </form>
                             </td>
                         </tr>

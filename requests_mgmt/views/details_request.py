@@ -10,7 +10,7 @@ from ..models import (
     AdvanceRequest,
     InvoiceLegalizationRequest,
     Request,
-    Expense
+    Expense,
 )
 
 
@@ -21,7 +21,6 @@ class DetailsRequestView(View):
 
     def get(self, request, request_id, *args, **kwargs):
         intance_request = Request.objects.get(pk=request_id)
-
         self.select_reviewer_form = AddReviewerForm(
             selected_reviewer_id=(
                 intance_request.reviewer.id if intance_request.reviewer else None
@@ -32,7 +31,6 @@ class DetailsRequestView(View):
                 intance_request.approver.id if intance_request.approver else None
             )
         )
-
         expenses = []
         if intance_request.type == "Cuenta de Cobro":
             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
@@ -54,13 +52,13 @@ class DetailsRequestView(View):
                 "expenses":expenses
             },
         )
-    
+
     def post(self, request, request_id, *args, **kwargs):
         action = request.POST.get("action")
-        comment = request.POST.get("comentario") 
+        comment = request.POST.get("comentario")
 
         instance_request = Request.objects.get(pk=request_id)
-        
+
         if action == "Aceptar":
             new_status = RequestStatus.objects.get(status="Aceptado")
             instance_request.status = new_status
@@ -87,14 +85,96 @@ class DetailsRequestView(View):
             new_status = RequestStatus.objects.get(status="Rechazado")
             instance_request.status = new_status
             instance_request.save()
-        
+
         if comment:
             instance_request.comments = comment
-        
+
         instance_request.save()
 
-        if request.user.role == "Reviewer":
+        if request.user.role == "revisor":
             return redirect("approve_as_reviewer")
-        elif request.user.role == "Approver":
+        elif request.user.role == "aprobador":
             return redirect("approve_as_approver")
-            
+
+
+# class DetailsRequestView(View):
+#     template_name = "request_details.html"
+#     select_reviewer_form_class = AddReviewerForm
+#     select_approver_form_class = AddApproverForm
+
+#     def get(self, request, request_id, *args, **kwargs):
+#         instance_request = Request.objects.get(pk=request_id)
+#         select_reviewer_form = self.select_reviewer_form_class(
+#             initial={
+#                 "selected_reviewer_id": (
+#                     instance_request.reviewer.id if instance_request.reviewer else None
+#                 )
+#             }
+#         )
+#         select_approver_form = self.select_approver_form_class(
+#             initial={
+#                 "selected_approver_id": (
+#                     instance_request.approver.id if instance_request.approver else None
+#                 )
+#             }
+#         )
+
+#         expenses = []
+#         if instance_request.type == "Cuenta de Cobro":
+#             gotten_request = ChargeAccountRequest.objects.get(pk=request_id)
+#         elif instance_request.type in [
+#             "Legalización de Factura",
+#             "Legalizacion de Factura",
+#         ]:
+#             gotten_request = InvoiceLegalizationRequest.objects.get(pk=request_id)
+#             expenses = Expense.objects.filter(request_id_number_id=request_id)
+#         elif instance_request.type == "Anticipos":
+#             gotten_request = AdvanceRequest.objects.get(pk=request_id)
+#         return render(
+#             request,
+#             self.template_name,
+#             {
+#                 "request": gotten_request,
+#                 "user": request.user,
+#                 "select_reviewer": select_reviewer_form,
+#                 "select_approver": select_approver_form,
+#                 "expenses": expenses,
+#             },
+#         )
+
+#     def post(self, request, request_id, *args, **kwargs):
+#         action = request.POST.get("action")
+#         comment = request.POST.get("comentario")
+
+#         instance_request = Request.objects.get(pk=request_id)
+
+#         if action == "Aceptar":
+#             new_status = RequestStatus.objects.get(status="Aceptado")
+#             instance_request.status = new_status
+#         elif action == "Aprobar":
+#             new_status = RequestStatus.objects.get(status="Aprobado")
+#             instance_request.status = new_status
+#         elif action == "Rechazar":
+#             new_status = RequestStatus.objects.get(status="Rechazado")
+#             instance_request.status = new_status
+
+#         if comment:
+#             instance_request.comments = comment
+
+#         # Actualizar revisores y aprobadores
+#         reviewer_id = request.POST.get("selected_reviewer_id")
+#         if reviewer_id:
+#             instance_request.reviewer_id = reviewer_id
+
+#         approver_id = request.POST.get("selected_approver_id")
+#         if approver_id:
+#             instance_request.approver_id = approver_id
+
+#         instance_request.save()
+
+#         if request.user.role == "Reviewer":
+#             return redirect("approve_as_reviewer")
+#         elif request.user.role == "Approver":
+#             return redirect("approve_as_approver")
+#         else:
+#             return redirect("request_details", request_id=request_id)

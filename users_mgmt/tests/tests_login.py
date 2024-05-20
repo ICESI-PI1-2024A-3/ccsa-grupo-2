@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from ..models import CustomUser as User
+from models import CustomUser as User
 
 
 class UserLoginTestCase(TestCase):
@@ -17,6 +17,7 @@ class UserLoginTestCase(TestCase):
             username="123456789",
             email="jhon@gmail.com",
             password="testpassword",
+            role_id=4,
         )
 
     def test_user_login_success(self):
