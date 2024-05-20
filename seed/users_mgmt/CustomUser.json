@@ -16,5 +16,77 @@
       "updated_at": "2021-07-01T00:00:00Z",
       "role_id": 1
     }
+  },
+  {
+    "model": "users_mgmt.customuser",
+    "pk": 2,
+    "fields": {
+      "username": "987654321",
+      "password": "maria12345",
+      "first_name": "Maria",
+      "last_name": "Garcia",
+      "email": "maria@gmail.com",
+      "needs_approval": true,
+      "id_type": "CC",
+      "id_number": "987654321",
+      "phone": "3167829019",
+      "created_at": "2021-07-01T00:00:00Z",
+      "updated_at": "2021-07-01T00:00:00Z",
+      "role_id": 4
+    }
+  },
+  {
+    "model": "users_mgmt.customuser",
+    "pk": 3,
+    "fields": {
+      "username": "246813579",
+      "password": "paula12345",
+      "first_name": "Paula",
+      "last_name": "Gomez",
+      "email": "paula@gmail.com",
+      "needs_approval": true,
+      "id_type": "CC",
+      "id_number": "246813579",
+      "phone": "3145627876",
+      "created_at": "2021-07-01T00:00:00Z",
+      "updated_at": "2021-07-01T00:00:00Z",
+      "role_id": 6
+    }
+  },
+  {
+    "model": "users_mgmt.customuser",
+    "pk": 3,
+    "fields": {
+      "username": "135792468",
+      "password": "mateo12345",
+      "first_name": "Mateo",
+      "last_name": "Rodriguez",
+      "email": "mateo@gmail.com",
+      "needs_approval": true,
+      "id_type": "CC",
+      "id_number": "135792468",
+      "phone": "3125678909",
+      "created_at": "2021-07-01T00:00:00Z",
+      "updated_at": "2021-07-01T00:00:00Z",
+      "role_id": 5
+    }
+  },
+  {
+    "model": "users_mgmt.customuser",
+    "pk": 3,
+    "fields": {
+      "username": "214365879",
+      "password": "carlos12345",
+      "first_name": "Carlos",
+      "last_name": "Hernandez",
+      "email": "carlos@gmail.com",
+      "needs_approval": true,
+      "id_type": "CC",
+      "id_number": "214365879",
+      "phone": "3145627812",
+      "created_at": "2021-07-01T00:00:00Z",
+      "updated_at": "2021-07-01T00:00:00Z",
+      "role_id": 3
+    }
   }
 ]
